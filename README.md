@@ -1,17 +1,19 @@
 <p align="center">
-  <img src="app/src/main/res/drawable/tracer_logo.png" alt="Tracer Kiosk Logo" width="220"/>
+  <img src="app/src/main/res/drawable/tracer_logo.png" width="180"/>
 </p>
 
 <h1 align="center">Tracer Kiosk</h1>
 
 <p align="center">
-  <b>Indoor Navigation for Smart Campuses</b>
+  Indoor Navigation for Smart Campuses
 </p>
 
 <p align="center">
-  A dedicated Android tablet kiosk application for indoor navigation within educational campuses.
+  <img src="https://img.shields.io/badge/Kotlin-2.2.0-7F52FF?logo=kotlin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4"/>
+  <img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-00C853"/>
+  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white"/>
 </p>
-
 # 📍 Tracer Kiosk
 
 Tracer Kiosk is an Android-based indoor wayfinding application designed for tablet kiosks installed at the entrance of a building. It allows visitors to search for destinations and view the shortest route from the kiosk's fixed location.
