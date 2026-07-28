@@ -72,13 +72,15 @@ fun SplashScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Indoor Navigation for Smart Campuses",
-                style = MaterialTheme.typography.bodyLarge
+                text = "Indoor Navigation for Smart Campuses"
             )
 
-            Spacer(modifier = Modifier.height(72.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                modifier = Modifier.size(48.dp),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
