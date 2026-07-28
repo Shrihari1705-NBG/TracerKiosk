@@ -1,4 +1,16 @@
+<p align="center">
+  <img src="app/src/main/res/drawable/tracer_logo.png" alt="Tracer Kiosk Logo" width="220"/>
+</p>
 
+<h1 align="center">Tracer Kiosk</h1>
+
+<p align="center">
+  <b>Indoor Navigation for Smart Campuses</b>
+</p>
+
+<p align="center">
+  A dedicated Android tablet kiosk application for indoor navigation within educational campuses.
+</p>
 
 # 📍 Tracer Kiosk
 
