@@ -35,9 +35,17 @@ fun FacultyScreen(
 
             Sidebar(
                 selectedRoute = Screen.Faculty.route,
+
                 onHomeClick = {
                     navController.navigate(Screen.Home.route)
                 },
+
+                onFacultyClick = {},
+
+                onDepartmentClick = {
+                    navController.navigate(Screen.Department.route)
+                },
+
                 onAboutClick = {
                     navController.navigate(Screen.About.route)
                 }

@@ -49,7 +49,11 @@ fun HomeScreen(
 
                 onAboutClick = {
                     navController.navigate(Screen.About.route)
-                }
+                },
+
+                onDepartmentClick = {
+                    navController.navigate(Screen.Department.route)
+                },
             )
 
         }
@@ -108,7 +112,9 @@ fun HomeScreen(
 
                     FeatureCard(
                         title = "Department",
-                        onClick = {},
+                        onClick = {
+                            navController.navigate(Screen.Department.route)
+                        },
                         modifier = Modifier.weight(1f)
                     )
 

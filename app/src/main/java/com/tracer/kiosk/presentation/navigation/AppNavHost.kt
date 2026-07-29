@@ -11,6 +11,7 @@ import com.tracer.kiosk.presentation.feature.about.AboutScreen
 import com.tracer.kiosk.presentation.feature.home.HomeScreen
 import com.tracer.kiosk.presentation.feature.splash.SplashScreen
 import com.tracer.kiosk.presentation.feature.faculty.FacultyScreen
+import com.tracer.kiosk.presentation.feature.department.DepartmentScreen
 
 @Composable
 fun AppNavHost(
@@ -103,6 +104,26 @@ fun AppNavHost(
         ) {
 
             FacultyScreen(
+                navController = navController
+            )
+
+        }
+
+        composable(
+            route = Screen.Department.route,
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(300)
+                )
+            },
+            exitTransition = {
+                fadeOut(
+                    animationSpec = tween(300)
+                )
+            }
+        ) {
+
+            DepartmentScreen(
                 navController = navController
             )
 

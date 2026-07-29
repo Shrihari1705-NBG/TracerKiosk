@@ -17,9 +17,10 @@ import com.tracer.kiosk.presentation.navigation.Screen
 @Composable
 fun Sidebar(
     selectedRoute: String,
-    onHomeClick: () -> Unit = {},
-    onFacultyClick: () -> Unit = {},
-    onAboutClick: () -> Unit = {}
+    onHomeClick: () -> Unit,
+    onFacultyClick: () -> Unit,
+    onDepartmentClick: () -> Unit,
+    onAboutClick: () -> Unit
 ){
 
     Column(
@@ -65,7 +66,7 @@ fun Sidebar(
             SidebarItem(
                 title = "Department",
                 selected = false,
-                onClick = {}
+                onClick = onDepartmentClick
             )
 
             SidebarItem(
