@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-
+import androidx.compose.foundation.shape.RoundedCornerShape
 @Composable
 fun FeatureCard(
     title: String,
@@ -25,6 +25,8 @@ fun FeatureCard(
         modifier = modifier
             .aspectRatio(2.4f)
             .clickable(onClick = onClick),
+
+        shape = RoundedCornerShape(32.dp),
 
         elevation = CardDefaults.cardElevation(
             defaultElevation = 8.dp
