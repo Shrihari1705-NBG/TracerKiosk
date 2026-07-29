@@ -28,13 +28,6 @@ import com.tracer.kiosk.presentation.feature.navigation.graph.GraphNode
 import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.feature.navigation.model.DestinationCategory
 import com.tracer.kiosk.presentation.navigation.Screen
-import androidx.compose.material3.Button
-import com.tracer.kiosk.presentation.feature.navigation.util.GraphExporter
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun NavigationScreen(
@@ -56,8 +49,6 @@ fun NavigationScreen(
     var currentRoute by remember {
         mutableStateOf<List<GraphNode>>(emptyList())
     }
-
-    val context = LocalContext.current
 
     val destinations = remember(query, selectedCategory) {
 
@@ -100,9 +91,7 @@ fun NavigationScreen(
                     .padding(top = 12.dp)
             ) {
 
-                // ==========================
                 // Left Panel
-                // ==========================
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -168,9 +157,7 @@ fun NavigationScreen(
 
                 }
 
-                // ==========================
                 // Right Panel
-                // ==========================
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -190,52 +177,23 @@ fun NavigationScreen(
                                     destinationNodeId = destination.nodeId
                                 )
 
+                                android.util.Log.d("Tracer", "Destination = ${destination.name}")
+                                android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
+                                android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
+                                android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
+
                             }
                         )
 
                     }
 
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    Box(
+                        modifier = Modifier.weight(1f)
                     ) {
 
-                        Button(
-                            onClick = {
-
-                                val graph = GraphExporter.export()
-
-                                val clipboard = context.getSystemService(
-                                    Context.CLIPBOARD_SERVICE
-                                ) as ClipboardManager
-
-                                clipboard.setPrimaryClip(
-                                    ClipData.newPlainText(
-                                        "GraphRepository",
-                                        graph
-                                    )
-                                )
-
-                                Toast.makeText(
-                                    context,
-                                    "✅ Graph copied to clipboard!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-
-                            }
-                        ) {
-                            Text("Copy Graph")
-                        }
-
-                        Box(
-                            modifier = Modifier.weight(1f)
-                        ) {
-
-                            MapCanvas(
-                                route = currentRoute
-                            )
-
-                        }
+                        MapCanvas(
+                            route = currentRoute
+                        )
 
                     }
 

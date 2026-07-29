@@ -1,52 +1,32 @@
 package com.tracer.kiosk.presentation.feature.navigation.components.map
 
-import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.R
-import com.tracer.kiosk.presentation.feature.navigation.algorithm.RouteGenerator
 import com.tracer.kiosk.presentation.feature.navigation.data.GraphRepository
 import com.tracer.kiosk.presentation.feature.navigation.graph.GraphNode
 
+private const val ORIGINAL_WIDTH = 1280f
+private const val ORIGINAL_HEIGHT = 720f
+
+private const val SHOW_GRAPH_DEBUG = true
 
 @Composable
 fun MapCanvas(
     route: List<GraphNode>
 ) {
-
-    var draggingNode by remember {
-        mutableStateOf<GraphNode?>(null)
-    }
-
-    var selectedNode by remember {
-        mutableStateOf<GraphNode?>(null)
-    }
-
-    // Current marker position
-    var markerPosition by remember {
-        mutableStateOf(
-            Offset(
-                x = 520f,
-                y = 120f
-            )
-        )
-    }
-
 
     Box(
         modifier = Modifier
@@ -55,106 +35,8 @@ fun MapCanvas(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outline
             )
-
-            // Tap Gesture
-            .pointerInput(Unit) {
-
-                detectTapGestures { tapOffset ->
-
-                    val tappedNode = GraphRepository.nodes.find { node ->
-
-                        val dx = node.position.x - tapOffset.x
-                        val dy = node.position.y - tapOffset.y
-
-                        (dx * dx + dy * dy) <= 25f * 25f
-
-                    }
-
-                    if (tappedNode != null) {
-
-                        if (selectedNode == null) {
-
-                            selectedNode = tappedNode
-                            tappedNode.isSelected = true
-
-                            Log.d("GraphEditor", "Selected ${tappedNode.id}")
-
-                        } else if (selectedNode != tappedNode) {
-
-                            if (!selectedNode!!.neighbors.contains(tappedNode.id)) {
-
-                                selectedNode!!.neighbors.add(tappedNode.id)
-                                tappedNode.neighbors.add(selectedNode!!.id)
-
-                                Log.d(
-                                    "GraphEditor",
-                                    "Connected ${selectedNode!!.id} ↔ ${tappedNode.id}"
-                                )
-                            }
-
-                            selectedNode!!.isSelected = false
-                            selectedNode = null
-
-                        }
-
-                    } else {
-
-                        GraphRepository.nodes.add(
-                            GraphNode(
-                                id = "N${GraphRepository.nodes.size + 1}",
-                                position = tapOffset
-                            )
-                        )
-
-                    }
-
-                }
-
-            }
-
-            // Long Press + Drag
-            .pointerInput(Unit) {
-
-                detectDragGesturesAfterLongPress(
-
-                    onDragStart = { offset ->
-
-                        draggingNode = GraphRepository.nodes.find { node ->
-
-                            val dx = node.position.x - offset.x
-                            val dy = node.position.y - offset.y
-
-                            (dx * dx + dy * dy) <= 25f * 25f
-
-                        }
-
-                    },
-
-                    onDrag = { change, _ ->
-
-                        draggingNode?.position = change.position
-
-                    },
-
-                    onDragEnd = {
-
-                        draggingNode = null
-
-                    },
-
-                    onDragCancel = {
-
-                        draggingNode = null
-
-                    }
-
-                )
-
-            }
-
     ) {
 
-        // Floor Map
         Image(
             painter = painterResource(R.drawable.floor_map),
             contentDescription = "Department Floor Map",
@@ -166,26 +48,48 @@ fun MapCanvas(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            // -----------------------------
-            // Draw Graph Edges
-            // -----------------------------
-            GraphRepository.nodes.forEach { node ->
+            val scale = minOf(
+                size.width / ORIGINAL_WIDTH,
+                size.height / ORIGINAL_HEIGHT
+            )
 
-                node.neighbors.forEach { neighborId ->
+            val imageWidth = ORIGINAL_WIDTH * scale
+            val imageHeight = ORIGINAL_HEIGHT * scale
 
-                    val neighbor = GraphRepository.nodes.find {
-                        it.id == neighborId
-                    } ?: return@forEach
+            val offsetX = (size.width - imageWidth) / 2f
+            val offsetY = (size.height - imageHeight) / 2f
 
-                    if (node.id < neighbor.id) {
+            fun transform(point: Offset): Offset {
+                return Offset(
+                    x = offsetX + point.x * scale,
+                    y = offsetY + point.y * scale
+                )
+            }
 
-                        drawLine(
-                            color = Color(0xFF1976D2),
-                            start = node.position,
-                            end = neighbor.position,
-                            strokeWidth = 6f,
-                            cap = StrokeCap.Round
-                        )
+            // ==========================
+            // Debug Graph
+            // ==========================
+            if (SHOW_GRAPH_DEBUG) {
+
+                GraphRepository.nodes.forEach { node ->
+
+                    node.neighbors.forEach { neighborId ->
+
+                        val neighbor = GraphRepository.nodes.find {
+                            it.id == neighborId
+                        } ?: return@forEach
+
+                        if (node.id < neighbor.id) {
+
+                            drawLine(
+                                color = Color.Blue,
+                                start = transform(node.position),
+                                end = transform(neighbor.position),
+                                strokeWidth = 5f,
+                                cap = StrokeCap.Round
+                            )
+
+                        }
 
                     }
 
@@ -193,41 +97,39 @@ fun MapCanvas(
 
             }
 
-            // -----------------------------
-            // Draw Shortest Route
-            // -----------------------------
+            // ==========================
+            // Route
+            // ==========================
             for (i in 0 until route.size - 1) {
 
                 drawLine(
                     color = Color.Red,
-                    start = route[i].position,
-                    end = route[i + 1].position,
-                    strokeWidth = 10f,
+                    start = transform(route[i].position),
+                    end = transform(route[i + 1].position),
+                    strokeWidth = 8f,
                     cap = StrokeCap.Round
                 )
 
             }
 
-        }
-
-        // Current Location Marker
-        CurrentLocationMarker(
-            position = markerPosition,
-            onPositionChanged = { newPosition ->
-                markerPosition = newPosition
-            }
-        )
-
-        // Graph Nodes
-        GraphRepository.nodes.forEach { node ->
-
-            NodeMarker(
-                position = node.position,
-                isSelected = node.isSelected
+            // ==========================
+            // Kiosk Marker
+            // ==========================
+            val kiosk = transform(
+                GraphRepository.nodes.first { it.id == "N1" }.position
             )
 
+            drawCircle(
+                color = Color.Red,
+                radius = 12f,
+                center = kiosk
+            )
+
+            drawCircle(
+                color = Color.White,
+                radius = 5f,
+                center = kiosk
+            )
         }
-
     }
-
 }

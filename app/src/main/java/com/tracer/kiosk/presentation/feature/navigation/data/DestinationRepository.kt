@@ -15,7 +15,7 @@ object DestinationRepository {
             id = "faculty_plasin",
             name = "Prof. Plasin F Dias",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_plasin",
+            nodeId = "N1",
             aliases = listOf("plasin", "hod")
         ),
 
@@ -23,7 +23,7 @@ object DestinationRepository {
             id = "faculty_mahendra",
             name = "Dr. Mahendra M Dixit",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_mahendra",
+            nodeId = "N20",
             aliases = listOf("mahendra", "dixit")
         ),
 
@@ -31,7 +31,7 @@ object DestinationRepository {
             id = "faculty_kolaki",
             name = "Mr. A V Kolaki",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_kolaki",
+            nodeId = "N23",
             aliases = listOf("kolaki")
         ),
 
@@ -39,7 +39,7 @@ object DestinationRepository {
             id = "faculty_nikhil",
             name = "Mr. Nikhil A Kulkarni",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_nikhil",
+            nodeId = "N9",
             aliases = listOf("nikhil", "kulkarni")
         ),
 
@@ -47,7 +47,7 @@ object DestinationRepository {
             id = "faculty_raghavendra",
             name = "Mr. Raghavendra Nagaralli",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_raghavendra",
+            nodeId = "N8",
             aliases = listOf("raghavendra", "nagaralli")
         ),
 
@@ -55,7 +55,7 @@ object DestinationRepository {
             id = "faculty_rohini",
             name = "Mrs. Rohini Kallur",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_rohini",
+            nodeId = "N16",
             aliases = listOf("rohini", "kallur")
         ),
 
@@ -63,7 +63,7 @@ object DestinationRepository {
             id = "faculty_suraj",
             name = "Mr. Suraj Kadli",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_suraj",
+            nodeId = "N9",
             aliases = listOf("suraj", "kadli")
         ),
 
@@ -71,7 +71,7 @@ object DestinationRepository {
             id = "faculty_vijayalaxmi",
             name = "Mrs. Vijayalaxmi C Kalal",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_vijayalaxmi",
+            nodeId = "N17",
             aliases = listOf("vijayalaxmi", "kalal")
         ),
 
@@ -79,7 +79,7 @@ object DestinationRepository {
             id = "faculty_pooja",
             name = "Ms. Pooja C Shidhe",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_pooja",
+            nodeId = "N7",
             aliases = listOf("pooja", "shidhe")
         ),
 
@@ -87,7 +87,7 @@ object DestinationRepository {
             id = "faculty_sudheendra",
             name = "Mr. Sudheendra Yalagur",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_sudheendra",
+            nodeId = "N8",
             aliases = listOf("sudheendra", "yalagur")
         ),
 
@@ -95,7 +95,7 @@ object DestinationRepository {
             id = "faculty_pavitra",
             name = "Ms. Pavitra M Badiger",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_pavitra",
+            nodeId = "N24",
             aliases = listOf("pavitra", "badiger")
         ),
 
@@ -103,7 +103,7 @@ object DestinationRepository {
             id = "faculty_ashwini",
             name = "Mrs. Ashwini Garaddi",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_ashwini",
+            nodeId = "N7",
             aliases = listOf("ashwini", "garaddi")
         ),
 
@@ -111,7 +111,7 @@ object DestinationRepository {
             id = "faculty_rajeshwari",
             name = "Mrs. Rajeshwari Pashupatimath",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_rajeshwari",
+            nodeId = "N25",
             aliases = listOf("rajeshwari", "pashupatimath")
         ),
 
@@ -119,7 +119,7 @@ object DestinationRepository {
             id = "faculty_jyothi",
             name = "Mrs. Jyothi Kammar",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_jyothi",
+            nodeId = "N24",
             aliases = listOf("jyothi", "kammar")
         ),
 
@@ -127,7 +127,7 @@ object DestinationRepository {
             id = "faculty_meenal",
             name = "Dr. Meenal M Kaliwal",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_meenal",
+            nodeId = "N26",
             aliases = listOf("meenal", "kaliwal")
         ),
 
@@ -135,7 +135,7 @@ object DestinationRepository {
             id = "faculty_gururaj",
             name = "Dr. Gururaj Hatti",
             category = DestinationCategory.FACULTY,
-            nodeId = "faculty_gururaj",
+            nodeId = "N19",
             aliases = listOf("gururaj", "hatti")
         ),
 
@@ -147,7 +147,7 @@ object DestinationRepository {
             id = "analog_lab",
             name = "Analog Lab",
             category = DestinationCategory.LABORATORY,
-            nodeId = "analog_lab",
+            nodeId = "N3",
             aliases = listOf("analog")
         ),
 
@@ -155,7 +155,7 @@ object DestinationRepository {
             id = "dsp_lab",
             name = "DSP Lab",
             category = DestinationCategory.LABORATORY,
-            nodeId = "dsp_lab",
+            nodeId = "N4",
             aliases = listOf("dsp", "digital signal processing")
         ),
 
@@ -163,7 +163,7 @@ object DestinationRepository {
             id = "dc_lab",
             name = "DC Lab",
             category = DestinationCategory.LABORATORY,
-            nodeId = "dc_lab",
+            nodeId = "N18",
             aliases = listOf("dc")
         ),
 
@@ -171,7 +171,7 @@ object DestinationRepository {
             id = "research_lab",
             name = "Research Lab",
             category = DestinationCategory.LABORATORY,
-            nodeId = "research_lab",
+            nodeId = "N6",
             aliases = listOf("research")
         ),
 
@@ -183,7 +183,7 @@ object DestinationRepository {
             id = "block6_a",
             name = "Block 6(A)",
             category = DestinationCategory.CLASSROOM,
-            nodeId = "block6_a",
+            nodeId = "N27",
             aliases = listOf("6a", "block 6")
         ),
 
@@ -191,7 +191,7 @@ object DestinationRepository {
             id = "block6_smart",
             name = "Block 6 (Smart Room)",
             category = DestinationCategory.CLASSROOM,
-            nodeId = "block6_smart",
+            nodeId = "N21",
             aliases = listOf("smart", "smart room")
         ),
 
@@ -203,7 +203,7 @@ object DestinationRepository {
             id = "hod_ece",
             name = "HOD ECE",
             category = DestinationCategory.OFFICE,
-            nodeId = "hod_ece",
+            nodeId = "N1",
             aliases = listOf("hod", "head of department")
         ),
 
@@ -215,7 +215,7 @@ object DestinationRepository {
             id = "department_library",
             name = "Department Library",
             category = DestinationCategory.FACILITY,
-            nodeId = "department_library",
+            nodeId = "N5",
             aliases = listOf("library")
         ),
 
@@ -223,7 +223,7 @@ object DestinationRepository {
             id = "ladies_room",
             name = "Ladies Room",
             category = DestinationCategory.FACILITY,
-            nodeId = "ladies_room",
+            nodeId = "N15",
             aliases = listOf("girls room")
         ),
 
@@ -231,7 +231,7 @@ object DestinationRepository {
             id = "ladies_washroom",
             name = "Ladies Washroom",
             category = DestinationCategory.FACILITY,
-            nodeId = "ladies_washroom",
+            nodeId = "N11",
             aliases = listOf("washroom", "restroom", "toilet")
         )
 
