@@ -12,9 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.tracer.kiosk.presentation.navigation.Screen
 
 @Composable
-fun Sidebar() {
+fun Sidebar(
+    selectedRoute: String,
+    onHomeClick: () -> Unit = {},
+    onFacultyClick: () -> Unit = {},
+    onAboutClick: () -> Unit = {}
+){
 
     Column(
         modifier = Modifier
@@ -40,8 +46,8 @@ fun Sidebar() {
 
             SidebarItem(
                 title = "Home",
-                selected = true,
-                onClick = {}
+                selected = selectedRoute == Screen.Home.route,
+                onClick = onHomeClick
             )
 
             SidebarItem(
@@ -52,8 +58,8 @@ fun Sidebar() {
 
             SidebarItem(
                 title = "Faculty & Staff",
-                selected = false,
-                onClick = {}
+                selected = selectedRoute == Screen.Faculty.route,
+                onClick = onFacultyClick
             )
 
             SidebarItem(
@@ -64,8 +70,8 @@ fun Sidebar() {
 
             SidebarItem(
                 title = "About Tracer",
-                selected = false,
-                onClick = {}
+                selected = selectedRoute == Screen.About.route,
+                onClick = onAboutClick
             )
 
         }

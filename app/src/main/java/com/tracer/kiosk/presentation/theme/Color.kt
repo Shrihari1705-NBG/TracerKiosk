@@ -7,10 +7,12 @@ val TracerPrimary = Color(0xFF00133A)
 val TracerSecondary = Color(0xFF2868A6)
 val TracerError = Color(0xFFB3261E)
 
+val CardBlue = Color(0xFFB4C7E7)
+
 // Background & Surface
-val TracerBackground = Color(0xFFEDEBFF)
-val TracerSurface = Color(0xFFFFFFFF)
-val TracerSurfaceVariant = Color(0xFFF4F3FF)
+val ScreenBackground = Color(0xF9F9F9)
+val TracerSurface = Color(0xFFB4C7E7)
+val TracerSurfaceVariant = Color(0xFFB4C7E7)
 
 // Text Colors
 val TracerOnPrimary = Color(0xFFFFFFFF)

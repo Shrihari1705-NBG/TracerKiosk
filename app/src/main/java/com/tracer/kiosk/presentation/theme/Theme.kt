@@ -10,7 +10,7 @@ private val LightColorScheme = lightColorScheme(
     primary = TracerPrimary,
     secondary = TracerSecondary,
 
-    background = TracerBackground,
+    background = ScreenBackground,
     surface = TracerSurface,
 
     onPrimary = TracerOnPrimary,

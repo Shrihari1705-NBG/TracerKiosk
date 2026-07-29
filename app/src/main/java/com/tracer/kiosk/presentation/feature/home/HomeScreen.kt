@@ -1,6 +1,5 @@
 package com.tracer.kiosk.presentation.feature.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,16 +14,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.tracer.kiosk.presentation.components.card.FeatureCard
 import com.tracer.kiosk.presentation.components.common.SectionTitle
-import com.tracer.kiosk.presentation.components.topbar.AppHeader
 import com.tracer.kiosk.presentation.components.sidebar.Sidebar
+import com.tracer.kiosk.presentation.components.topbar.AppHeader
+import com.tracer.kiosk.presentation.navigation.Screen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
 
     Row(
         modifier = Modifier.fillMaxSize()
+
     ) {
 
         // Sidebar
@@ -33,7 +37,21 @@ fun HomeScreen() {
                 .fillMaxHeight()
                 .width(260.dp)
         ) {
-            Sidebar()
+
+            Sidebar(
+                selectedRoute = Screen.Home.route,
+
+                onHomeClick = {},
+
+                onFacultyClick = {
+                    navController.navigate(Screen.Faculty.route)
+                },
+
+                onAboutClick = {
+                    navController.navigate(Screen.About.route)
+                }
+            )
+
         }
 
         // Main Content
@@ -76,7 +94,9 @@ fun HomeScreen() {
 
                     FeatureCard(
                         title = "Faculty & Staff",
-                        onClick = {},
+                        onClick = {
+                            navController.navigate(Screen.Faculty.route)
+                        },
                         modifier = Modifier.weight(1f)
                     )
 
@@ -96,7 +116,9 @@ fun HomeScreen() {
 
                     FeatureCard(
                         title = "About Tracer",
-                        onClick = {},
+                        onClick = {
+                            navController.navigate(Screen.About.route)
+                        },
                         modifier = Modifier.weight(1f)
                     )
 
