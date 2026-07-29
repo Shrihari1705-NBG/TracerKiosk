@@ -15,7 +15,8 @@ import kotlin.math.roundToInt
 
 @Composable
 fun NodeMarker(
-    position: Offset
+    position: Offset,
+    isSelected: Boolean
 ) {
     Box(
         modifier = Modifier
@@ -27,7 +28,7 @@ fun NodeMarker(
             }
             .size(14.dp)
             .background(
-                color = Color.Blue,
+                color = if (isSelected) Color.Red else Color.Blue,
                 shape = CircleShape
             )
     )
