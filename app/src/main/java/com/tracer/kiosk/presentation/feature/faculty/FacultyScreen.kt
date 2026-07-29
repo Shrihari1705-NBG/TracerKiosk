@@ -43,6 +43,10 @@ fun FacultyScreen(
                         navController.navigate(Screen.Home.route)
                     },
 
+                    onNavigateClick = {
+                        navController.navigate(Screen.Navigation.route)
+                    },
+
                     onFacultyClick = {},
 
                     onDepartmentClick = {

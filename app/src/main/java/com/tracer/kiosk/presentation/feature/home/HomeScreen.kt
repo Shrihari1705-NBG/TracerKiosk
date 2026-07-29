@@ -63,6 +63,10 @@ fun HomeScreen(
 
                 onHomeClick = {},
 
+                onNavigateClick = {
+                    navController.navigate(Screen.Navigation.route)
+                },
+
                 onFacultyClick = {
                     navController.navigate(Screen.Faculty.route)
                 },
@@ -115,11 +119,10 @@ fun HomeScreen(
                             title = "Navigate",
                             icon = Icons.Outlined.Map,
                             onClick = {
-                                // TODO: Navigation Screen
+                                navController.navigate(Screen.Navigation.route)
                             },
                             modifier = Modifier.weight(1f)
                         )
-
                         FeatureCard(
                             title = "Faculty & Staff",
                             icon = Icons.Outlined.Groups,

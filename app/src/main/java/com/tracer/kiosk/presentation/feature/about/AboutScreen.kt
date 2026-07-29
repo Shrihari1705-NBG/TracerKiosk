@@ -57,6 +57,10 @@ fun AboutScreen(
                         navController.navigate(Screen.Home.route)
                     },
 
+                    onNavigateClick = {
+                        navController.navigate(Screen.Navigation.route)
+                    },
+
                     onFacultyClick = {
                         navController.navigate(Screen.Faculty.route)
                     },

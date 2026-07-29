@@ -18,6 +18,7 @@ import com.tracer.kiosk.presentation.navigation.Screen
 fun Sidebar(
     selectedRoute: String,
     onHomeClick: () -> Unit,
+    onNavigateClick: () -> Unit,
     onFacultyClick: () -> Unit,
     onDepartmentClick: () -> Unit,
     onAboutClick: () -> Unit
@@ -35,7 +36,6 @@ fun Sidebar(
                 )
             )
             .padding(vertical = 40.dp),
-
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -53,8 +53,8 @@ fun Sidebar(
 
             SidebarItem(
                 title = "Navigate",
-                selected = false,
-                onClick = {}
+                selected = selectedRoute == Screen.Navigation.route,
+                onClick = onNavigateClick
             )
 
             SidebarItem(

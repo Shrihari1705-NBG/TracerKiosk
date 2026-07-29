@@ -19,7 +19,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import com.tracer.kiosk.presentation.feature.idle.IdleScreen
 import kotlinx.coroutines.delay
 
-private const val IDLE_TIMEOUT = 2*60*1000L
+private const val IDLE_TIMEOUT = 2*60*10_000L
 
 @Composable
 fun IdleContainer(
