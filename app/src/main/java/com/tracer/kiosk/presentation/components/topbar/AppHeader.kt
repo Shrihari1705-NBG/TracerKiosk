@@ -11,6 +11,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.R
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.graphicsLayer
 
 @Composable
 fun AppHeader(
@@ -18,6 +26,20 @@ fun AppHeader(
     modifier: Modifier = Modifier
 
 ) {
+    val infiniteTransition = rememberInfiniteTransition(label = "logoFloat")
+
+    val floatOffset by infiniteTransition.animateFloat(
+        initialValue = -8f,
+        targetValue = 8f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2500,
+                easing = LinearEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "float"
+    )
 
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -29,10 +51,13 @@ fun AppHeader(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.tracer_logo),
+            painter = painterResource(R.drawable.tracer_logo),
             contentDescription = "Tracer Logo",
-
-            modifier = Modifier.size(120.dp)
+            modifier = Modifier
+                .size(190.dp)
+                .graphicsLayer {
+                    translationY = floatOffset
+                }
         )
 
         Spacer(modifier = Modifier.width(32.dp))

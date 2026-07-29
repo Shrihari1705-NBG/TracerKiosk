@@ -12,6 +12,7 @@ import com.tracer.kiosk.presentation.feature.home.HomeScreen
 import com.tracer.kiosk.presentation.feature.splash.SplashScreen
 import com.tracer.kiosk.presentation.feature.faculty.FacultyScreen
 import com.tracer.kiosk.presentation.feature.department.DepartmentScreen
+import com.tracer.kiosk.presentation.feature.idle.IdleScreen
 
 @Composable
 fun AppNavHost(

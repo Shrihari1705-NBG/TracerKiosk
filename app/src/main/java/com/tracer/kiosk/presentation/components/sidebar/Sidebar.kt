@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -21,12 +21,12 @@ fun Sidebar(
     onFacultyClick: () -> Unit,
     onDepartmentClick: () -> Unit,
     onAboutClick: () -> Unit
-){
+) {
 
     Column(
         modifier = Modifier
+            .width(240.dp)
             .fillMaxHeight()
-            .fillMaxWidth()
             .background(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(
@@ -65,7 +65,7 @@ fun Sidebar(
 
             SidebarItem(
                 title = "Department",
-                selected = false,
+                selected = selectedRoute == Screen.Department.route,
                 onClick = onDepartmentClick
             )
 
@@ -74,9 +74,6 @@ fun Sidebar(
                 selected = selectedRoute == Screen.About.route,
                 onClick = onAboutClick
             )
-
         }
-
     }
-
 }

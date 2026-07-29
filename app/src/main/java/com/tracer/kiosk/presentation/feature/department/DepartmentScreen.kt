@@ -27,99 +27,101 @@ import com.tracer.kiosk.presentation.components.department.VisionCard
 import com.tracer.kiosk.presentation.components.sidebar.Sidebar
 import com.tracer.kiosk.presentation.components.topbar.AppHeader
 import com.tracer.kiosk.presentation.navigation.Screen
+import com.tracer.kiosk.presentation.components.common.TracerBackground
 
 @Composable
 fun DepartmentScreen(
     navController: NavHostController
 ) {
 
-    Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
+    TracerBackground {
 
-        // Sidebar
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(260.dp)
+        Row(
+            modifier = Modifier.fillMaxSize()
         ) {
 
-            Sidebar(
-                selectedRoute = Screen.Department.route,
-
-                onHomeClick = {
-                    navController.navigate(Screen.Home.route)
-                },
-
-                onFacultyClick = {
-                    navController.navigate(Screen.Faculty.route)
-                },
-
-                onDepartmentClick = {},
-
-                onAboutClick = {
-                    navController.navigate(Screen.About.route)
-                }
-            )
-        }
-
-        // Main Content
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    start = 32.dp,
-                    top = 56.dp,
-                    end = 32.dp,
-                    bottom = 32.dp
-                )
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-
-            AppHeader()
-
-            DepartmentHeaderCard()
-
-            DepartmentOverviewCard()
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            // Sidebar
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(260.dp)
             ) {
 
-                DepartmentStatCard(
-                    value = "15",
-                    label = "Faculty Members",
-                    modifier = Modifier.weight(1f)
-                )
+                Sidebar(
+                    selectedRoute = Screen.Department.route,
 
-                DepartmentStatCard(
-                    value = "03",
-                    label = "Faculty with Ph.D.",
-                    modifier = Modifier.weight(1f)
-                )
+                    onHomeClick = {
+                        navController.navigate(Screen.Home.route)
+                    },
 
-                DepartmentStatCard(
-                    value = "10",
-                    label = "Faculty pursuing\nPh.D.",
-                    modifier = Modifier.weight(1f)
-                )
+                    onFacultyClick = {
+                        navController.navigate(Screen.Faculty.route)
+                    },
 
-                DepartmentStatCard(
-                    value = "07",
-                    label = "Laboratories",
-                    modifier = Modifier.weight(1f)
+                    onDepartmentClick = {},
+
+                    onAboutClick = {
+                        navController.navigate(Screen.About.route)
+                    }
                 )
             }
 
-            VisionCard()
+            // Main Content
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        start = 32.dp,
+                        top = 56.dp,
+                        end = 32.dp,
+                        bottom = 32.dp
+                    )
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
 
-            MissionCard()
+                AppHeader()
 
-            Spacer(modifier = Modifier.height(24.dp))
+                DepartmentHeaderCard()
+
+                DepartmentOverviewCard()
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+
+                    DepartmentStatCard(
+                        value = "15",
+                        label = "Faculty Members",
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    DepartmentStatCard(
+                        value = "03",
+                        label = "Faculty with Ph.D.",
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    DepartmentStatCard(
+                        value = "10",
+                        label = "Faculty pursuing\nPh.D.",
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    DepartmentStatCard(
+                        value = "07",
+                        label = "Laboratories",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                VisionCard()
+
+                MissionCard()
+
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
 }

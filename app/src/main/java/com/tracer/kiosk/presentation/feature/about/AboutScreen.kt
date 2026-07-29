@@ -30,143 +30,145 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import com.tracer.kiosk.presentation.components.common.TracerBackground
 
 @Composable
 fun AboutScreen(
     navController: NavHostController
 ) {
 
-    Row(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    TracerBackground {
 
-        // Sidebar
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(260.dp)
+        Row(
+            modifier = Modifier.fillMaxSize()
         ) {
 
-            Sidebar(
-                selectedRoute = Screen.About.route,
-
-                onHomeClick = {
-                    navController.navigate(Screen.Home.route)
-                },
-
-                onFacultyClick = {
-                    navController.navigate(Screen.Faculty.route)
-                },
-
-                onDepartmentClick = {
-                    navController.navigate(Screen.Department.route)
-                },
-
-                onAboutClick = {}
-            )
-        }
-
-        // Main Content
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .verticalScroll(rememberScrollState())
-                .background(MaterialTheme.colorScheme.background)
-                .padding(32.dp),
-        ) {
-
-            // Page Title
-            Text(
-                text = "About",
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.headlineMedium
-            )
-
-            // Header Placeholder
-            AboutHeaderCard()
-
-            // Guide + App Info
-            Row(
+            // Sidebar
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .fillMaxHeight()
+                    .width(260.dp)
             ) {
 
-                GuideCard(
-                    modifier = Modifier.weight(2f)
+                Sidebar(
+                    selectedRoute = Screen.About.route,
+
+                    onHomeClick = {
+                        navController.navigate(Screen.Home.route)
+                    },
+
+                    onFacultyClick = {
+                        navController.navigate(Screen.Faculty.route)
+                    },
+
+                    onDepartmentClick = {
+                        navController.navigate(Screen.Department.route)
+                    },
+
+                    onAboutClick = {}
+                )
+            }
+
+            // Main Content
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .verticalScroll(rememberScrollState())
+                    .padding(32.dp),
+            ) {
+
+                // Page Title
+                Text(
+                    text = "About",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium
                 )
 
-                Spacer(modifier = Modifier.width(24.dp))
+                // Header Placeholder
+                AboutHeaderCard()
 
-                Box(
+                // Guide + App Info
+                Row(
                     modifier = Modifier
-                        .width(2.dp)
-                        .height(180.dp)
-                        .background(MaterialTheme.colorScheme.outline.copy(alpha = 0.35f))
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    GuideCard(
+                        modifier = Modifier.weight(2f)
+                    )
+
+                    Spacer(modifier = Modifier.width(24.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .width(2.dp)
+                            .height(180.dp)
+                            .background(MaterialTheme.colorScheme.outline.copy(alpha = 0.35f))
+                    )
+
+                    Spacer(modifier = Modifier.width(24.dp))
+
+                    AppInfoCard(
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                // Student Developers Section
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "Student Developers",
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.width(24.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-                AppInfoCard(
-                    modifier = Modifier.weight(1f)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.Top
+                ) {
+
+                    DeveloperCard(
+                        icon = Icons.Default.AccountCircle,
+                        name = "Shrihari N B Goudru"
+                    )
+
+                    DeveloperCard(
+                        icon = Icons.Default.AccountCircle,
+                        name = "Shreesha M Tembe"
+                    )
+
+                    DeveloperCard(
+                        icon = Icons.Default.AccountCircle,
+                        name = "Shubhangi S Naik"
+                    )
+
+                    DeveloperCard(
+                        icon = Icons.Default.AccountCircle,
+                        name = "Vageesh I Gaonkar"
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Text(
+                    text = "© 2026 Team Tracer",
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f),
+                    textAlign = TextAlign.End
                 )
+
             }
-
-            // Student Developers Section
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Student Developers",
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Top
-            ) {
-
-                DeveloperCard(
-                    icon = Icons.Default.AccountCircle,
-                    name = "Shrihari N B Goudru"
-                )
-
-                DeveloperCard(
-                    icon = Icons.Default.AccountCircle,
-                    name = "Shreesha M Tembe"
-                )
-
-                DeveloperCard(
-                    icon = Icons.Default.AccountCircle,
-                    name = "Shubhangi S Naik"
-                )
-
-                DeveloperCard(
-                    icon = Icons.Default.AccountCircle,
-                    name = "Vageesh I Gaonkar"
-                )
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = "© 2026 Team Tracer",
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f),
-                textAlign = TextAlign.End
-            )
 
         }
-
     }
-
 }

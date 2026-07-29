@@ -2,6 +2,7 @@ package com.tracer.kiosk.presentation.app
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
+import com.tracer.kiosk.presentation.components.idle.IdleContainer
 import com.tracer.kiosk.presentation.navigation.AppNavHost
 import com.tracer.kiosk.presentation.theme.TracerKioskTheme
 
@@ -12,9 +13,13 @@ fun TracerKioskApp() {
 
     TracerKioskTheme {
 
-        AppNavHost(
-            navController = navController
-        )
+        IdleContainer {
+
+            AppNavHost(
+                navController = navController
+            )
+
+        }
 
     }
 }
