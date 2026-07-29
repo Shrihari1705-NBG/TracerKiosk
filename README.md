@@ -5,7 +5,7 @@
 <h1 align="center">Tracer Kiosk</h1>
 
 <p align="center">
-  Indoor Navigation for Smart Campuses
+  Information & Navigation Kiosk for the Tracer Indoor Navigation System
 </p>
 
 <p align="center">
@@ -14,67 +14,117 @@
   <img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-00C853"/>
   <img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white"/>
 </p>
+
+---
+
 # 📍 Tracer Kiosk
 
-Tracer Kiosk is an Android-based indoor wayfinding application designed for tablet kiosks installed at the entrance of a building. It allows visitors to search for destinations and view the shortest route from the kiosk's fixed location.
+**Tracer Kiosk** is an Android tablet application developed as the kiosk interface for the **Tracer Indoor Navigation System**.
 
-> **Note:** This application is part of the **Tracer** ecosystem and is developed separately from the mobile application.
+Installed at the entrance of a building, it allows visitors to explore department information, browse faculty details, and access indoor navigation services through a simple touch-friendly interface.
 
----
+Unlike the Tracer mobile application, the kiosk serves as a **fixed information and navigation terminal**, providing visitors with quick access to campus information and route guidance.
 
-## ✨ Features
-
-- 🗺️ Interactive indoor map
-- 🔍 Search for rooms, labs, and faculty offices
-- 📂 Department directory
-- 📍 Fixed starting location (Kiosk)
-- 🚶 Route visualization to selected destinations
-- 🎨 Modern Material 3 UI with Jetpack Compose
+> **Note**
+>
+> This repository contains only the **Tracer Kiosk** application. Indoor localization, BLE fingerprinting, and path-planning algorithms are part of the main **Tracer** ecosystem and are developed separately.
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
+
+### Current
+
+- 🏠 Modern Home Dashboard
+- 🏛️ Department Information
+- 👨‍🏫 Faculty & Staff Directory
+- ℹ️ About Tracer
+- 🧭 Navigation Hub (UI)
+- 🎨 Material 3 Design
+- 📱 Optimized for Android Tablets
+- 🧩 Modular Component-Based UI
+
+### Planned
+
+- 🗺️ Interactive Indoor Map
+- 📍 Route Visualization
+- 🔍 Destination Search
+- 📂 Complete Campus Directory
+- 🚶 Indoor Navigation Integration
+
+---
+
+# 🛠️ Tech Stack
 
 - Kotlin
 - Jetpack Compose
 - Material 3
 - Navigation Compose
-- MVVM
+- MVVM Architecture
 - Clean Architecture
-- Hilt (Planned)
-- Coroutines & StateFlow
+- Repository Pattern
+- Coroutines
+- StateFlow
 
 ---
 
-## 📁 Project Structure
+# 📂 Project Structure
 
-```
+```text
 app/
 ├── data/
 ├── domain/
 ├── presentation/
+│   ├── components/
+│   ├── feature/
+│   ├── navigation/
+│   └── theme/
 ├── di/
 └── utils/
 ```
 
 ---
 
-## 🚀 Project Status
+# 🚀 Project Status
 
-🚧 Currently under development.
+## ✅ Completed
 
-Completed:
-- ✅ Project setup
-- ✅ Design System (Theme)
-- ⏳ Navigation
-- ⏳ Home Screen
-- ⏳ Search
-- ⏳ Directory
-- ⏳ Indoor Map
+- Splash Screen
+- Home Screen
+- Faculty & Staff Screen
+- Department Screen
+- About Tracer Screen
+- Sidebar Navigation
+- Material 3 Design System
+- Navigation Graph
+
+## 🚧 In Progress
+
+- Navigation Module
+- Destination Search
+- Indoor Map
+- Route Visualization
 
 ---
 
-## 👨‍💻 Author
+# 🎯 Project Goal
+
+The goal of Tracer Kiosk is to provide visitors with an intuitive digital kiosk for accessing building information and indoor navigation services, offering a seamless user experience within the larger **Tracer Indoor Navigation System**.
+
+---
+
+# 👨‍💻 Developer
 
 **Shrihari N B Goudru**
-Major Project: **Tracer – BLE-Based Indoor Navigation System**
+
+**Major Project**
+
+**Tracer – BLE-Based Indoor Navigation System**
+
+---
+
+# 📄 License
+
+This project is developed as part of an academic major project.
+
+All rights reserved © 2026.
