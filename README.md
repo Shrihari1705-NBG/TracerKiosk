@@ -50,6 +50,56 @@ Unlike a personal mobile application, Tracer Kiosk serves as a **fixed digital i
 
 ---
 
+# 📸 Screenshots
+
+## 🚀 Splash Screen
+
+<p align="center">
+  <img src="screenshots/splash.png" width="900"/>
+</p>
+
+---
+
+## 🏠 Home Dashboard
+
+<p align="center">
+  <img src="screenshots/home.png" width="900"/>
+</p>
+
+---
+
+## 🧭 Indoor Navigation
+
+<p align="center">
+  <img src="screenshots/navigation.png" width="900"/>
+</p>
+
+---
+
+## 👨‍🏫 Faculty & Staff Directory
+
+<p align="center">
+  <img src="screenshots/faculty.png" width="900"/>
+</p>
+
+---
+
+## 🏢 Department Information
+
+<p align="center">
+  <img src="screenshots/department.png" width="900"/>
+</p>
+
+---
+
+## ℹ️ About Tracer
+
+<p align="center">
+  <img src="screenshots/about.png" width="900"/>
+</p>
+
+---
+
 # 📱 Application Modules
 
 - Home
