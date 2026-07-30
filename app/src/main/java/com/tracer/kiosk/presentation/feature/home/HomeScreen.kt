@@ -108,11 +108,11 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(24.dp)
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(24.dp)
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
 
                         FeatureCard(
@@ -134,7 +134,7 @@ fun HomeScreen(
                     }
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(24.dp)
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
 
                         FeatureCard(

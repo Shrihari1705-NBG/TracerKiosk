@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.presentation.navigation.Screen
 
@@ -29,10 +31,11 @@ fun Sidebar(
             .width(240.dp)
             .fillMaxHeight()
             .background(
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(
-                    topEnd = 64.dp,
-                    bottomEnd = 64.dp
+                Brush.linearGradient(
+                    colors = listOf(
+                        Color(0xFF071B4D),
+                        Color(0xFF123C82)
+                    )
                 )
             )
             .padding(vertical = 40.dp),

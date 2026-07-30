@@ -1,7 +1,9 @@
 package com.tracer.kiosk.presentation.components.card
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +13,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -32,46 +35,58 @@ fun FeatureCard(
 
     Card(
         modifier = modifier
-            .aspectRatio(2.4f)
+            .aspectRatio(2.6f)          // Slightly smaller than before
             .clickable(onClick = onClick),
 
-        shape = RoundedCornerShape(32.dp),
+        shape = RoundedCornerShape(28.dp),
 
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 8.dp
+            defaultElevation = 10.dp
         ),
 
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = Color.Transparent
         )
     ) {
 
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 32.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+                .clip(RoundedCornerShape(28.dp))
+                .background(
+                    Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFF071B4D),
+                            Color(0xFF123C82)
+                        )
+                    )
+                )
         ) {
 
-            Icon(
-                imageVector = icon,
-                contentDescription = title,
-                tint = Color.White,
+            Row(
                 modifier = Modifier
-                    .size(44.dp)
-                    .padding(end = 18.dp)
-            )
+                    .fillMaxSize()
+                    .padding(horizontal = 28.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
 
-            Text(
-                text = title,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            )
+                Icon(
+                    imageVector = icon,
+                    contentDescription = title,
+                    tint = Color.White,
+                    modifier = Modifier
+                        .size(40.dp)
+                        .padding(end = 16.dp)
+                )
 
+                Text(
+                    text = title,
+                    color = Color.White,
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
-
     }
-
 }
