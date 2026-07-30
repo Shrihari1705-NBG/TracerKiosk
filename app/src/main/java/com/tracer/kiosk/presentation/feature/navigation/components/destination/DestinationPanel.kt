@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.feature.navigation.model.DestinationCategory
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun DestinationPanel(
@@ -66,14 +67,18 @@ fun DestinationPanel(
                         .clickable {
                             onDestinationClick(destination)
                         },
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF071B4D)
+                    ),
                     elevation = CardDefaults.cardElevation(
-                        defaultElevation = 3.dp
+                        defaultElevation = 6.dp
                     )
                 ) {
 
                     Text(
                         text = destination.name,
                         style = MaterialTheme.typography.titleMedium,
+                        color = Color.White,
                         modifier = Modifier.padding(16.dp)
                     )
 

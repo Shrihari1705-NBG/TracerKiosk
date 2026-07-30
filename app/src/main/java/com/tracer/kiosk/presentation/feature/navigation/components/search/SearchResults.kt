@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.presentation.feature.navigation.model.Destination
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun SearchResults(
@@ -44,8 +45,11 @@ fun SearchResults(
                     .clickable {
                         onDestinationClick(destination)
                     },
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF071B4D)
+                ),
                 elevation = CardDefaults.cardElevation(
-                    defaultElevation = 2.dp
+                    defaultElevation = 6.dp
                 )
             ) {
 
@@ -55,8 +59,10 @@ fun SearchResults(
 
                     Text(
                         text = destination.name,
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium,
+                        color = Color.White
                     )
+
 
                     Text(
                         text = destination.category.name
@@ -64,7 +70,7 @@ fun SearchResults(
                             .lowercase()
                             .replaceFirstChar { it.uppercase() },
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary
+                        color = Color.White.copy(alpha = 0.75f)
                     )
                 }
             }

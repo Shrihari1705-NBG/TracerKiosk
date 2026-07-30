@@ -1,5 +1,6 @@
 package com.tracer.kiosk.presentation.feature.navigation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,8 +14,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.components.navigation.NavigationTopBar
 import com.tracer.kiosk.presentation.feature.navigation.algorithm.PathFinder
 import com.tracer.kiosk.presentation.feature.navigation.components.destination.DestinationInfoCard
@@ -34,9 +38,7 @@ fun NavigationScreen(
     navController: NavHostController
 ) {
 
-    var query by remember {
-        mutableStateOf("")
-    }
+    var query by remember { mutableStateOf("") }
 
     var selectedCategory by remember {
         mutableStateOf<DestinationCategory?>(null)
@@ -66,134 +68,146 @@ fun NavigationScreen(
                         }
 
             matchesCategory && matchesSearch
-
         }
-
     }
 
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        Column(
+        Box(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            NavigationTopBar(
-                onBackClick = {
-                    navController.navigate(Screen.Home.route)
-                }
+            // Background Image
+            Image(
+                painter = painterResource(R.drawable.background_pattern),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 12.dp)
+            Column(
+                modifier = Modifier.fillMaxSize()
             ) {
 
-                // Left Panel
-                Box(
+                NavigationTopBar(
+                    onBackClick = {
+                        navController.navigate(Screen.Home.route)
+                    }
+                )
+
+                Row(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(0.30f)
-                        .padding(20.dp)
+                        .fillMaxSize()
+                        .padding(top = 12.dp)
                 ) {
 
-                    if (selectedCategory == null) {
+                    // Left Panel
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(0.30f)
+                            .padding(20.dp)
+                    ) {
 
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
+                        if (selectedCategory == null) {
 
-                            Text(
-                                text = "Where would you like to go?",
-                                style = MaterialTheme.typography.headlineMedium
-                            )
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            ) {
 
-                            SearchBar(
-                                query = query,
-                                onQueryChange = {
-                                    query = it
+                                Text(
+                                    text = "Where would you like to go?",
+                                    style = MaterialTheme.typography.headlineMedium
+                                )
+
+                                SearchBar(
+                                    query = query,
+                                    onQueryChange = {
+                                        query = it
+                                    }
+                                )
+
+                                HorizontalDivider()
+
+                                if (query.isBlank()) {
+
+                                    CategoryGrid(
+                                        onCategoryClick = {
+                                            selectedCategory = it
+                                        }
+                                    )
+
+                                } else {
+
+                                    SearchResults(
+                                        destinations = destinations,
+                                        onDestinationClick = { destination ->
+                                            selectedDestination = destination
+                                        }
+                                    )
+
+                                }
+
+                            }
+
+                        } else {
+
+                            DestinationPanel(
+                                category = selectedCategory!!,
+                                destinations = destinations,
+                                onBackClick = {
+                                    selectedCategory = null
+                                },
+                                onDestinationClick = { destination ->
+                                    selectedDestination = destination
                                 }
                             )
 
-                            HorizontalDivider()
+                        }
 
-                            if (query.isBlank()) {
+                    }
 
-                                CategoryGrid(
-                                    onCategoryClick = {
-                                        selectedCategory = it
-                                    }
-                                )
+                    // Right Panel
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(0.70f)
+                            .padding(20.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
 
-                            } else {
+                        selectedDestination?.let { destination ->
 
-                                SearchResults(
-                                    destinations = destinations,
-                                    onDestinationClick = { destination ->
-                                        selectedDestination = destination
-                                    }
-                                )
+                            DestinationInfoCard(
+                                destination = destination,
+                                onStartNavigation = {
 
-                            }
+                                    currentRoute = PathFinder.findPath(
+                                        startNodeId = "N1",
+                                        destinationNodeId = destination.nodeId
+                                    )
+
+                                    android.util.Log.d("Tracer", "Destination = ${destination.name}")
+                                    android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
+                                    android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
+                                    android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
+
+                                }
+                            )
 
                         }
 
-                    } else {
+                        Box(
+                            modifier = Modifier.weight(1f)
+                        ) {
 
-                        DestinationPanel(
-                            category = selectedCategory!!,
-                            destinations = destinations,
-                            onBackClick = {
-                                selectedCategory = null
-                            },
-                            onDestinationClick = { destination ->
-                                selectedDestination = destination
-                            }
-                        )
+                            MapCanvas(
+                                route = currentRoute
+                            )
 
-                    }
-
-                }
-
-                // Right Panel
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(0.70f)
-                        .padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-
-                    selectedDestination?.let { destination ->
-
-                        DestinationInfoCard(
-                            destination = destination,
-                            onStartNavigation = {
-
-                                currentRoute = PathFinder.findPath(
-                                    startNodeId = "N1",
-                                    destinationNodeId = destination.nodeId
-                                )
-
-                                android.util.Log.d("Tracer", "Destination = ${destination.name}")
-                                android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
-                                android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
-                                android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
-
-                            }
-                        )
-
-                    }
-
-                    Box(
-                        modifier = Modifier.weight(1f)
-                    ) {
-
-                        MapCanvas(
-                            route = currentRoute
-                        )
+                        }
 
                     }
 

@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tracer.kiosk.presentation.feature.navigation.model.DestinationCategory
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun CategoryGrid(
@@ -42,8 +43,11 @@ fun CategoryGrid(
                     .clickable {
                         onCategoryClick(category)
                     },
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF071B4D)
+                ),
                 elevation = CardDefaults.cardElevation(
-                    defaultElevation = 4.dp
+                    defaultElevation = 6.dp
                 )
             ) {
 
@@ -54,12 +58,14 @@ fun CategoryGrid(
 
                     Icon(
                         imageVector = category.icon,
-                        contentDescription = category.title
+                        contentDescription = category.title,
+                        tint = Color.White
                     )
 
                     Text(
                         text = category.title,
                         style = MaterialTheme.typography.titleMedium,
+                        color = Color.White,
                         textAlign = TextAlign.Center
                     )
 
