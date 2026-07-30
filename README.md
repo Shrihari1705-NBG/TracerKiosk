@@ -70,13 +70,16 @@ Unlike a personal mobile application, Tracer Kiosk serves as a **fixed digital i
 
 ## 🧭 Indoor Navigation
 
+<p>Navigation Screen</p>
+<p align="center">
+  <img src="screenshots/navigation.png" width="900"/>
+</p>
+
+<p>Navigation Complete</p>
 <p align="center">
   <img src="screenshots/navigation complete.png" width="900"/>
 </p>
 
-<p align="center">
-  <img src="screenshots/navigation.png" width="900"/>
-</p>
 
 ---
 
