@@ -5,52 +5,58 @@
 <h1 align="center">Tracer Kiosk</h1>
 
 <p align="center">
-  Information & Navigation Kiosk for the Tracer Indoor Navigation System
+  Smart Information & Indoor Navigation Kiosk for Android Tablets
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Kotlin-2.2.0-7F52FF?logo=kotlin&logoColor=white"/>
   <img src="https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4"/>
-  <img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-00C853"/>
+  <img src="https://img.shields.io/badge/Architecture-MVVM-00C853"/>
   <img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Status-v1.0.0-success"/>
 </p>
 
 ---
 
 # 📍 Tracer Kiosk
 
-**Tracer Kiosk** is an Android tablet application developed as the kiosk interface for the **Tracer Indoor Navigation System**.
+**Tracer Kiosk** is an Android tablet application developed as part of the **Tracer Smart Campus Navigation System**.
 
-Installed at the entrance of a building, it allows visitors to explore department information, browse faculty details, and access indoor navigation services through a simple touch-friendly interface.
+Designed for installation at the entrance of a department or campus building, the kiosk enables visitors to quickly browse faculty information, explore department facilities, search destinations, and receive indoor navigation guidance through an intuitive touch-friendly interface.
 
-Unlike the Tracer mobile application, the kiosk serves as a **fixed information and navigation terminal**, providing visitors with quick access to campus information and route guidance.
+Unlike a personal mobile application, Tracer Kiosk serves as a **fixed digital information terminal**, providing visitors with fast access to campus information and indoor wayfinding.
 
 > **Note**
 >
-> This repository contains only the **Tracer Kiosk** application. Indoor localization, BLE fingerprinting, and path-planning algorithms are part of the main **Tracer** ecosystem and are developed separately.
+> This repository contains only the **Tracer Kiosk** application.
+> The BLE scanner, RSSI fingerprint collection, indoor localization engine, and machine learning modules are developed separately as part of the overall **Tracer** ecosystem.
 
 ---
 
 # ✨ Features
 
-### Current
-
 - 🏠 Modern Home Dashboard
 - 🏛️ Department Information
 - 👨‍🏫 Faculty & Staff Directory
-- ℹ️ About Tracer
-- 🧭 Navigation Hub (UI)
-- 🎨 Material 3 Design
+- 🔍 Smart Destination Search
+- 🧭 Interactive Indoor Navigation
+- 🗺️ Floor Map Visualization
+- 📍 Animated Route Rendering
+- 🚶 A* Pathfinding Navigation
+- 📌 "You Are Here" Navigation Marker
+- 🎨 Material 3 User Interface
 - 📱 Optimized for Android Tablets
-- 🧩 Modular Component-Based UI
+- 🧩 Modular Jetpack Compose Components
 
-### Planned
+---
 
-- 🗺️ Interactive Indoor Map
-- 📍 Route Visualization
-- 🔍 Destination Search
-- 📂 Complete Campus Directory
-- 🚶 Indoor Navigation Integration
+# 📱 Application Modules
+
+- Home
+- Faculty & Staff
+- Department Information
+- Indoor Navigation
+- About Tracer
 
 ---
 
@@ -61,10 +67,25 @@ Unlike the Tracer mobile application, the kiosk serves as a **fixed information 
 - Material 3
 - Navigation Compose
 - MVVM Architecture
-- Clean Architecture
 - Repository Pattern
+- Clean Architecture
 - Coroutines
 - StateFlow
+
+---
+
+# 🧭 Indoor Navigation
+
+The kiosk includes a complete indoor navigation module featuring:
+
+- Graph-based indoor map representation
+- A* shortest path algorithm
+- Interactive destination search
+- Animated path visualization
+- Smooth curved route rendering
+- Animated navigation indicator
+- Responsive floor map scaling
+- Calibrated node positioning
 
 ---
 
@@ -72,44 +93,44 @@ Unlike the Tracer mobile application, the kiosk serves as a **fixed information 
 
 ```text
 app/
-├── data/
-├── domain/
 ├── presentation/
 │   ├── components/
 │   ├── feature/
 │   ├── navigation/
-│   └── theme/
-├── di/
-└── utils/
+│   ├── theme/
+│   └── utils/
+├── data/
+├── domain/
+└── ui/
 ```
 
 ---
 
 # 🚀 Project Status
 
-## ✅ Completed
+## ✅ Version 1.0.0
+
+Completed modules:
 
 - Splash Screen
-- Home Screen
-- Faculty & Staff Screen
-- Department Screen
-- About Tracer Screen
+- Home Dashboard
+- Faculty & Staff Directory
+- Department Information
+- Indoor Navigation
+- Interactive Floor Map
+- Destination Search
+- Route Visualization
+- About Tracer
 - Sidebar Navigation
 - Material 3 Design System
-- Navigation Graph
-
-## 🚧 In Progress
-
-- Navigation Module
-- Destination Search
-- Indoor Map
-- Route Visualization
 
 ---
 
-# 🎯 Project Goal
+# 🎯 Project Objective
 
-The goal of Tracer Kiosk is to provide visitors with an intuitive digital kiosk for accessing building information and indoor navigation services, offering a seamless user experience within the larger **Tracer Indoor Navigation System**.
+Tracer Kiosk provides visitors with an intuitive self-service kiosk for accessing department information and navigating indoor environments without requiring prior knowledge of the building layout.
+
+The application forms the user-facing kiosk component of the broader **Tracer Smart Campus Navigation System**.
 
 ---
 
@@ -117,14 +138,24 @@ The goal of Tracer Kiosk is to provide visitors with an intuitive digital kiosk 
 
 **Shrihari N B Goudru**
 
-**Major Project**
+Student Android Developer
 
-**Tracer – BLE-Based Indoor Navigation System**
+Designed and developed the complete Tracer Kiosk Android application, including application architecture, modern Jetpack Compose user interface, interactive indoor navigation, A* pathfinding implementation, floor map visualization, and overall user experience.
+
+---
+
+# 📚 Academic Project
+
+Developed as part of the Bachelor of Engineering Major Project.
+
+**Project Title**
+
+**Tracer – Smart Indoor Navigation System**
 
 ---
 
 # 📄 License
 
-This project is developed as part of an academic major project.
+This project is developed for academic and research purposes.
 
-All rights reserved © 2026.
+© 2026 Team Tracer. All Rights Reserved.
