@@ -10,164 +10,170 @@ object GraphRepository {
 
         GraphNode(
             id = "N1",
-            position = Offset(755f, 244f),
+            position = Offset(741f, 134f),
             neighbors = listOf("N2")
         ),
 
         GraphNode(
             id = "N2",
-            position = Offset(820f, 369f),
-            neighbors = listOf("N1", "N3", "N4", "N5", "N10")
+            position = Offset(772f, 262f),
+            neighbors = listOf("N1", "N3", "N4", "N6", "N10")
         ),
 
         GraphNode(
             id = "N3",
-            position = Offset(881f, 278f),
+            position = Offset(881f, 178f),
             neighbors = listOf("N2")
         ),
 
         GraphNode(
             id = "N4",
-            position = Offset(888f, 461f),
+            position = Offset(881f, 347f),
             neighbors = listOf("N2")
         ),
 
         GraphNode(
             id = "N5",
-            position = Offset(983f, 334f),
-            neighbors = listOf("N2", "N6")
+            position = Offset(1097f, 172f),
+            neighbors = listOf("N28")
         ),
 
         GraphNode(
             id = "N6",
-            position = Offset(1106f, 269f),
-            neighbors = listOf("N5", "N7")
+            position = Offset(988f, 228f),
+            neighbors = listOf("N2", "N28")
         ),
 
         GraphNode(
             id = "N7",
-            position = Offset(1134f, 425f),
-            neighbors = listOf("N6", "N8")
+            position = Offset(1134f, 328f),
+            neighbors = listOf("N28", "N8")
         ),
 
         GraphNode(
             id = "N8",
-            position = Offset(1130f, 508f),
+            position = Offset(1134f, 403f),
             neighbors = listOf("N7", "N9")
         ),
 
         GraphNode(
             id = "N9",
-            position = Offset(1080f, 648f),
+            position = Offset(1091f, 534f),
             neighbors = listOf("N8")
         ),
 
         GraphNode(
             id = "N10",
-            position = Offset(675f, 309f),
+            position = Offset(678f, 209f),
             neighbors = listOf("N2", "N11", "N12")
         ),
 
         GraphNode(
             id = "N11",
-            position = Offset(627f, 215f),
+            position = Offset(653f, 122f),
             neighbors = listOf("N10")
         ),
 
         GraphNode(
             id = "N12",
-            position = Offset(555f, 423f),
+            position = Offset(553f, 322f),
             neighbors = listOf("N10", "N13", "N14")
         ),
 
         GraphNode(
             id = "N13",
-            position = Offset(328f, 364f),
+            position = Offset(350f, 259f),
             neighbors = listOf("N12", "N15", "N16", "N27")
         ),
 
         GraphNode(
             id = "N14",
-            position = Offset(315f, 455f),
+            position = Offset(316f, 372f),
             neighbors = listOf("N12", "N18", "N19", "N21", "N22")
         ),
 
         GraphNode(
             id = "N15",
-            position = Offset(375f, 311f),
+            position = Offset(384f, 209f),
             neighbors = listOf("N13")
         ),
 
         GraphNode(
             id = "N16",
-            position = Offset(342f, 201f),
+            position = Offset(331f, 103f),
             neighbors = listOf("N13", "N17")
         ),
 
         GraphNode(
             id = "N17",
-            position = Offset(348f, 136f),
+            position = Offset(331f, 34f),
             neighbors = listOf("N16")
         ),
 
         GraphNode(
             id = "N18",
-            position = Offset(374f, 555f),
+            position = Offset(369f, 447f),
             neighbors = listOf("N14")
         ),
 
         GraphNode(
             id = "N19",
-            position = Offset(332f, 661f),
+            position = Offset(340f, 556f),
             neighbors = listOf("N14", "N20")
         ),
 
         GraphNode(
             id = "N20",
-            position = Offset(336f, 720f),
+            position = Offset(340f, 616f),
             neighbors = listOf("N19")
         ),
 
         GraphNode(
             id = "N21",
-            position = Offset(207f, 610f),
+            position = Offset(200f, 506f),
             neighbors = listOf("N14")
         ),
 
         GraphNode(
             id = "N22",
-            position = Offset(212f, 500f),
+            position = Offset(222f, 403f),
             neighbors = listOf("N14", "N23", "N25", "N26")
         ),
 
         GraphNode(
             id = "N23",
-            position = Offset(124f, 495f),
+            position = Offset(131f, 390f),
             neighbors = listOf("N22", "N24")
         ),
 
         GraphNode(
             id = "N24",
-            position = Offset(54f, 466f),
+            position = Offset(81f, 356f),
             neighbors = listOf("N23")
         ),
 
         GraphNode(
             id = "N25",
-            position = Offset(117f, 418f),
+            position = Offset(141f, 309f),
             neighbors = listOf("N22")
         ),
 
         GraphNode(
             id = "N26",
-            position = Offset(186f, 424f),
+            position = Offset(200f, 312f),
             neighbors = listOf("N22")
         ),
 
         GraphNode(
             id = "N27",
-            position = Offset(221f, 318f),
+            position = Offset(206f, 222f),
             neighbors = listOf("N13")
+        ),
+
+        GraphNode(
+            id = "N28",
+            position = Offset(1068f, 200f),
+            neighbors = listOf("N5", "N6", "N7")
         )
 
     )

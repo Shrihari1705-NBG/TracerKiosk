@@ -171,7 +171,7 @@ object DestinationRepository {
             id = "research_lab",
             name = "Research Lab",
             category = DestinationCategory.LABORATORY,
-            nodeId = "N6",
+            nodeId = "N5",
             aliases = listOf("research")
         ),
 
@@ -215,7 +215,7 @@ object DestinationRepository {
             id = "department_library",
             name = "Department Library",
             category = DestinationCategory.FACILITY,
-            nodeId = "N5",
+            nodeId = "N6",
             aliases = listOf("library")
         ),
 

@@ -1,0 +1,16 @@
+* [33me2fd198[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m feat: complete A* indoor navigation and prepare graph calibration
+* [33meac6b1d[m feat(navigation): implement graph editor and export system
+* [33m0ad1d91[m feat: implement interactive graph node creation on floor map
+* [33m555e5d6[m feat: implement kiosk idle attract mode
+* [33m56e16b1[m Update README.md
+* [33m08e0497[m feat: add Department screen with sidebar navigation
+* [33m2a12dc0[m feat: complete Phase 1 kiosk interface
+* [33m4bf16d0[m Implement splash to home fade animation
+* [33m7140af7[m Revise README with logo and technology badges
+* [33ma1e9117[m Update README.md
+* [33m68c4cc6[m feat(home): implement home screen UI and sidebar navigation
+* [33m745c114[m feat: implement splash screen and application branding
+* [33m34bc2df[m Create README.md
+* [33m1959433[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m feat: implement tracer design system
+* [33mfa11417[m chore: initial project setup
+* [33m3ab8fea[m feat: add navigation compose

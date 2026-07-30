@@ -21,7 +21,11 @@ import com.tracer.kiosk.presentation.feature.navigation.graph.GraphNode
 private const val ORIGINAL_WIDTH = 1280f
 private const val ORIGINAL_HEIGHT = 720f
 
-private const val SHOW_GRAPH_DEBUG = true
+private const val SHOW_GRAPH_DEBUG = false
+
+// Fine-tune the graph alignment
+private const val GRAPH_OFFSET_X = 5f
+private const val GRAPH_OFFSET_Y = 3f
 
 @Composable
 fun MapCanvas(
@@ -59,10 +63,12 @@ fun MapCanvas(
             val offsetX = (size.width - imageWidth) / 2f
             val offsetY = (size.height - imageHeight) / 2f
 
+
+
             fun transform(point: Offset): Offset {
                 return Offset(
-                    x = offsetX + point.x * scale,
-                    y = offsetY + point.y * scale
+                    x = offsetX + point.x * scale + GRAPH_OFFSET_X,
+                    y = offsetY + point.y * scale + GRAPH_OFFSET_Y
                 )
             }
 
