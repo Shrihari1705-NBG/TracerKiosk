@@ -16,7 +16,7 @@ object GraphRepository {
 
         GraphNode(
             id = "N2",
-            position = Offset(772f, 262f),
+            position = Offset(772f, 209f),
             neighbors = listOf("N1", "N3", "N4", "N6", "N10")
         ),
 
