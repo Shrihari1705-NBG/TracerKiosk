@@ -1,21 +1,18 @@
 package com.tracer.kiosk.presentation.feature.navigation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.ui.draw.rotate
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tracer.kiosk.R
@@ -37,6 +34,10 @@ import com.tracer.kiosk.presentation.navigation.Screen
 fun NavigationScreen(
     navController: NavHostController
 ) {
+
+    var isNavigationPanelCollapsed by remember {
+        mutableStateOf(false)
+    }
 
     var query by remember { mutableStateOf("") }
 
@@ -79,7 +80,6 @@ fun NavigationScreen(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            // Background Image
             Image(
                 painter = painterResource(R.drawable.background_pattern),
                 contentDescription = null,
@@ -145,6 +145,7 @@ fun NavigationScreen(
                                         destinations = destinations,
                                         onDestinationClick = { destination ->
                                             selectedDestination = destination
+                                            isNavigationPanelCollapsed = false
                                         }
                                     )
 
@@ -162,6 +163,7 @@ fun NavigationScreen(
                                 },
                                 onDestinationClick = { destination ->
                                     selectedDestination = destination
+                                    isNavigationPanelCollapsed = false
                                 }
                             )
 
@@ -180,23 +182,38 @@ fun NavigationScreen(
 
                         selectedDestination?.let { destination ->
 
-                            DestinationInfoCard(
-                                destination = destination,
-                                onStartNavigation = {
+                            if (isNavigationPanelCollapsed) {
 
-                                    currentRoute = PathFinder.findPath(
-                                        startNodeId = "N1",
-                                        destinationNodeId = destination.nodeId
-                                    )
+                                NavigationCollapsedBar(
+                                    destinationName = destination.name,
+                                    onExpand = {
+                                        isNavigationPanelCollapsed = false
+                                    }
+                                )
 
-                                    android.util.Log.d("Tracer", "Destination = ${destination.name}")
-                                    android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
-                                    android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
-                                    android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
+                            } else {
 
-                                }
-                            )
+                                DestinationInfoCard(
+                                    destination = destination,
+                                    onStartNavigation = {
 
+                                        currentRoute = PathFinder.findPath(
+                                            startNodeId = "N1",
+                                            destinationNodeId = destination.nodeId
+                                        )
+
+                                        android.util.Log.d("Tracer", "Destination = ${destination.name}")
+                                        android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
+                                        android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
+                                        android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
+
+                                        isNavigationPanelCollapsed = true
+                                    },
+                                    onCollapse = {
+                                        isNavigationPanelCollapsed = true
+                                    }
+                                )
+                            }
                         }
 
                         Box(
@@ -220,3 +237,49 @@ fun NavigationScreen(
     }
 
 }
+
+@Composable
+fun NavigationCollapsedBar(
+    destinationName: String,
+    onExpand: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onExpand() },
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            IconButton(onClick = onExpand) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Expand"
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = destinationName,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text(
+                text = "Tap to expand",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+
+

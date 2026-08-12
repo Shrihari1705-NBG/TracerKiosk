@@ -135,7 +135,7 @@ fun AboutScreen(
                     text = "© 2026 Team Tracer",
                     modifier = Modifier.fillMaxWidth(),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f),
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.50f),
                     textAlign = TextAlign.End
                 )
             }

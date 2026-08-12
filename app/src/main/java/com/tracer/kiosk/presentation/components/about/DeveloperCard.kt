@@ -64,6 +64,14 @@ fun DeveloperCard(
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold
             )
+
+
+            Text(
+                text = "Other Contributers: Vageesh Gaonkar • Shreesha Tembe • Shubhangi Naik",
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold
+            )
         }
     }
 }
