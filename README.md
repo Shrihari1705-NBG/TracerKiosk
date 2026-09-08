@@ -211,8 +211,12 @@ Developed as part of the Bachelor of Engineering Major Project.
 
 ---
 
-# 📄 License
+# License
 
-This project is developed for academic and research purposes.
+Tracer Kiosk is licensed under the Apache License, Version 2.0.
+
+Copyright 2026 Shrihari N B G, Shreesha M Tembe, Shubhangi S Naik, and Vageesh S Gaonkar.
+
+See the [LICENSE](LICENSE) file for the full license text.
 
 © 2026 Team Tracer. All Rights Reserved.
