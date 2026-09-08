@@ -1,0 +1,477 @@
+{
+  "department": "Electronics and Communication Engineering",
+  "institution": "KLS Vishwanathrao Deshpande Institute of Technology, Haliyal",
+  "faculty": [
+    {
+      "id": "FAC001",
+      "name": "Dr. Plasin Francis Dias",
+      "designation": "Assistant Professor and HOD",
+      "qualification": ["M.Tech.", "Ph.D."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "26 years",
+      "publications": 18,
+      "email": "pfd@klsvdit.edu.in",
+
+      "about": "Dr. Plasin Francis Dias is a faculty in Electronics and Communication Engineering. Her research focuses on Synthetic Aperture Radar (SAR) Polarimetry, image processing, signal processing, and VLSI-based implementations for remote sensing applications. Her interests include radar signal analysis, FPGA design, and advanced techniques for Earth observation and environmental monitoring. She has published 18 research papers in reputed journals and conferences and is actively engaged in advanced research and academic activities.",
+
+      "research_interests": [
+        "Signal Processing",
+        "Very Large Scale Integration (VLSI)",
+        "Image Processing",
+        "Communication System"
+      ],
+
+      "courses_taught": [
+        "Digital Image Processing",
+        "Analog Mixed Mode Very Large Scale Integration (VLSI) Design",
+        "Principles Of Communication Systems",
+        "Signals And Systems"
+      ],
+
+      "recognition": [
+        "Research article titled \"Entropy Based target Identification in Synthetic Aperture Radar Polarimetry\" received Best Paper Award at The 2nd World Summit on Advances in Science, Engineering and Technology, Indiana Summit 2019, Indiana University Perdue University Indianapolis, USA.",
+        "Research article titled \"Quantitative Approach for Snowy Feature Detection using Polarimetric Analysis\" received Best Paper Award at the International Conference on Intelligent Engineering Approach (ICIEA-2022).",
+        "Member of Institution of Engineers India (IEI).",
+        "Life member of Indian Society for Technical Education (ISTE).",
+        "Life Member of International Association of Engineers (IAENG)."
+      ]
+    },
+
+    {
+      "id": "FAC002",
+      "name": "Dr. Mahendra M. Dixit",
+      "designation": "Professor & Dean",
+      "qualification": ["M.Tech.", "Ph.D."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "19 years",
+      "publications": 30,
+      "email": "mmd@klsvdit.edu.in",
+
+      "about": "Dr. Mahendra M. Dixit is an Associate Professor in the Department of Electronics and Communication Engineering. He has been serving at SDM College of Engineering and Technology, Dharwad, since 2008. His academic and research interests include VLSI Design, Embedded Systems, and Image Processing, contributing to teaching, research, and student development.",
+
+      "research_interests": [
+        "Very Large Scale Integration (VLSI) Design",
+        "Embedded Systems",
+        "Digital Image Processing",
+        "Agricultural Technology"
+      ],
+
+      "courses_taught": [
+        "Digital Image Processing",
+        "Embedded Systems Design",
+        "Essentials Of Information Technology"
+      ],
+
+      "recognition": [
+        "Recognized Reviewer for Springer, Elsevier Science, Taylor and Francis, IEEE Transactions, and IET (UK).",
+        "Worked as Head of the Department (Electronics and Communication Engineering) for more than 5 years at KLS VDIT Haliyal.",
+        "Worked as Dean Research and Development for 2 years at KLS VDIT Haliyal.",
+        "Working as President of Institution's Innovation Council (IIC) since its inception at KLS VDIT Haliyal."
+      ]
+    },
+
+    {
+      "id": "FAC003",
+      "name": "Mr. A V Kolaki",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "26 years",
+      "publications": 15,
+      "email": "avk@klsvdit.edu.in",
+
+      "about": "Mr. A. V. Kolaki has been serving as an Assistant Professor in the Department of Electronics and Communication Engineering since 2004. With over two decades of teaching experience, he has been actively involved in imparting quality education, mentoring students, and contributing to various academic and administrative activities of the institution. He is also serving as the VDIT Examination Coordinator, responsible for the effective planning, coordination, and conduct of examination-related activities.",
+
+      "research_interests": [
+        "Digital Communication",
+        "Secured Communication"
+      ],
+
+      "courses_taught": [
+        "Digital Circuits",
+        "Cryptography",
+        "Fundamentals Of Electronics",
+        "Computer Networking"
+      ],
+
+      "recognition": [
+        "Worked as Computer Center Head."
+      ]
+    },
+
+    {
+      "id": "FAC004",
+      "name": "Mr. Nikhil A. Kulkarni",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "14 years",
+      "publications": 10,
+      "email": "nak@klsvdit.edu.in",
+
+      "about": "Mr. Nikhil A. Kulkarni holds an M.Tech in VLSI Design and Embedded Systems and a B.E. in Electronics and Communication Engineering. His areas of interest include Embedded Systems, VLSI Design, Digital Electronics, and FPGA-Based System Design. He is actively involved in teaching, research, and technology-driven learning in the field of Electronics and Communication Engineering.",
+
+      "research_interests": [
+        "Embedded Systems",
+        "Very Large Scale Integration (VLSI) Design",
+        "Digital Electronics",
+        "Field Programmable Gate Array (FPGA) and Application Specific Integrated Circuit (ASIC) Design"
+      ],
+
+      "courses_taught": [
+        "Embedded System Design",
+        "Network Analysis",
+        "Electromagnetics",
+        "VHDL And Verilog"
+      ],
+
+      "recognition": [
+        "NPTEL Coordinator.",
+        "IIT Bombay Spoken Tutorial and NPTEL Coordinator."
+      ]
+    },
+
+    {
+      "id": "FAC005",
+      "name": "Mr. Raghavendra Nagaralli",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "13 years",
+      "publications": 5,
+      "email": "rpn@klsvdit.edu.in",
+
+      "about": "Mr. Raghavendra Nagaralli is an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT. His research focuses on the application of Deep Learning algorithms in Image Processing. His areas of interest include Artificial Intelligence, Machine Learning, and Deep Learning, contributing to innovative research and technological advancements.",
+
+      "research_interests": [
+        "Deep Learning",
+        "Image Processing",
+        "Machine Learning"
+      ],
+
+      "courses_taught": [
+        "Computer Communication Networking",
+        "Network Security",
+        "Operating System",
+        "Computer Organization"
+      ],
+
+      "recognition": [
+        "Successfully completed AICTE QIP Postgraduate Certification Programme in Cyber Physical System from IIIT Dharwad during June - December 2025."
+      ]
+    },
+
+    {
+      "id": "FAC006",
+      "name": "Mrs. Rohini Kallur",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "18 years",
+      "publications": 20,
+      "email": "rrk@klsvdit.edu.in",
+
+      "about": "Mrs. Rohini Kallur is an Assistant Professor with expertise in Communication Systems and Embedded Systems. She is currently pursuing Ph.D in Communication domain from VTU, Belagavi. She has authored 20 research papers in reputed national and international journals and conferences. She also serves as a reviewer for reputed Scopus-indexed journals and has guided a KSCST-funded project. She is dedicated to teaching and research and to advancing knowledge and fostering innovation in Electronics and Communication Engineering.",
+
+      "research_interests": [
+        "Communication Engineering",
+        "Optical Networks",
+        "Embedded Systems"
+      ],
+
+      "courses_taught": [
+        "Power Electronics",
+        "Principles Of Communication Systems",
+        "Artificial Intelligence And Machine Learning",
+        "Digital System Design Using Verilog"
+      ],
+
+      "recognition": [
+        "Received Best Paper Award for the paper \"Optimization of Energy in Wavelength Division Multiplexing (WDM) Passive Optical Network\" in RISEM.",
+        "Secretary of Kalpavruksha Kannada Sangha, KLS VDIT Haliyal.",
+        "Member of Institution of Engineers India (IEI).",
+        "Life Member of International Association of Engineers (IAENG)."
+      ]
+    },
+
+    {
+      "id": "FAC007",
+      "name": "Mr. Suraj Kadli",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "12 years",
+      "publications": 7,
+      "email": "sbk@klsvdit.edu.in",
+
+      "about": "Mr. Suraj Kadli is an Assistant Professor in the Department of Electronics and Communication Engineering. His research focuses on optimization of Audio Compression algorithms using Deep Learning techniques. He has guided 5 PG projects.",
+
+      "research_interests": [
+        "Signal Processing",
+        "Audio Compression"
+      ],
+
+      "courses_taught": [
+        "Digital Signal Processing",
+        "Control Systems",
+        "Automotive Electronics",
+        "Introduction To Artificial Intelligence (AI) And Applications"
+      ],
+
+      "recognition": [
+        "Information to be updated."
+      ]
+    },
+
+    {
+      "id": "FAC008",
+      "name": "Mr. Deepak Sharma",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "11 years",
+      "publications": 10,
+      "email": "dss@klsvdit.edu.in",
+
+      "about": "Mr. Deepak Sharma is an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT. He holds B.E. and M.Tech degrees from SDMCET, Dharwad. His research interests include Low-Power VLSI and Digital Circuit Design. He is currently pursuing a Ph.D. under VTU, Belagavi, at KLS VDIT.",
+
+      "research_interests": [
+        "Digital Very Large Scale Integration (VLSI) Circuits"
+      ],
+
+      "courses_taught": [
+        "Analog Electronics",
+        "Very Large Scale Integration (VLSI) Design And Testing",
+        "Basic Electronics",
+        "Automotive Electronics"
+      ],
+
+      "recognition": [
+        "Reviewer for international journals.",
+        "Innovation Ambassador."
+      ]
+    },
+
+    {
+      "id": "FAC009",
+      "name": "Mrs. Vijayalaxmi C. Kalal",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "9 years",
+      "publications": 12,
+      "email": "vck@klsvdit.edu.in",
+
+      "about": "Mrs. Vijayalaxmi C. Kalal is a passionate academician and researcher in the field of VLSI and Embedded Systems. She earned her M.Tech in VLSI Design and Embedded Systems from VTU, Belagavi, and is currently pursuing her Ph.D. in VLSI. With 10 research publications in reputed journals and conferences, she is dedicated to advancing semiconductor technology through innovative research, inspiring teaching, and a commitment to technological excellence.",
+
+      "research_interests": [
+        "Very Large Scale Integration (VLSI)",
+        "Embedded Systems",
+        "Artificial Intelligence",
+        "Communication System"
+      ],
+
+      "courses_taught": [
+        "Very Large Scale Integration (VLSI) Design",
+        "Satellite Communication",
+        "Internet Of Things",
+        "Advanced Control Systems"
+      ],
+
+      "recognition": [
+        "KSCST Student Project Programme (SPP) Coordinator of Institute.",
+        "Received Gold Medal in M.Tech in VLSI Design and Embedded Systems from VTU, Belagavi for securing 1st Rank in the college."
+      ]
+    },
+
+    {
+      "id": "FAC010",
+      "name": "Ms. Pooja C Shindhe",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "4 years",
+      "publications": 6,
+      "email": "pcs@klsvdit.edu.in",
+
+      "about": "Ms. Pooja Shindhe serves as an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT. Her research interests include image compression and related signal processing techniques. She is actively involved in promoting innovation and entrepreneurship as an Innovation Ambassador under Institution's Innovation Council (IIC), contributing to academic excellence and student development.",
+
+      "research_interests": [
+        "Image Processing/Compression",
+        "Multimedia Communication"
+      ],
+
+      "courses_taught": [
+        "Network Analysis",
+        "Microwave And Antenna Theory",
+        "Electromagnetic Theory",
+        "Multimedia Communication"
+      ],
+
+      "recognition": [
+        "Innovation Ambassador under the Institution's Innovation Council (IIC).",
+        "Doctor of Philosophy (Ph.D.) Research Scholar.",
+        "Internship Coordinator.",
+        "Department Student Association Coordinator."
+      ]
+    },
+
+    {
+      "id": "FAC011",
+      "name": "Mr. Sudheendra Yalagur",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "15 years",
+      "publications": 3,
+      "email": "shy@klsvdit.edu.in",
+
+      "about": "Mr. Sudheendra Yalagur is an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT. His academic interests include Embedded Systems, Signal Processing, Computer Networks, and Wireless Communication. He is passionate about teaching, research, and mentoring students, fostering innovation, critical thinking, and practical problem-solving skills.",
+
+      "research_interests": [
+        "Embedded Systems",
+        "Signal Processing",
+        "Computer Networks",
+        "Wireless Communication"
+      ],
+
+      "courses_taught": [
+        "Network Analysis",
+        "Digital Signal Processing",
+        "Embedded Systems",
+        "Control Systems"
+      ],
+
+      "recognition": [
+        "Project batches received KSCST project grants under his guidance."
+      ]
+    },
+
+    {
+      "id": "FAC012",
+      "name": "Ms. Pavitra M Badiger",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "2.5 years",
+      "publications": 6,
+      "email": "pmb@klsvdit.edu.in",
+
+      "about": "Ms. Pavitra M. Badiger is an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT since 2023. She is currently pursuing Ph.D. research in Image Processing under VTU. Her research work has been presented at an international conference, reflecting her commitment to academic excellence and research advancement.",
+
+      "research_interests": [
+        "Image Processing"
+      ],
+
+      "courses_taught": [
+        "Computer Networks And Protocols",
+        "Digital System Design using Verilog (DSDV)"
+      ],
+
+      "recognition": [
+        "Working as Assistant Professor in Electronics and Communication Engineering department.",
+        "Department Internal Assessment (IA) Coordinator.",
+        "Department mentoring / Counseling Coordinator.",
+        "Institution Innovation Council (IIC) Ambassador.",
+        "Research Scholar of the college."
+      ]
+    },
+
+    {
+      "id": "FAC013",
+      "name": "Mrs. Ashwini Garaddi",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "2 years",
+      "publications": 3,
+      "email": "asg@klsvdit.edu.in",
+
+      "about": "Mrs. Ashwini Garaddi completed M.Tech. from KLS VDIT and is pursuing Ph.D. from AMC Engineering College, Bengaluru under VTU. Her research areas are Antenna design and communication subsystem design.",
+
+      "research_interests": [
+        "Antenna Design",
+        "Communication Subsystem Design"
+      ],
+
+      "courses_taught": [
+        "Network Security",
+        "Wireless Communication System",
+        "Microcontroller",
+        "Hybrid Electric Vehicles"
+      ],
+
+      "recognition": [
+        "Completed NPTEL Courses.",
+        "Published patent on antenna.",
+        "Project Coordinator.",
+        "ERP Coordinator.",
+        "Institution Innovation Council (IIC) Innovation Ambassador."
+      ]
+    },
+
+    {
+      "id": "FAC014",
+      "name": "Mrs. Rajeshwari Pashupatimath",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "2 years 5 months",
+      "publications": 2,
+      "email": "rap@klsvdit.edu.in",
+
+      "about": "Mrs. Rajeshwari Pashupatimath serves as an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT, Haliyal. Her academic and research interests are centered on Image Processing, with a focus on exploring innovative techniques and applications in the field. She is currently pursuing her Ph.D. as a Research Scholar at KLS VDIT, Haliyal, contributing to research in advanced image processing technologies. She is actively involved in teaching, mentoring students, and engaging in research activities that bridge theoretical concepts with practical applications in Electronics and Communication Engineering.",
+
+      "research_interests": [
+        "Image Processing"
+      ],
+
+      "courses_taught": [
+        "Microcontroller",
+        "Digital Communication"
+      ],
+
+      "recognition": [
+        "Authored and co-authored research papers in reputed national and international journals and conferences.",
+        "Institutional Coordinator for Indian Science, Technology and Engineering facilities Map (I-STEM).",
+        "Karnataka Science and Technology Academy (KSTA) Coordinator.",
+        "Ambassador of Institution Innovation Council (IIC).",
+        "Research Scholar.",
+        "Coordinator of Indian Science Technology and Engineering facilities Map (I-STEM).",
+        "Coordinator of Karnataka Science and Technology Academy (KSTA)."
+      ]
+    },
+
+    {
+      "id": "FAC015",
+      "name": "Mrs. Jyoti Kammar",
+      "designation": "Assistant Professor",
+      "qualification": ["M.Tech."],
+      "department": "Electronics and Communication Engineering",
+      "experience": "1 year",
+      "publications": null,
+      "email": "jsk@klsvdit.edu.in",
+
+      "about": "Mrs. Jyoti Kammar is an Assistant Professor in the Department of Electronics and Communication Engineering at KLS VDIT. She actively contributes to teaching, student development, and institutional initiatives. She serves as Coordinator of the Red Cross and Red Ribbon Club, Department Website Coordinator, and IIC Ambassador. Her area of interest is Power Systems.",
+
+      "research_interests": [
+        "Power System"
+      ],
+
+      "courses_taught": [
+        "Electric Circuit Analysis",
+        "Wireless Communication System",
+        "Control System",
+        "Electromagnetic Theory"
+      ],
+
+      "recognition": [
+        "Published Patent.",
+        "Completed NPTEL Courses.",
+        "Red Cross and Red Ribbon Club Coordinator.",
+        "Institution Innovation Council (IIC) Innovation Ambassador.",
+        "Website Coordinator."
+      ]
+    }
+  ]
+}
