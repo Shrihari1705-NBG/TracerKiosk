@@ -2,37 +2,12 @@ package com.tracer.kiosk.presentation.tracerbot.search
 
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 
-/**
- * Searches the local faculty database using
- * natural-language queries.
- *
- * The search engine is completely local.
- *
- * It supports:
- *
- * 1. Faculty name matching
- * 2. Department matching
- * 3. Course matching
- * 4. Research-interest matching
- * 5. Qualification matching
- * 6. Designation matching
- * 7. Recognition matching
- * 8. General profile matching
- *
- * Results are ranked from strongest to weakest match.
- */
 class FacultySearchEngine {
 
     /**
-     * Search the supplied faculty list.
+     * Search faculty using a natural-language query.
      *
-     * Example:
-     *
-     * "Tell me about Dr. Plasin Francis Dias"
-     *
-     * or:
-     *
-     * "Who teaches VLSI?"
+     * This is intentionally lightweight and completely local.
      */
     fun search(
         facultyList: List<Faculty>,
@@ -45,19 +20,11 @@ class FacultySearchEngine {
             return emptyList()
         }
 
-        /*
-         * Remove common conversational words.
-         *
-         * These words help form a sentence but usually
-         * do not identify a faculty member.
-         */
+        // Remove common conversational words.
         val queryWords = normalizedQuery
             .split(" ")
-            .filter { word ->
-                word.isNotBlank() &&
-                        word.length >= 2 &&
-                        word !in STOP_WORDS
-            }
+            .filter { it.isNotBlank() }
+            .filterNot { isStopWord(it) }
 
         return facultyList
             .map { faculty ->
@@ -82,9 +49,8 @@ class FacultySearchEngine {
     }
 
     /**
-     * Calculates the relevance score for one faculty member.
-     *
-     * Higher score = stronger match.
+     * Calculate how relevant a faculty member is
+     * to the user's query.
      */
     private fun calculateScore(
         faculty: Faculty,
@@ -93,10 +59,6 @@ class FacultySearchEngine {
     ): Int {
 
         var score = 0
-
-        // ---------------------------------------------------------
-        // Normalize faculty information
-        // ---------------------------------------------------------
 
         val name = normalize(faculty.name)
         val designation = normalize(faculty.designation)
@@ -115,186 +77,66 @@ class FacultySearchEngine {
         val recognition = faculty.selectedRecognition
             .map { normalize(it) }
 
-        // =========================================================
-        // EXACT FULL NAME MATCH
-        // =========================================================
+        // ---------------------------------------------------------
+        // Exact / phrase matches
+        // ---------------------------------------------------------
 
         if (name == query) {
-            score += 500
-        }
-
-        // =========================================================
-        // FULL NAME CONTAINED IN QUERY
-        // =========================================================
-        //
-        // Example:
-        //
-        // "tell me about dr plasin francis dias"
-        //
-        // contains:
-        //
-        // "plasin francis dias"
-        //
-        // This is a very strong match.
-
-        if (
-            name.isNotBlank() &&
-            query.contains(name)
-        ) {
-            score += 400
-        }
-
-        // =========================================================
-        // QUERY CONTAINS IMPORTANT NAME WORDS
-        // =========================================================
-
-        val nameWords = name
-            .split(" ")
-            .filter { word ->
-                word.length >= 3 &&
-                        word !in NAME_STOP_WORDS
-            }
-
-        for (nameWord in nameWords) {
-
-            if (queryWords.contains(nameWord)) {
-                score += 100
-            }
-        }
-
-        // =========================================================
-        // DEPARTMENT PHRASE MATCH
-        // =========================================================
-
-        if (
-            department.isNotBlank() &&
-            query.contains(department)
-        ) {
             score += 100
         }
 
-        // =========================================================
-        // RESEARCH PHRASE MATCH
-        // =========================================================
-
-        if (
-            researchInterests.any { interest ->
-                interest.isNotBlank() &&
-                        query.contains(interest)
-            }
-        ) {
-            score += 120
+        if (name.contains(query)) {
+            score += 80
         }
 
-        // =========================================================
-        // COURSE PHRASE MATCH
-        // =========================================================
-
-        if (
-            coursesTaught.any { course ->
-                course.isNotBlank() &&
-                        query.contains(course)
-            }
-        ) {
-            score += 150
-        }
-
-        // =========================================================
-        // INDIVIDUAL WORD MATCHES
-        // =========================================================
+        // ---------------------------------------------------------
+        // Individual word matches
+        // ---------------------------------------------------------
 
         for (word in queryWords) {
 
-            // -----------------------------------------------------
-            // Name
-            // -----------------------------------------------------
-
-            if (nameWords.contains(word)) {
-                score += 80
+            if (word.length < 2) {
                 continue
             }
 
-            // -----------------------------------------------------
-            // Department
-            // -----------------------------------------------------
-
-            if (department.contains(word)) {
-                score += 20
+            // Name is the strongest field.
+            if (name.contains(word)) {
+                score += 25
             }
-
-            // -----------------------------------------------------
-            // Research
-            // -----------------------------------------------------
-
-            if (
-                researchInterests.any { interest ->
-                    interest.contains(word)
-                }
-            ) {
-                score += 30
-            }
-
-            // -----------------------------------------------------
-            // Courses
-            // -----------------------------------------------------
-
-            if (
-                coursesTaught.any { course ->
-                    course.contains(word)
-                }
-            ) {
-                score += 35
-            }
-
-            // -----------------------------------------------------
-            // Designation
-            // -----------------------------------------------------
 
             if (designation.contains(word)) {
-                score += 12
+                score += 8
             }
-
-            // -----------------------------------------------------
-            // Qualification
-            // -----------------------------------------------------
 
             if (qualification.contains(word)) {
-                score += 12
+                score += 8
             }
 
-            // -----------------------------------------------------
-            // About
-            // -----------------------------------------------------
+            if (department.contains(word)) {
+                score += 10
+            }
 
             if (about.contains(word)) {
                 score += 5
             }
 
-            // -----------------------------------------------------
-            // Experience
-            // -----------------------------------------------------
-
             if (experience.contains(word)) {
                 score += 5
             }
 
-            // -----------------------------------------------------
-            // Recognition
-            // -----------------------------------------------------
-
-            if (
-                recognition.any { item ->
-                    item.contains(word)
-                }
-            ) {
-                score += 10
+            if (email.contains(word)) {
+                score += 5
             }
 
-            // -----------------------------------------------------
-            // Email
-            // -----------------------------------------------------
+            if (researchInterests.any { it.contains(word) }) {
+                score += 15
+            }
 
-            if (email.contains(word)) {
+            if (coursesTaught.any { it.contains(word) }) {
+                score += 15
+            }
+
+            if (recognition.any { it.contains(word) }) {
                 score += 10
             }
         }
@@ -303,15 +145,62 @@ class FacultySearchEngine {
     }
 
     /**
+     * Common conversational words that should not
+     * strongly influence faculty matching.
+     */
+    private fun isStopWord(word: String): Boolean {
+
+        return word in setOf(
+            "a",
+            "an",
+            "the",
+            "me",
+            "my",
+            "i",
+            "you",
+            "he",
+            "she",
+            "they",
+            "him",
+            "her",
+            "tell",
+            "give",
+            "show",
+            "please",
+            "can",
+            "could",
+            "would",
+            "about",
+            "information",
+            "details",
+            "some",
+            "more",
+            "know",
+            "want",
+            "to",
+            "of",
+            "for",
+            "is",
+            "are",
+            "was",
+            "were",
+            "do",
+            "does",
+            "did",
+            "what",
+            "who",
+            "where",
+            "when",
+            "how",
+            "much",
+            "many",
+            "his",
+            "her"
+        )
+    }
+
+    /**
      * Normalize text before searching.
-     *
-     * Example:
-     *
-     * " Dr. PLASIN Francis Dias "
-     *
-     * becomes:
-     *
-     * "dr plasin francis dias"
      */
     private fun normalize(text: String): String {
 
@@ -320,90 +209,5 @@ class FacultySearchEngine {
             .replace(Regex("[^a-z0-9@.+-]"), " ")
             .replace(Regex("\\s+"), " ")
             .trim()
-    }
-
-    companion object {
-
-        /**
-         * Common words that should not influence
-         * faculty matching.
-         */
-        private val STOP_WORDS = setOf(
-
-            "a",
-            "an",
-            "the",
-
-            "about",
-            "tell",
-            "me",
-            "more",
-
-            "who",
-            "what",
-            "which",
-            "where",
-            "when",
-            "why",
-            "how",
-
-            "does",
-            "do",
-            "did",
-            "is",
-            "are",
-            "was",
-            "were",
-
-            "can",
-            "could",
-            "would",
-            "should",
-
-            "i",
-            "you",
-            "he",
-            "she",
-            "they",
-            "his",
-            "her",
-            "their",
-
-            "please",
-
-            "give",
-            "show",
-            "find",
-
-            "tell",
-            "know",
-
-            "for",
-            "to",
-            "of",
-            "in",
-            "on",
-            "at",
-            "with",
-            "from",
-
-            "and",
-            "or"
-        )
-
-        /**
-         * Words commonly appearing in faculty names
-         * that should not receive name-specific weight.
-         */
-        private val NAME_STOP_WORDS = setOf(
-
-            "dr",
-            "prof",
-            "professor",
-            "mr",
-            "mrs",
-            "ms",
-            "miss"
-        )
     }
 }

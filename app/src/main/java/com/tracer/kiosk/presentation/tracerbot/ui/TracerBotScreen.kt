@@ -50,10 +50,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotUiState
 import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotViewModel
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.text.input.ImeAction
 
 private val TracerNavy = Color(0xFF00183F)
 private val TracerBlue = Color(0xFF477ACB)
@@ -124,6 +129,16 @@ private fun TracerBotContent(
                 )
             )
     ) {
+        // ---------------------------------------------------------
+        // Clear query after TracerBot produces a response
+        // ---------------------------------------------------------
+
+        LaunchedEffect(uiState.response) {
+
+            if (uiState.response != null) {
+                onQueryChanged("")
+            }
+        }
 
         Column(
             modifier = Modifier.fillMaxSize()
@@ -543,6 +558,12 @@ private fun QueryInput(
     onSubmit: () -> Unit
 ) {
 
+    // -------------------------------------------------------------
+    // Keyboard controller
+    // -------------------------------------------------------------
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -576,6 +597,22 @@ private fun QueryInput(
 
                 singleLine = true,
 
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+
+                keyboardActions = KeyboardActions(
+                    onDone = {
+
+                        if (query.isNotBlank() && !isLoading) {
+
+                            keyboardController?.hide()
+
+                            onSubmit()
+                        }
+                    }
+                ),
+
                 placeholder = {
                     Text(
                         text = "Ask TracerBot anything..."
@@ -594,7 +631,14 @@ private fun QueryInput(
             // =====================================================
 
             Button(
-                onClick = onSubmit,
+                onClick = {
+
+                    // Hide the keyboard first
+                    keyboardController?.hide()
+
+                    // Then process the question
+                    onSubmit()
+                },
 
                 enabled = query.isNotBlank() && !isLoading,
 
@@ -675,10 +719,6 @@ private fun ResponseCard(
 
                 contentAlignment = Alignment.Center
             ) {
-
-                // Keep SmartToy here for now because this is
-                // the response/message indicator, not the
-                // main TracerBot avatar.
 
                 Icon(
                     imageVector = Icons.Default.SmartToy,
