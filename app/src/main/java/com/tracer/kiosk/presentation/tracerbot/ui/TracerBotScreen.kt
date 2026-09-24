@@ -101,7 +101,13 @@ fun TracerBotScreen(
             viewModel.submitQuery()
         },
 
-        onFacultyNavigate = onNavigateToFaculty,
+        onFacultyNavigate = { faculty ->
+
+            viewModel.clearFacultyMatches()
+
+            onNavigateToFaculty(faculty)
+        },
+
         onFacultyIgnore = viewModel::clearFacultyMatches
     )
 }

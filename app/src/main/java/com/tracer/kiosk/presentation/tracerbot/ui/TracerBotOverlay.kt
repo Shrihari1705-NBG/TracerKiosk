@@ -56,18 +56,12 @@ import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotViewModelFacto
 @Composable
 fun TracerBotOverlay(
     tracerBotEngine: TracerBotEngine,
+    isOpen: Boolean,
+    onOpen: () -> Unit,
+    onClose: () -> Unit,
     onNavigateToFaculty: (Faculty) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-
-    // -------------------------------------------------------------
-    // Bot open / closed state
-    // -------------------------------------------------------------
-
-    var isOpen by remember {
-        mutableStateOf(false)
-    }
-
     // -------------------------------------------------------------
     // ViewModel
     // -------------------------------------------------------------
@@ -149,7 +143,7 @@ fun TracerBotOverlay(
                         // -------------------------------------------------
 
                         onClose = {
-                            isOpen = false
+                            onClose()
                         },
 
                         // -------------------------------------------------
@@ -158,7 +152,7 @@ fun TracerBotOverlay(
 
                         onNavigateToFaculty = { faculty ->
 
-                            isOpen = false
+                            onClose()
 
                             onNavigateToFaculty(faculty)
                         }
@@ -228,7 +222,7 @@ fun TracerBotOverlay(
                             .fillMaxSize()
                             .clickable {
 
-                                isOpen = true
+                                onOpen()
 
                                 viewModel.openBot()
                             }

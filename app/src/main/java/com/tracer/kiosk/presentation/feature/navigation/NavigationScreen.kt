@@ -144,9 +144,7 @@ fun NavigationScreen(
 
                 NavigationTopBar(
                     onBackClick = {
-                        navController.navigate(
-                            Screen.Home.route
-                        )
+                        navController.popBackStack()
                     }
                 )
 

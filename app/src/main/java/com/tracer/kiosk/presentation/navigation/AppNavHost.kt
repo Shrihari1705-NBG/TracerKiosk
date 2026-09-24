@@ -3,16 +3,18 @@ package com.tracer.kiosk.presentation.navigation
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 import com.tracer.kiosk.presentation.feature.about.AboutScreen
 import com.tracer.kiosk.presentation.feature.home.HomeScreen
@@ -32,80 +34,96 @@ fun AppNavHost(
     tracerBotEngine: TracerBotEngine
 ) {
 
+    // =============================================================
+    // Pending navigation destination from TracerBot
+    // =============================================================
+
     var navigationDestination by remember {
         mutableStateOf<Destination?>(null)
     }
 
-    NavHost(
-        navController = navController,
-        startDestination = Screen.Splash.route
+    var isTracerBotOpen by remember {
+        mutableStateOf(false)
+    }
+
+    // =============================================================
+    // Current application route
+    // =============================================================
+
+    val backStackEntry by navController.currentBackStackEntryAsState()
+
+    val currentRoute =
+        backStackEntry?.destination?.route
+
+    // =============================================================
+    // Root container
+    //
+    // NavHost is placed first.
+    // TracerBot is placed afterwards so it stays ABOVE the app.
+    // =============================================================
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
 
         // =========================================================
-        // SPLASH
-        // TracerBot hidden
+        // Application navigation
         // =========================================================
 
-        composable(
-            route = Screen.Splash.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
-                )
-            }
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Splash.route
         ) {
 
-            SplashScreen(
-                onNavigateToHome = {
+            // =====================================================
+            // SPLASH
+            // =====================================================
 
-                    navController.navigate(
-                        Screen.Home.route
-                    ) {
+            composable(
+                route = Screen.Splash.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
+                    )
+                }
+            ) {
 
-                        popUpTo(
-                            Screen.Splash.route
+                SplashScreen(
+                    onNavigateToHome = {
+
+                        navController.navigate(
+                            Screen.Home.route
                         ) {
-                            inclusive = true
+
+                            popUpTo(
+                                Screen.Splash.route
+                            ) {
+                                inclusive = true
+                            }
                         }
                     }
-                }
-            )
-        }
-
-        // =========================================================
-        // HOME
-        // TracerBot enabled
-        // =========================================================
-
-        composable(
-            route = Screen.Home.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
                 )
             }
-        ) {
 
-            BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine,
+            // =====================================================
+            // HOME
+            // =====================================================
 
-                onNavigateToFaculty = { faculty ->
-
-                    navigationDestination =
-                        findFacultyDestination(faculty)
-
-                    navController.navigate(
-                        Screen.Navigation.route
+            composable(
+                route = Screen.Home.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
                     )
                 }
             ) {
@@ -114,37 +132,21 @@ fun AppNavHost(
                     navController = navController
                 )
             }
-        }
 
-        // =========================================================
-        // NAVIGATION
-        // TracerBot enabled
-        // =========================================================
+            // =====================================================
+            // NAVIGATION
+            // =====================================================
 
-        composable(
-            route = Screen.Navigation.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
-                )
-            }
-        ) {
-
-            BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine,
-
-                onNavigateToFaculty = { faculty ->
-
-                    navigationDestination =
-                        findFacultyDestination(faculty)
-
-                    navController.navigate(
-                        Screen.Navigation.route
+            composable(
+                route = Screen.Navigation.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
                     )
                 }
             ) {
@@ -157,37 +159,21 @@ fun AppNavHost(
                     }
                 )
             }
-        }
 
-        // =========================================================
-        // FACULTY
-        // TracerBot enabled
-        // =========================================================
+            // =====================================================
+            // FACULTY
+            // =====================================================
 
-        composable(
-            route = Screen.Faculty.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
-                )
-            }
-        ) {
-
-            BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine,
-
-                onNavigateToFaculty = { faculty ->
-
-                    navigationDestination =
-                        findFacultyDestination(faculty)
-
-                    navController.navigate(
-                        Screen.Navigation.route
+            composable(
+                route = Screen.Faculty.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
                     )
                 }
             ) {
@@ -196,37 +182,21 @@ fun AppNavHost(
                     navController = navController
                 )
             }
-        }
 
-        // =========================================================
-        // DEPARTMENT
-        // TracerBot enabled
-        // =========================================================
+            // =====================================================
+            // DEPARTMENT
+            // =====================================================
 
-        composable(
-            route = Screen.Department.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
-                )
-            }
-        ) {
-
-            BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine,
-
-                onNavigateToFaculty = { faculty ->
-
-                    navigationDestination =
-                        findFacultyDestination(faculty)
-
-                    navController.navigate(
-                        Screen.Navigation.route
+            composable(
+                route = Screen.Department.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
                     )
                 }
             ) {
@@ -235,29 +205,70 @@ fun AppNavHost(
                     navController = navController
                 )
             }
+
+            // =====================================================
+            // ABOUT
+            // TracerBot intentionally hidden
+            // =====================================================
+
+            composable(
+                route = Screen.About.route,
+                enterTransition = {
+                    fadeIn(
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
+                        animationSpec = tween(300)
+                    )
+                }
+            ) {
+
+                AboutScreen(
+                    navController = navController
+                )
+            }
         }
 
         // =========================================================
-        // ABOUT
-        // TracerBot intentionally hidden
+        // GLOBAL TRACERBOT
+        //
+        // One single TracerBot instance sits above the entire app.
         // =========================================================
 
-        composable(
-            route = Screen.About.route,
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(300)
-                )
-            }
-        ) {
+        if (
+            currentRoute != Screen.Splash.route &&
+            currentRoute != Screen.Navigation.route &&
+            currentRoute != Screen.About.route
+        )  {
 
-            AboutScreen(
-                navController = navController
+            TracerBotOverlay(
+                tracerBotEngine = tracerBotEngine,
+
+                isOpen = isTracerBotOpen,
+
+                onOpen = {
+                    isTracerBotOpen = true
+                },
+
+                onClose = {
+                    isTracerBotOpen = false
+                },
+
+                onNavigateToFaculty = { faculty ->
+
+                    isTracerBotOpen = false
+
+                    navigationDestination =
+                        findFacultyDestination(faculty)
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                },
+
+                modifier = Modifier.fillMaxSize()
             )
         }
     }
@@ -288,43 +299,5 @@ private fun findFacultyDestination(
                                     )
                                 }
                         )
-    }
-}
-
-
-/**
- * Places the existing screen underneath the
- * floating TracerBot overlay.
- *
- * The screen itself remains unchanged.
- */
-@Composable
-private fun BoxWithTracerBot(
-    tracerBotEngine: TracerBotEngine,
-    onNavigateToFaculty: (Faculty) -> Unit,
-    content: @Composable () -> Unit
-) {
-
-    androidx.compose.foundation.layout.Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-
-        // ---------------------------------------------------------
-        // Existing kiosk screen
-        // ---------------------------------------------------------
-
-        content()
-
-        // ---------------------------------------------------------
-        // TracerBot floating assistant
-        // ---------------------------------------------------------
-
-        TracerBotOverlay(
-            tracerBotEngine = tracerBotEngine,
-
-            onNavigateToFaculty = onNavigateToFaculty,
-
-            modifier = Modifier.fillMaxSize()
-        )
     }
 }
