@@ -1,5 +1,6 @@
 package com.tracer.kiosk.presentation.tracerbot.response
 
+import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.query.TracerBotQuery
@@ -16,7 +17,7 @@ import com.tracer.kiosk.presentation.tracerbot.query.TracerBotQuery
  * Human-readable response
  *
  * All responses are generated locally from the
- * faculty information stored in the application.
+ * information stored in the application.
  */
 class TracerBotResponseEngine {
 
@@ -42,8 +43,41 @@ class TracerBotResponseEngine {
             }
 
             else -> {
-                // Faculty-related intents continue below.
+                // Continue below.
             }
+        }
+
+        // =========================================================
+        // NAVIGATION
+        // =========================================================
+        //
+        // Navigation can now target either:
+        //
+        // 1. A faculty member
+        // 2. A campus destination
+        //
+        // Faculty is checked first so existing faculty
+        // navigation behavior remains unchanged.
+
+        if (query.intent == TracerBotIntent.Navigate) {
+
+            if (query.faculty != null) {
+
+                return createNavigationResponse(
+                    faculty = query.faculty
+                )
+            }
+
+            if (query.destination != null) {
+
+                return createDestinationNavigationResponse(
+                    destination = query.destination
+                )
+            }
+
+            return createNoDestinationResponse(
+                query = query
+            )
         }
 
         // =========================================================
@@ -99,9 +133,6 @@ class TracerBotResponseEngine {
 
             TracerBotIntent.FacultyContact ->
                 createContactResponse(faculty)
-
-            TracerBotIntent.Navigate ->
-                createNavigationResponse(faculty)
 
             else ->
                 createProfileResponse(faculty)
@@ -407,7 +438,7 @@ class TracerBotResponseEngine {
     }
 
     // =================================================================
-    // NAVIGATION
+    // FACULTY NAVIGATION
     // =================================================================
 
     private fun createNavigationResponse(
@@ -429,6 +460,34 @@ class TracerBotResponseEngine {
             navigationDestination = faculty.name,
 
             hasFacultyInformation = true
+        )
+    }
+
+    // =================================================================
+    // CAMPUS DESTINATION NAVIGATION
+    // =================================================================
+
+    private fun createDestinationNavigationResponse(
+        destination: Destination
+    ): TracerBotResponse {
+
+        return TracerBotResponse(
+
+            message =
+                "I can help you find ${destination.name}. " +
+                        "Let's navigate there.",
+
+            facultyName = null,
+
+            facultyMatches = emptyList(),
+
+            destination = destination,
+
+            showNavigationAction = true,
+
+            navigationDestination = destination.name,
+
+            hasFacultyInformation = false
         )
     }
 
@@ -456,7 +515,10 @@ class TracerBotResponseEngine {
                 • "How many publications does Dr. XYZ have?"
                 • "What is Dr. XYZ's email?"
                 • "Where is Dr. XYZ?"
-                
+                • "Where is the library?"
+                • "Take me to the DSP lab"
+                • "Where is Block 6A?"
+
                 I can also help you find faculty based on their courses or research areas.
                 """.trimIndent(),
 
@@ -475,8 +537,28 @@ class TracerBotResponseEngine {
             message =
                 "I'm sorry, I didn't quite understand that. " +
                         "Try asking me about a faculty member, " +
-                        "their courses, research, qualification, " +
-                        "contact information, or location.",
+                        "a campus destination, their courses, research, " +
+                        "qualification, contact information, or location.",
+
+            hasFacultyInformation = false
+        )
+    }
+
+    // =================================================================
+    // NO DESTINATION
+    // =================================================================
+
+    private fun createNoDestinationResponse(
+        query: TracerBotQuery
+    ): TracerBotResponse {
+
+        return TracerBotResponse(
+
+            message =
+                "I couldn't find a campus location matching " +
+                        "\"${query.originalText}\". " +
+                        "Try asking for a library, laboratory, classroom, " +
+                        "office, or faculty member.",
 
             hasFacultyInformation = false
         )

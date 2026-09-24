@@ -60,6 +60,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.input.ImeAction
 import com.tracer.kiosk.presentation.tracerbot.model.TracerBotMessage
+import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 
 private val TracerNavy = Color(0xFF00183F)
 private val TracerBlue = Color(0xFF477ACB)
@@ -77,7 +78,8 @@ private val TracerText = Color(0xFF071A3D)
 fun TracerBotScreen(
     viewModel: TracerBotViewModel,
     onClose: () -> Unit = {},
-    onNavigateToFaculty: (Faculty) -> Unit = {}
+    onNavigateToFaculty: (Faculty) -> Unit = {},
+    onNavigateToDestination: (Destination) -> Unit = {}
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -86,10 +88,6 @@ fun TracerBotScreen(
         uiState = uiState,
         onQueryChanged = viewModel::updateQuery,
         onSubmit = viewModel::submitQuery,
-
-        // ---------------------------------------------------------
-        // Close button
-        // ---------------------------------------------------------
 
         onClose = {
             viewModel.closeBot()
@@ -108,7 +106,12 @@ fun TracerBotScreen(
             onNavigateToFaculty(faculty)
         },
 
-        onFacultyIgnore = viewModel::clearFacultyMatches
+        onFacultyIgnore = viewModel::clearFacultyMatches,
+
+        onDestinationNavigate = { destination ->
+
+            onNavigateToDestination(destination)
+        }
     )
 }
 
@@ -123,7 +126,8 @@ private fun TracerBotContent(
     onClose: () -> Unit,
     onSuggestionClick: (String) -> Unit,
     onFacultyNavigate: (Faculty) -> Unit,
-    onFacultyIgnore: () -> Unit
+    onFacultyIgnore: () -> Unit,
+    onDestinationNavigate: (Destination) -> Unit
 ) {
 
     Box(
@@ -250,6 +254,36 @@ private fun TracerBotContent(
                                 onFacultyNavigate(faculty)
                             },
                             onIgnore = onFacultyIgnore
+                        )
+                    }
+                }
+
+                // -------------------------------------------------
+                // Campus destination result
+                // -------------------------------------------------
+
+                uiState.response?.destination?.let { destination ->
+
+                    item {
+
+                        Text(
+                            text = "Destination found",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = TracerText
+                        )
+                    }
+
+                    item {
+
+                        DestinationResultCard(
+                            destination = destination,
+                            onNavigate = {
+                                onDestinationNavigate(destination)
+                            },
+                            onIgnore = {
+                                // Destination card will be cleared in the next step.
+                            }
                         )
                     }
                 }
@@ -900,6 +934,147 @@ private fun FacultyResultCard(
                         text = faculty.department,
                         fontSize = 14.sp,
                         color = TracerBlue
+                    )
+                }
+            }
+
+            Spacer(
+                modifier = Modifier.height(16.dp)
+            )
+
+            // =====================================================
+            // Actions
+            // =====================================================
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+
+                horizontalArrangement = Arrangement.End
+            ) {
+
+                Button(
+                    onClick = onNavigate,
+
+                    shape = RoundedCornerShape(14.dp),
+
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = TracerNavy
+                    )
+                ) {
+
+                    Text(
+                        text = "Navigate",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(10.dp)
+                )
+
+                Button(
+                    onClick = onIgnore,
+
+                    shape = RoundedCornerShape(14.dp),
+
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = TracerLightBlue,
+                        contentColor = TracerNavy
+                    )
+                ) {
+
+                    Text(
+                        text = "Ignore",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * Campus destination result card.
+ */
+@Composable
+private fun DestinationResultCard(
+    destination: Destination,
+    onNavigate: () -> Unit,
+    onIgnore: () -> Unit
+) {
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+
+        shape = RoundedCornerShape(20.dp),
+
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 3.dp
+        )
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
+
+            // =====================================================
+            // Destination information
+            // =====================================================
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .size(58.dp)
+                        .clip(RoundedCornerShape(18.dp))
+                        .background(TracerLightBlue),
+
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = null,
+                        tint = TracerNavy,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(16.dp)
+                )
+
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+
+                    Text(
+                        text = destination.name,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = TracerText
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(4.dp)
+                    )
+
+                    Text(
+                        text = destination.category.name
+                            .replace("_", " "),
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
                     )
                 }
             }

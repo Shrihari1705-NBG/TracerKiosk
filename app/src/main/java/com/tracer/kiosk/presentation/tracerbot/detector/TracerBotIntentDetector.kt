@@ -197,7 +197,49 @@ class TracerBotIntentDetector {
         }
 
         // =========================================================
-        // 9. RESEARCH
+        // 9. NAVIGATION
+        // =========================================================
+        //
+        // Navigation is checked before research because destination
+        // names can contain words such as "research".
+        //
+        // Examples:
+        //
+        // "Where is the Research Lab?"
+        // "Take me to the Research Lab"
+        // "Where is the library?"
+        // "Go to DSP lab"
+        // "Guide me to Block 6A"
+        //
+        // Information-specific intents such as contact,
+        // publications, courses, etc. are already checked above.
+
+        if (
+            containsAny(
+                text,
+                "navigate",
+                "navigation",
+                "take me to",
+                "guide me to",
+                "show me the way",
+                "how do i get to",
+                "directions to",
+                "route to",
+                "find the way to",
+                "lead me to",
+                "go to",
+                "where is",
+                "where can i find",
+                "how do i reach",
+                "how can i reach",
+                "take me there"
+            )
+        ) {
+            return TracerBotIntent.Navigate
+        }
+
+        // =========================================================
+        // 10. RESEARCH
         // =========================================================
 
         if (
@@ -220,12 +262,33 @@ class TracerBotIntentDetector {
         }
 
         // =========================================================
-        // 10. NAVIGATION
+        // 11. NAVIGATION
         // =========================================================
         //
-        // Navigation is checked after information-specific
-        // intents so "where is the email?" does not become
-        // a navigation request.
+        // Navigation is intentionally generic.
+        //
+        // It can refer to:
+        //
+        // - Faculty cabins
+        // - Laboratories
+        // - Classrooms
+        // - Library
+        // - Offices
+        // - Other campus destinations
+        //
+        // The destination itself will be resolved later by
+        // TracerBotQueryProcessor.
+        //
+        // Examples:
+        //
+        // "Take me to Plasin"
+        // "Where is the library?"
+        // "Go to DSP lab"
+        // "Guide me to Block 6A"
+        //
+        // Information-specific intents are checked first so
+        // questions such as "Where is the email?" remain
+        // contact questions.
 
         if (
             containsAny(
@@ -241,14 +304,18 @@ class TracerBotIntentDetector {
                 "find the way to",
                 "lead me to",
                 "go to",
-                "where is"
+                "where is",
+                "where can i find",
+                "how do i reach",
+                "how can i reach",
+                "take me there"
             )
         ) {
             return TracerBotIntent.Navigate
         }
 
         // =========================================================
-        // 11. GENERAL FACULTY PROFILE
+        // 12. GENERAL FACULTY PROFILE
         // =========================================================
 
         if (
@@ -268,7 +335,7 @@ class TracerBotIntentDetector {
         }
 
         // =========================================================
-        // 12. UNKNOWN
+        // 13. UNKNOWN
         // =========================================================
 
         return TracerBotIntent.Unknown

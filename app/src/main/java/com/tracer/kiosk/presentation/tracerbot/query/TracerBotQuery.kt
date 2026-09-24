@@ -1,5 +1,6 @@
 package com.tracer.kiosk.presentation.tracerbot.query
 
+import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 
@@ -13,6 +14,8 @@ import com.tracer.kiosk.presentation.tracerbot.model.Faculty
  * Detected intent
  *      +
  * Matched faculty
+ *      +
+ * Matched campus destination
  *      +
  * Search confidence
  */
@@ -35,6 +38,20 @@ data class TracerBotQuery(
      * a specific faculty member.
      */
     val faculty: Faculty? = null,
+
+    /**
+     * Campus destination identified from the question.
+     *
+     * Examples:
+     *
+     * Department Library
+     * DSP Lab
+     * Block 6(A)
+     *
+     * Null when the question is not related to
+     * a campus destination.
+     */
+    val destination: Destination? = null,
 
     /**
      * Other faculty members that matched the query.

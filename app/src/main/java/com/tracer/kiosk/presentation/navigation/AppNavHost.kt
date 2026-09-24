@@ -268,6 +268,17 @@ fun AppNavHost(
                     )
                 },
 
+                onNavigateToDestination = { destination ->
+
+                    isTracerBotOpen = false
+
+                    navigationDestination = destination
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                },
+
                 modifier = Modifier.fillMaxSize()
             )
         }

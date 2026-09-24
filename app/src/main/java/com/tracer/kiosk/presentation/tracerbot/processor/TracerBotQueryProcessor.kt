@@ -1,10 +1,13 @@
 package com.tracer.kiosk.presentation.tracerbot.processor
 
+import com.tracer.kiosk.presentation.feature.navigation.data.DestinationRepository
+import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.tracerbot.data.FacultyRepository
 import com.tracer.kiosk.presentation.tracerbot.detector.TracerBotIntentDetector
 import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.query.TracerBotQuery
+import com.tracer.kiosk.presentation.tracerbot.search.DestinationSearchEngine
 import com.tracer.kiosk.presentation.tracerbot.search.FacultySearchEngine
 import com.tracer.kiosk.presentation.tracerbot.context.TracerBotConversationContext
 
@@ -16,8 +19,8 @@ import com.tracer.kiosk.presentation.tracerbot.context.TracerBotConversationCont
  * 1. Detect the user's intent.
  * 2. Load faculty data from the local repository.
  * 3. Search for relevant faculty members.
- * 4. Determine whether the strongest match is reliable.
- * 5. Calculate a local relevance score.
+ * 4. Search for relevant campus destinations.
+ * 5. Determine whether the strongest faculty match is reliable.
  * 6. Create a structured TracerBotQuery object.
  *
  * This class contains no UI code.
@@ -30,7 +33,9 @@ class TracerBotQueryProcessor(
     private val intentDetector: TracerBotIntentDetector =
         TracerBotIntentDetector(),
     private val facultySearchEngine: FacultySearchEngine =
-        FacultySearchEngine()
+        FacultySearchEngine(),
+    private val destinationSearchEngine: DestinationSearchEngine =
+        DestinationSearchEngine()
 ) {
 
     /**
@@ -112,14 +117,49 @@ class TracerBotQueryProcessor(
             }
 
         // =========================================================
-        // Resolve faculty from conversation context
+// Search campus destinations
+// =========================================================
+
+        val destinationMatches =
+            destinationSearchEngine.search(
+                destinations = DestinationRepository.destinations,
+                query = cleanQuery
+            )
+
+        val resolvedDestination =
+            if (intent == TracerBotIntent.Navigate) {
+                destinationMatches.firstOrNull()
+            } else {
+                null
+            }
+
         // =========================================================
+        // Resolve faculty
+        // =========================================================
+        //
+        // For navigation queries, a clearly detected campus
+        // destination takes priority over faculty conversation
+        // context.
+        //
+        // Example:
+        // "Where is the Research Lab?"
+        // must resolve to Research Lab rather than the
+        // previously discussed faculty member.
+        //
 
         val resolvedFaculty =
-            bestFaculty
-                ?: resolveFacultyFromContext(
-                    intent = intent
-                )
+            if (
+                intent == TracerBotIntent.Navigate &&
+                resolvedDestination != null &&
+                bestFaculty == null
+            ) {
+                null
+            } else {
+                bestFaculty
+                    ?: resolveFacultyFromContext(
+                        intent = intent
+                    )
+            }
 
         // =========================================================
         // Calculate confidence
@@ -149,6 +189,8 @@ class TracerBotQueryProcessor(
             intent = intent,
 
             faculty = resolvedFaculty,
+
+            destination = resolvedDestination,
 
             facultyMatches = facultyMatches,
 
