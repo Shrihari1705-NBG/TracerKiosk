@@ -80,6 +80,129 @@ object ProjectInfoRepository {
         ),
 
         // =========================================================
+        // PROJECT IDENTITY & TEAM
+        // =========================================================
+
+        ProjectInfoEntry(
+            id = "project_name",
+            title = "Project Name",
+            answer =
+                "The project is called Tracer – Indoor Navigation " +
+                        "for Smart Campuses. It is an indoor navigation " +
+                        "system developed for smart campus environments.",
+            keywords = listOf(
+                "project name",
+                "what is the project name",
+                "name of the project",
+                "what is tracer called",
+                "tracer name"
+            )
+        ),
+
+        ProjectInfoEntry(
+            id = "project_developer",
+            title = "Project Developer",
+            answer =
+                "The project developer is Shrihari N B Goudru.",
+            keywords = listOf(
+                "developer",
+                "developer name",
+                "project developer",
+                "who developed this app",
+                "who developed the app",
+                "who developed tracer",
+                "who made tracer",
+                "who created tracer",
+                "who built tracer"
+            )
+        ),
+
+        ProjectInfoEntry(
+            id = "project_guide",
+            title = "Project Guide",
+            answer =
+                "The project guide is Prof. Vijayalaxmi Kalal, " +
+                        "Assistant Professor.",
+            keywords = listOf(
+                "guide",
+                "project guide",
+                "guide name",
+                "who is the guide",
+                "who is project guide",
+                "who guided the project"
+            )
+        ),
+
+        ProjectInfoEntry(
+            id = "development_team",
+            title = "Development Team",
+            answer =
+                "The Tracer project was developed by a team consisting " +
+                        "of Shrihari N B Goudru, Shreesha M Tembe, " +
+                        "Vageesh I Gaonkar, and Shubhangi S Naik.",
+            keywords = listOf(
+                "team",
+                "development team",
+                "project team",
+                "team members",
+                "developers",
+                "who are the developers",
+                "who developed tracer",
+                "who are the team members"
+            )
+        ),
+
+        // =========================================================
+        // TRACERBOT
+        // =========================================================
+
+        ProjectInfoEntry(
+            id = "tracerbot_overview",
+            title = "TracerBot",
+            answer =
+                "TracerBot is the conversational assistant built into " +
+                        "Tracer Kiosk. It helps users obtain information " +
+                        "about faculty members, campus destinations, and " +
+                        "the Tracer project. It can also connect user requests " +
+                        "with campus navigation when the user wants to find " +
+                        "a faculty member or destination.",
+            keywords = listOf(
+                "tracerbot",
+                "tracer bot",
+                "what is tracerbot",
+                "what is tracer bot",
+                "about tracerbot",
+                "about tracer bot"
+            )
+        ),
+
+        ProjectInfoEntry(
+            id = "tracerbot_capabilities",
+            title = "TracerBot Capabilities",
+            answer =
+                "TracerBot can answer faculty-related questions about " +
+                        "profiles, courses, research, qualifications, " +
+                        "designations, experience, recognition, publications, " +
+                        "and contact information. It can also identify campus " +
+                        "destinations and provide navigation actions. In addition, " +
+                        "it can explain verified information about the Tracer " +
+                        "project, its Kiosk and Main App, navigation, localization, " +
+                        "and system integration.",
+            keywords = listOf(
+                "tracerbot capabilities",
+                "tracerbot features",
+                "what can tracerbot do",
+                "what can tracer bot do",
+                "what does tracerbot do",
+                "what does tracer bot do",
+                "what can tracerbot help with",
+                "what can tracer bot help with",
+                "tracerbot functions",
+                "tracerbot functionality"
+            )
+        ),
+
+        // =========================================================
         // TRACER KIOSK
         // =========================================================
 

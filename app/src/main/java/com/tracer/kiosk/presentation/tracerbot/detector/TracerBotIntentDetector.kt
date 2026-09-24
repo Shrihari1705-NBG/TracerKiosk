@@ -199,19 +199,17 @@ class TracerBotIntentDetector {
         // 9. PROJECT INFORMATION
         // =========================================================
         //
-        // IMPORTANT:
+        // ProjectInfo is checked BEFORE Navigation and Research.
         //
-        // ProjectInfo is checked BEFORE Research and Navigation.
+        // This is important because project questions can contain
+        // words such as:
         //
-        // This prevents questions such as:
+        // "navigation"
+        // "research"
+        // "algorithm"
         //
-        // "What algorithm does navigation use?"
-        //
-        // from being classified as Navigate.
-        //
-        // It also prevents project questions containing
-        // "research" or "navigation" from being classified
-        // as faculty research or campus navigation.
+        // which could otherwise be mistaken for campus navigation
+        // or faculty research.
         //
         // A* is also handled explicitly.
 
@@ -219,7 +217,10 @@ class TracerBotIntentDetector {
             containsAny(
                 text,
 
+                // -------------------------------------------------
                 // Tracer project
+                // -------------------------------------------------
+
                 "tracer project",
                 "what is tracer",
                 "what is the tracer project",
@@ -230,7 +231,54 @@ class TracerBotIntentDetector {
                 "what is the objective of tracer",
                 "what is the goal of tracer",
 
+                // Project identity
+                "project name",
+                "what is the project name",
+                "name of the project",
+                "what is tracer called",
+                "tracer name",
+
+                // -------------------------------------------------
+                // Developer
+                // -------------------------------------------------
+
+                "developer",
+                "developer name",
+                "project developer",
+                "who developed this app",
+                "who developed the app",
+                "who developed tracer",
+                "who made tracer",
+                "who created tracer",
+                "who built tracer",
+
+                // -------------------------------------------------
+                // Project guide
+                // -------------------------------------------------
+
+                "guide",
+                "project guide",
+                "guide name",
+                "who is the guide",
+                "who is project guide",
+                "who guided the project",
+
+                // -------------------------------------------------
+                // Development team
+                // -------------------------------------------------
+
+                "team",
+                "development team",
+                "project team",
+                "team members",
+                "developers",
+                "who are the developers",
+                "who are the team members",
+
+                // -------------------------------------------------
                 // Tracer Kiosk
+                // -------------------------------------------------
+
                 "tracer kiosk",
                 "what is the kiosk",
                 "what is tracer kiosk",
@@ -239,7 +287,10 @@ class TracerBotIntentDetector {
                 "kiosk features",
                 "kiosk functionality",
 
+                // -------------------------------------------------
                 // Tracer Main App
+                // -------------------------------------------------
+
                 "tracer main app",
                 "what is the main app",
                 "what is tracer main app",
@@ -247,7 +298,29 @@ class TracerBotIntentDetector {
                 "main app features",
                 "main app technologies",
 
+                // -------------------------------------------------
+                // TracerBot
+                // -------------------------------------------------
+
+                "tracerbot",
+                "tracer bot",
+                "what is tracerbot",
+                "what is tracer bot",
+                "what does tracerbot do",
+                "what does tracer bot do",
+                "what can tracerbot do",
+                "what can tracer bot do",
+                "about tracerbot",
+                "about tracer bot",
+                "tracerbot capabilities",
+                "tracerbot features",
+                "tracerbot functions",
+                "tracerbot functionality",
+
+                // -------------------------------------------------
                 // Technologies
+                // -------------------------------------------------
+
                 "technologies used",
                 "what technologies are used",
                 "technology stack",
@@ -257,13 +330,19 @@ class TracerBotIntentDetector {
                 "what technologies does tracer use",
                 "what technology does tracer use",
 
+                // -------------------------------------------------
                 // Architecture
+                // -------------------------------------------------
+
                 "architecture",
                 "project architecture",
                 "system architecture",
                 "what architecture is used",
 
+                // -------------------------------------------------
                 // Navigation algorithm
+                // -------------------------------------------------
+
                 "navigation algorithm",
                 "what algorithm does navigation use",
                 "what algorithm is used for navigation",
@@ -272,7 +351,10 @@ class TracerBotIntentDetector {
                 "what pathfinding algorithm is used",
                 "route planning algorithm",
 
+                // -------------------------------------------------
                 // A*
+                // -------------------------------------------------
+
                 "a star",
                 "a*",
                 "astar",
@@ -286,7 +368,10 @@ class TracerBotIntentDetector {
                 "how does a* work",
                 "how does astar work",
 
+                // -------------------------------------------------
                 // Navigation graph
+                // -------------------------------------------------
+
                 "navigation graph",
                 "what is the navigation graph",
                 "weighted graph",
@@ -294,7 +379,10 @@ class TracerBotIntentDetector {
                 "navigation nodes",
                 "navigation edges",
 
+                // -------------------------------------------------
                 // BLE / RSSI localization
+                // -------------------------------------------------
+
                 "ble localization",
                 "rssi localization",
                 "bluetooth localization",
@@ -302,14 +390,20 @@ class TracerBotIntentDetector {
                 "how does ble localization work",
                 "how does rssi localization work",
 
+                // -------------------------------------------------
                 // ONNX
+                // -------------------------------------------------
+
                 "onnx",
                 "onnx localization",
                 "onnx model",
                 "how is onnx used",
                 "how does onnx localization work",
 
+                // -------------------------------------------------
                 // QR handoff
+                // -------------------------------------------------
+
                 "qr handoff",
                 "qr code",
                 "kiosk qr",
@@ -317,7 +411,10 @@ class TracerBotIntentDetector {
                 "how does qr handoff work",
                 "how does the qr handoff work",
 
+                // -------------------------------------------------
                 // Kiosk ↔ Main App integration
+                // -------------------------------------------------
+
                 "kiosk main app",
                 "how does kiosk and main app work",
                 "how does the kiosk and main app work",
@@ -330,7 +427,10 @@ class TracerBotIntentDetector {
                 "how does the kiosk connect to the main app",
                 "how does the main app connect to the kiosk",
 
+                // -------------------------------------------------
                 // Complete system workflow
+                // -------------------------------------------------
+
                 "system workflow",
                 "project workflow",
                 "overall workflow",
@@ -388,16 +488,17 @@ class TracerBotIntentDetector {
         // 11. RESEARCH
         // =========================================================
         //
-        // This remains after ProjectInfo.
+        // Navigation comes before Research so:
         //
-        // Therefore:
+        // "Where is the Research Lab?"
+        //
+        // becomes Navigate.
+        //
+        // A normal faculty question such as:
         //
         // "What is Plasin's research?"
         //
-        // still becomes FacultyResearch.
-        //
-        // But a project question containing navigation /
-        // algorithm terms is already captured above.
+        // reaches FacultyResearch.
 
         if (
             containsAny(
