@@ -81,6 +81,20 @@ sealed class TracerBotIntent {
     data object FacultyContact : TracerBotIntent()
 
     /**
+     * User wants information about the Tracer project,
+     * Tracer Kiosk, Tracer Main App, navigation,
+     * localization, technologies, or system integration.
+     *
+     * Examples:
+     * "What is Tracer Kiosk?"
+     * "What technologies are used?"
+     * "What algorithm does navigation use?"
+     * "What is the Main App?"
+     * "How does the QR handoff work?"
+     */
+    data object ProjectInfo : TracerBotIntent()
+
+    /**
      * User wants to navigate somewhere.
      *
      * Example:

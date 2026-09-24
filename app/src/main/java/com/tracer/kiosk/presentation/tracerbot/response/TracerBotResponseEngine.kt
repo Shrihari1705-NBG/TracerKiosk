@@ -1,9 +1,11 @@
 package com.tracer.kiosk.presentation.tracerbot.response
 
 import com.tracer.kiosk.presentation.feature.navigation.model.Destination
+import com.tracer.kiosk.presentation.tracerbot.data.ProjectInfoRepository
 import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.query.TracerBotQuery
+
 
 /**
  * Generates the final human-readable response for TracerBot.
@@ -45,6 +47,17 @@ class TracerBotResponseEngine {
             else -> {
                 // Continue below.
             }
+        }
+
+        // =========================================================
+        // PROJECT INFORMATION
+        // =========================================================
+        //
+        // ProjectInfo does not require a faculty member.
+        // The answer is retrieved from ProjectInfoRepository.
+
+        if (query.intent == TracerBotIntent.ProjectInfo) {
+            return createProjectInfoResponse(query)
         }
 
         // =========================================================
@@ -656,6 +669,34 @@ class TracerBotResponseEngine {
             navigationDestination = null,
 
             hasFacultyInformation = true
+        )
+    }
+    // =================================================================
+    // PROJECT INFORMATION
+    // =================================================================
+
+    private fun createProjectInfoResponse(
+        query: TracerBotQuery
+    ): TracerBotResponse {
+
+        val projectInfo =
+            ProjectInfoRepository.findBestMatch(
+                query.originalText
+            )
+
+        if (projectInfo == null) {
+
+            return TracerBotResponse(
+                message =
+                    "I don't have specific information about that part " +
+                            "of the Tracer project yet.",
+                hasFacultyInformation = false
+            )
+        }
+
+        return TracerBotResponse(
+            message = projectInfo.answer,
+            hasFacultyInformation = false
         )
     }
 }
