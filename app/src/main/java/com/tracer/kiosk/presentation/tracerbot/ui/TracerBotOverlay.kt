@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.tracerbot.engine.TracerBotEngine
+import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotViewModel
 import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotViewModelFactory
 
@@ -55,6 +56,7 @@ import com.tracer.kiosk.presentation.tracerbot.viewmodel.TracerBotViewModelFacto
 @Composable
 fun TracerBotOverlay(
     tracerBotEngine: TracerBotEngine,
+    onNavigateToFaculty: (Faculty) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
 
@@ -143,12 +145,22 @@ fun TracerBotOverlay(
                         viewModel = viewModel,
 
                         // -------------------------------------------------
-                        // IMPORTANT:
-                        // Connect the X button to the overlay state.
+                        // Close the TracerBot panel.
                         // -------------------------------------------------
 
                         onClose = {
                             isOpen = false
+                        },
+
+                        // -------------------------------------------------
+                        // Faculty navigation.
+                        // -------------------------------------------------
+
+                        onNavigateToFaculty = { faculty ->
+
+                            isOpen = false
+
+                            onNavigateToFaculty(faculty)
                         }
                     )
                 }

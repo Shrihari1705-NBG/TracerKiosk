@@ -6,6 +6,7 @@ import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.query.TracerBotQuery
 import com.tracer.kiosk.presentation.tracerbot.search.FacultySearchEngine
+import com.tracer.kiosk.presentation.tracerbot.context.TracerBotConversationContext
 
 /**
  * Processes a complete TracerBot user query.
@@ -25,6 +26,7 @@ import com.tracer.kiosk.presentation.tracerbot.search.FacultySearchEngine
  */
 class TracerBotQueryProcessor(
     private val facultyRepository: FacultyRepository,
+    private val conversationContext: TracerBotConversationContext,
     private val intentDetector: TracerBotIntentDetector =
         TracerBotIntentDetector(),
     private val facultySearchEngine: FacultySearchEngine =
@@ -110,6 +112,16 @@ class TracerBotQueryProcessor(
             }
 
         // =========================================================
+        // Resolve faculty from conversation context
+        // =========================================================
+
+        val resolvedFaculty =
+            bestFaculty
+                ?: resolveFacultyFromContext(
+                    intent = intent
+                )
+
+        // =========================================================
         // Calculate confidence
         // =========================================================
 
@@ -136,7 +148,7 @@ class TracerBotQueryProcessor(
 
             intent = intent,
 
-            faculty = bestFaculty,
+            faculty = resolvedFaculty,
 
             facultyMatches = facultyMatches,
 
@@ -144,6 +156,41 @@ class TracerBotQueryProcessor(
 
             requiresNavigation = requiresNavigation
         )
+    }
+
+    /**
+     * Resolve a faculty member from the previous conversation
+     * when the current question does not explicitly identify one.
+     *
+     * Example:
+     *
+     * User: "Who is Plasin?"
+     * User: "What does she teach?"
+     *
+     * The second query has no faculty name, so the previous
+     * faculty from conversation context can be reused.
+     */
+    private fun resolveFacultyFromContext(
+        intent: TracerBotIntent
+    ): Faculty? {
+
+        val facultySpecificIntent =
+            intent is TracerBotIntent.FacultyProfile ||
+                    intent is TracerBotIntent.FacultyCourses ||
+                    intent is TracerBotIntent.FacultyResearch ||
+                    intent is TracerBotIntent.FacultyQualification ||
+                    intent is TracerBotIntent.FacultyDesignation ||
+                    intent is TracerBotIntent.FacultyExperience ||
+                    intent is TracerBotIntent.FacultyRecognition ||
+                    intent is TracerBotIntent.FacultyPublications ||
+                    intent is TracerBotIntent.FacultyContact ||
+                    intent is TracerBotIntent.Navigate
+
+        if (!facultySpecificIntent) {
+            return null
+        }
+
+        return conversationContext.lastFaculty
     }
 
     /**

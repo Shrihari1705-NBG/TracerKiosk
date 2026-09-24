@@ -6,6 +6,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,8 +20,10 @@ import com.tracer.kiosk.presentation.feature.splash.SplashScreen
 import com.tracer.kiosk.presentation.feature.faculty.FacultyScreen
 import com.tracer.kiosk.presentation.feature.department.DepartmentScreen
 import com.tracer.kiosk.presentation.feature.navigation.NavigationScreen
-
+import com.tracer.kiosk.presentation.feature.navigation.data.DestinationRepository
+import com.tracer.kiosk.presentation.feature.navigation.model.Destination
 import com.tracer.kiosk.presentation.tracerbot.engine.TracerBotEngine
+import com.tracer.kiosk.presentation.tracerbot.model.Faculty
 import com.tracer.kiosk.presentation.tracerbot.ui.TracerBotOverlay
 
 @Composable
@@ -25,6 +31,10 @@ fun AppNavHost(
     navController: NavHostController,
     tracerBotEngine: TracerBotEngine
 ) {
+
+    var navigationDestination by remember {
+        mutableStateOf<Destination?>(null)
+    }
 
     NavHost(
         navController = navController,
@@ -87,7 +97,17 @@ fun AppNavHost(
         ) {
 
             BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine
+                tracerBotEngine = tracerBotEngine,
+
+                onNavigateToFaculty = { faculty ->
+
+                    navigationDestination =
+                        findFacultyDestination(faculty)
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                }
             ) {
 
                 HomeScreen(
@@ -116,11 +136,25 @@ fun AppNavHost(
         ) {
 
             BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine
+                tracerBotEngine = tracerBotEngine,
+
+                onNavigateToFaculty = { faculty ->
+
+                    navigationDestination =
+                        findFacultyDestination(faculty)
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                }
             ) {
 
                 NavigationScreen(
-                    navController = navController
+                    navController = navController,
+                    initialDestination = navigationDestination,
+                    onInitialDestinationConsumed = {
+                        navigationDestination = null
+                    }
                 )
             }
         }
@@ -145,7 +179,17 @@ fun AppNavHost(
         ) {
 
             BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine
+                tracerBotEngine = tracerBotEngine,
+
+                onNavigateToFaculty = { faculty ->
+
+                    navigationDestination =
+                        findFacultyDestination(faculty)
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                }
             ) {
 
                 FacultyScreen(
@@ -174,7 +218,17 @@ fun AppNavHost(
         ) {
 
             BoxWithTracerBot(
-                tracerBotEngine = tracerBotEngine
+                tracerBotEngine = tracerBotEngine,
+
+                onNavigateToFaculty = { faculty ->
+
+                    navigationDestination =
+                        findFacultyDestination(faculty)
+
+                    navController.navigate(
+                        Screen.Navigation.route
+                    )
+                }
             ) {
 
                 DepartmentScreen(
@@ -211,6 +265,34 @@ fun AppNavHost(
 
 
 /**
+ * Finds the existing navigation destination
+ * corresponding to a TracerBot faculty member.
+ */
+private fun findFacultyDestination(
+    faculty: Faculty
+): Destination? {
+
+    return DestinationRepository.destinations.firstOrNull { destination ->
+
+        destination.category.name == "FACULTY" &&
+                (
+                        destination.name.equals(
+                            faculty.name,
+                            ignoreCase = true
+                        ) ||
+                                destination.aliases.any { alias ->
+
+                                    faculty.name.contains(
+                                        alias,
+                                        ignoreCase = true
+                                    )
+                                }
+                        )
+    }
+}
+
+
+/**
  * Places the existing screen underneath the
  * floating TracerBot overlay.
  *
@@ -219,6 +301,7 @@ fun AppNavHost(
 @Composable
 private fun BoxWithTracerBot(
     tracerBotEngine: TracerBotEngine,
+    onNavigateToFaculty: (Faculty) -> Unit,
     content: @Composable () -> Unit
 ) {
 
@@ -238,6 +321,9 @@ private fun BoxWithTracerBot(
 
         TracerBotOverlay(
             tracerBotEngine = tracerBotEngine,
+
+            onNavigateToFaculty = onNavigateToFaculty,
+
             modifier = Modifier.fillMaxSize()
         )
     }

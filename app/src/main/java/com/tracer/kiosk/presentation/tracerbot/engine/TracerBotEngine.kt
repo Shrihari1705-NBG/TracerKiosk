@@ -1,5 +1,6 @@
 package com.tracer.kiosk.presentation.tracerbot.engine
 
+import com.tracer.kiosk.presentation.tracerbot.context.TracerBotConversationContext
 import com.tracer.kiosk.presentation.tracerbot.data.FacultyRepository
 import com.tracer.kiosk.presentation.tracerbot.processor.TracerBotQueryProcessor
 import com.tracer.kiosk.presentation.tracerbot.response.TracerBotResponse
@@ -18,24 +19,35 @@ import com.tracer.kiosk.presentation.tracerbot.response.TracerBotResponseEngine
  *      ↓
  * Final Response
  *
- * The UI should eventually communicate with this class
- * instead of directly communicating with the individual
- * TracerBot components.
+ * The engine also maintains lightweight conversation context
+ * so TracerBot can understand follow-up questions.
  *
  * All processing is local.
  */
 class TracerBotEngine(
-    facultyRepository: FacultyRepository
+    private val facultyRepository: FacultyRepository
 ) {
+
+    // ---------------------------------------------------------
+    // Conversation Context
+    // ---------------------------------------------------------
+
+    private var conversationContext =
+        TracerBotConversationContext()
 
     // ---------------------------------------------------------
     // Query Processor
     // ---------------------------------------------------------
 
-    private val queryProcessor =
-        TracerBotQueryProcessor(
-            facultyRepository = facultyRepository
+    private fun createQueryProcessor(
+        facultyRepository: FacultyRepository
+    ): TracerBotQueryProcessor {
+
+        return TracerBotQueryProcessor(
+            facultyRepository = facultyRepository,
+            conversationContext = conversationContext
         )
+    }
 
     // ---------------------------------------------------------
     // Response Engine
@@ -47,16 +59,9 @@ class TracerBotEngine(
     /**
      * Process a complete user question.
      *
-     * Example:
-     *
-     * "Tell me about Prof. XYZ"
-     *
-     * The method:
-     *
-     * 1. Processes the user's query.
-     * 2. Finds relevant faculty information.
-     * 3. Generates a user-friendly response.
-     * 4. Returns the final TracerBotResponse.
+     * The query processor receives the current conversation
+     * context so follow-up questions can eventually refer
+     * to information from the previous query.
      */
     fun ask(
         question: String
@@ -66,6 +71,9 @@ class TracerBotEngine(
         // Step 1 — Process the query
         // -----------------------------------------------------
 
+        val queryProcessor =
+            createQueryProcessor(facultyRepository)
+
         val processedQuery =
             queryProcessor.process(question)
 
@@ -73,8 +81,35 @@ class TracerBotEngine(
         // Step 2 — Generate the response
         // -----------------------------------------------------
 
-        return responseEngine.generateResponse(
-            query = processedQuery
-        )
+        val response =
+            responseEngine.generateResponse(
+                query = processedQuery
+            )
+
+        // -----------------------------------------------------
+        // Step 3 — Update conversation context
+        // -----------------------------------------------------
+
+        conversationContext =
+            conversationContext.copy(
+                lastFaculty = processedQuery.faculty
+                    ?: conversationContext.lastFaculty,
+
+                lastIntent = processedQuery.intent
+            )
+
+        return response
+    }
+
+    /**
+     * Clear the current conversation context.
+     *
+     * This is useful when the user starts a completely
+     * new conversation.
+     */
+    fun clearConversation() {
+
+        conversationContext =
+            TracerBotConversationContext()
     }
 }

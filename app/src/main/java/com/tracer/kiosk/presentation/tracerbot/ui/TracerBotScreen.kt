@@ -59,6 +59,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.input.ImeAction
+import com.tracer.kiosk.presentation.tracerbot.model.TracerBotMessage
 
 private val TracerNavy = Color(0xFF00183F)
 private val TracerBlue = Color(0xFF477ACB)
@@ -100,7 +101,8 @@ fun TracerBotScreen(
             viewModel.submitQuery()
         },
 
-        onFacultyClick = onNavigateToFaculty
+        onFacultyNavigate = onNavigateToFaculty,
+        onFacultyIgnore = viewModel::clearFacultyMatches
     )
 }
 
@@ -114,7 +116,8 @@ private fun TracerBotContent(
     onSubmit: () -> Unit,
     onClose: () -> Unit,
     onSuggestionClick: (String) -> Unit,
-    onFacultyClick: (Faculty) -> Unit
+    onFacultyNavigate: (Faculty) -> Unit,
+    onFacultyIgnore: () -> Unit
 ) {
 
     Box(
@@ -178,16 +181,26 @@ private fun TracerBotContent(
                 }
 
                 // -------------------------------------------------
-                // Response
+                // Chat history
                 // -------------------------------------------------
 
-                if (uiState.response != null) {
+                items(
+                    items = uiState.messages
+                ) { message ->
 
-                    item {
+                    when (message.sender) {
 
-                        ResponseCard(
-                            message = uiState.response.message
-                        )
+                        TracerBotMessage.Sender.USER -> {
+                            UserMessageCard(
+                                message = message.text
+                            )
+                        }
+
+                        TracerBotMessage.Sender.BOT -> {
+                            ResponseCard(
+                                message = message.text
+                            )
+                        }
                     }
                 }
 
@@ -227,9 +240,10 @@ private fun TracerBotContent(
 
                         FacultyResultCard(
                             faculty = faculty,
-                            onClick = {
-                                onFacultyClick(faculty)
-                            }
+                            onNavigate = {
+                                onFacultyNavigate(faculty)
+                            },
+                            onIgnore = onFacultyIgnore
                         )
                     }
                 }
@@ -239,7 +253,7 @@ private fun TracerBotContent(
                 // -------------------------------------------------
 
                 if (
-                    uiState.response == null &&
+                    uiState.messages.isEmpty() &&
                     !uiState.isLoading
                 ) {
 
@@ -682,6 +696,49 @@ private fun QueryInput(
 }
 
 /**
+ * User message displayed in the chat.
+ */
+@Composable
+private fun UserMessageCard(
+    message: String
+) {
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+
+        Surface(
+            shape = RoundedCornerShape(
+                topStart = 20.dp,
+                topEnd = 20.dp,
+                bottomStart = 20.dp,
+                bottomEnd = 4.dp
+            ),
+
+            color = TracerNavy
+        ) {
+
+            Text(
+                text = message,
+
+                modifier = Modifier
+                    .padding(
+                        horizontal = 20.dp,
+                        vertical = 14.dp
+                    ),
+
+                fontSize = 17.sp,
+
+                color = Color.White,
+
+                lineHeight = 24.sp
+            )
+        }
+    }
+}
+
+/**
  * Response displayed by TracerBot.
  */
 @Composable
@@ -753,15 +810,12 @@ private fun ResponseCard(
 @Composable
 private fun FacultyResultCard(
     faculty: Faculty,
-    onClick: () -> Unit
+    onNavigate: () -> Unit,
+    onIgnore: () -> Unit
 ) {
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                onClick()
-            },
+        modifier = Modifier.fillMaxWidth(),
 
         shape = RoundedCornerShape(20.dp),
 
@@ -774,72 +828,127 @@ private fun FacultyResultCard(
         )
     ) {
 
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
-
-            verticalAlignment = Alignment.CenterVertically
+                .padding(20.dp)
         ) {
 
-            Box(
-                modifier = Modifier
-                    .size(58.dp)
-                    .clip(RoundedCornerShape(18.dp))
-                    .background(TracerLightBlue),
+            // =====================================================
+            // Faculty information
+            // =====================================================
 
-                contentAlignment = Alignment.Center
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = null,
-                    tint = TracerNavy,
-                    modifier = Modifier.size(32.dp)
+                Box(
+                    modifier = Modifier
+                        .size(58.dp)
+                        .clip(RoundedCornerShape(18.dp))
+                        .background(TracerLightBlue),
+
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = null,
+                        tint = TracerNavy,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.width(16.dp)
                 )
+
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+
+                    Text(
+                        text = faculty.name,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = TracerText
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(4.dp)
+                    )
+
+                    Text(
+                        text = faculty.designation,
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(2.dp)
+                    )
+
+                    Text(
+                        text = faculty.department,
+                        fontSize = 14.sp,
+                        color = TracerBlue
+                    )
+                }
             }
 
             Spacer(
-                modifier = Modifier.width(16.dp)
+                modifier = Modifier.height(16.dp)
             )
 
-            Column(
-                modifier = Modifier.weight(1f)
+            // =====================================================
+            // Actions
+            // =====================================================
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+
+                horizontalArrangement = Arrangement.End
             ) {
 
-                Text(
-                    text = faculty.name,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TracerText
-                )
+                Button(
+                    onClick = onNavigate,
+
+                    shape = RoundedCornerShape(14.dp),
+
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = TracerNavy
+                    )
+                ) {
+
+                    Text(
+                        text = "Navigate",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
 
                 Spacer(
-                    modifier = Modifier.height(4.dp)
+                    modifier = Modifier.width(10.dp)
                 )
 
-                Text(
-                    text = faculty.designation,
-                    fontSize = 15.sp,
-                    color = Color.DarkGray
-                )
+                Button(
+                    onClick = onIgnore,
 
-                Spacer(
-                    modifier = Modifier.height(2.dp)
-                )
+                    shape = RoundedCornerShape(14.dp),
 
-                Text(
-                    text = faculty.department,
-                    fontSize = 14.sp,
-                    color = TracerBlue
-                )
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = TracerLightBlue,
+                        contentColor = TracerNavy
+                    )
+                ) {
+
+                    Text(
+                        text = "Ignore",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
-
-            Icon(
-                imageVector = Icons.Default.ArrowForward,
-                contentDescription = "Open faculty",
-                tint = TracerBlue
-            )
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.tracer.kiosk.presentation.tracerbot.viewmodel
 
 import com.tracer.kiosk.presentation.tracerbot.model.Faculty
+import com.tracer.kiosk.presentation.tracerbot.model.TracerBotMessage
 import com.tracer.kiosk.presentation.tracerbot.response.TracerBotResponse
 
 data class TracerBotUiState(
@@ -10,6 +11,8 @@ data class TracerBotUiState(
     val response: TracerBotResponse? = null,
 
     val facultyMatches: List<Faculty> = emptyList(),
+
+    val messages: List<TracerBotMessage> = emptyList(),
 
     val isLoading: Boolean = false,
 

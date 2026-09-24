@@ -3,6 +3,7 @@ package com.tracer.kiosk.presentation.tracerbot.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tracer.kiosk.presentation.tracerbot.engine.TracerBotEngine
+import com.tracer.kiosk.presentation.tracerbot.model.TracerBotMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,34 +33,37 @@ class TracerBotViewModel(
      * Process the current user query.
      */
     fun submitQuery() {
-
         val query = _uiState.value.query.trim()
+        if (query.isBlank()) return
 
-        if (query.isBlank()) {
-            return
-        }
+        // Add user's message immediately
+        _uiState.value = _uiState.value.copy(
+            messages = _uiState.value.messages +
+                    TracerBotMessage(
+                        text = query,
+                        sender = TracerBotMessage.Sender.USER
+                    ),
+            isLoading = true,
+            errorMessage = null
+        )
 
         viewModelScope.launch {
-
-            _uiState.value = _uiState.value.copy(
-                isLoading = true,
-                errorMessage = null
-            )
-
             try {
-
                 val result = tracerBotEngine.ask(query)
 
                 _uiState.value = _uiState.value.copy(
-                    query = query,
                     response = result,
                     facultyMatches = result.facultyMatches,
+                    messages = _uiState.value.messages +
+                            TracerBotMessage(
+                                text = result.message,
+                                sender = TracerBotMessage.Sender.BOT
+                            ),
                     isLoading = false,
                     errorMessage = null
                 )
 
             } catch (e: Exception) {
-
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     errorMessage =
@@ -67,6 +71,16 @@ class TracerBotViewModel(
                 )
             }
         }
+    }
+
+    /**
+     * Remove faculty suggestions from the current response.
+     */
+    fun clearFacultyMatches() {
+
+        _uiState.value = _uiState.value.copy(
+            facultyMatches = emptyList()
+        )
     }
 
     /**

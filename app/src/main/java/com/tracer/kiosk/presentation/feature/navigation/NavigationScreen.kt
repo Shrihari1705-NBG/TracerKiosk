@@ -32,7 +32,9 @@ import com.tracer.kiosk.presentation.navigation.Screen
 
 @Composable
 fun NavigationScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    initialDestination: Destination? = null,
+    onInitialDestinationConsumed: () -> Unit = {}
 ) {
 
     var isNavigationPanelCollapsed by remember {
@@ -53,6 +55,47 @@ fun NavigationScreen(
         mutableStateOf<List<GraphNode>>(emptyList())
     }
 
+    // =============================================================
+    // TracerBot destination request
+    // =============================================================
+
+    LaunchedEffect(initialDestination) {
+
+        initialDestination?.let { destination ->
+
+            selectedDestination = destination
+
+            currentRoute = PathFinder.findPath(
+                startNodeId = "N1",
+                destinationNodeId = destination.nodeId
+            )
+
+            android.util.Log.d(
+                "Tracer",
+                "TracerBot Destination = ${destination.name}"
+            )
+
+            android.util.Log.d(
+                "Tracer",
+                "Node = ${destination.nodeId}"
+            )
+
+            android.util.Log.d(
+                "Tracer",
+                "Route Size = ${currentRoute.size}"
+            )
+
+            android.util.Log.d(
+                "Tracer",
+                "Route = ${currentRoute.map { it.id }}"
+            )
+
+            isNavigationPanelCollapsed = true
+
+            onInitialDestinationConsumed()
+        }
+    }
+
     val destinations = remember(query, selectedCategory) {
 
         DestinationRepository.destinations.filter { destination ->
@@ -63,9 +106,15 @@ fun NavigationScreen(
 
             val matchesSearch =
                 query.isBlank() ||
-                        destination.name.contains(query, ignoreCase = true) ||
+                        destination.name.contains(
+                            query,
+                            ignoreCase = true
+                        ) ||
                         destination.aliases.any {
-                            it.contains(query, ignoreCase = true)
+                            it.contains(
+                                query,
+                                ignoreCase = true
+                            )
                         }
 
             matchesCategory && matchesSearch
@@ -81,7 +130,9 @@ fun NavigationScreen(
         ) {
 
             Image(
-                painter = painterResource(R.drawable.background_pattern),
+                painter = painterResource(
+                    R.drawable.background_pattern
+                ),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -93,7 +144,9 @@ fun NavigationScreen(
 
                 NavigationTopBar(
                     onBackClick = {
-                        navController.navigate(Screen.Home.route)
+                        navController.navigate(
+                            Screen.Home.route
+                        )
                     }
                 )
 
@@ -103,7 +156,10 @@ fun NavigationScreen(
                         .padding(top = 12.dp)
                 ) {
 
+                    // =================================================
                     // Left Panel
+                    // =================================================
+
                     Box(
                         modifier = Modifier
                             .fillMaxHeight()
@@ -114,12 +170,16 @@ fun NavigationScreen(
                         if (selectedCategory == null) {
 
                             Column(
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                                verticalArrangement =
+                                    Arrangement.spacedBy(16.dp)
                             ) {
 
                                 Text(
-                                    text = "Where would you like to go?",
-                                    style = MaterialTheme.typography.headlineMedium
+                                    text =
+                                        "Where would you like to go?",
+                                    style =
+                                        MaterialTheme.typography
+                                            .headlineMedium
                                 )
 
                                 SearchBar(
@@ -143,14 +203,17 @@ fun NavigationScreen(
 
                                     SearchResults(
                                         destinations = destinations,
-                                        onDestinationClick = { destination ->
-                                            selectedDestination = destination
-                                            isNavigationPanelCollapsed = false
+                                        onDestinationClick = {
+                                                destination ->
+
+                                            selectedDestination =
+                                                destination
+
+                                            isNavigationPanelCollapsed =
+                                                false
                                         }
                                     )
-
                                 }
-
                             }
 
                         } else {
@@ -158,26 +221,36 @@ fun NavigationScreen(
                             DestinationPanel(
                                 category = selectedCategory!!,
                                 destinations = destinations,
+
                                 onBackClick = {
                                     selectedCategory = null
                                 },
-                                onDestinationClick = { destination ->
-                                    selectedDestination = destination
-                                    isNavigationPanelCollapsed = false
+
+                                onDestinationClick = {
+                                        destination ->
+
+                                    selectedDestination =
+                                        destination
+
+                                    isNavigationPanelCollapsed =
+                                        false
                                 }
                             )
-
                         }
-
                     }
 
+                    // =================================================
                     // Right Panel
+                    // =================================================
+
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
                             .weight(0.70f)
                             .padding(20.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+
+                        verticalArrangement =
+                            Arrangement.spacedBy(16.dp)
                     ) {
 
                         selectedDestination?.let { destination ->
@@ -185,9 +258,12 @@ fun NavigationScreen(
                             if (isNavigationPanelCollapsed) {
 
                                 NavigationCollapsedBar(
-                                    destinationName = destination.name,
+                                    destinationName =
+                                        destination.name,
+
                                     onExpand = {
-                                        isNavigationPanelCollapsed = false
+                                        isNavigationPanelCollapsed =
+                                            false
                                     }
                                 )
 
@@ -195,22 +271,49 @@ fun NavigationScreen(
 
                                 DestinationInfoCard(
                                     destination = destination,
+
                                     onStartNavigation = {
 
-                                        currentRoute = PathFinder.findPath(
-                                            startNodeId = "N1",
-                                            destinationNodeId = destination.nodeId
+                                        currentRoute =
+                                            PathFinder.findPath(
+                                                startNodeId = "N1",
+                                                destinationNodeId =
+                                                    destination.nodeId
+                                            )
+
+                                        android.util.Log.d(
+                                            "Tracer",
+                                            "Destination = " +
+                                                    destination.name
                                         )
 
-                                        android.util.Log.d("Tracer", "Destination = ${destination.name}")
-                                        android.util.Log.d("Tracer", "Node = ${destination.nodeId}")
-                                        android.util.Log.d("Tracer", "Route Size = ${currentRoute.size}")
-                                        android.util.Log.d("Tracer", "Route = ${currentRoute.map { it.id }}")
+                                        android.util.Log.d(
+                                            "Tracer",
+                                            "Node = " +
+                                                    destination.nodeId
+                                        )
 
-                                        isNavigationPanelCollapsed = true
+                                        android.util.Log.d(
+                                            "Tracer",
+                                            "Route Size = " +
+                                                    currentRoute.size
+                                        )
+
+                                        android.util.Log.d(
+                                            "Tracer",
+                                            "Route = " +
+                                                    currentRoute.map {
+                                                        it.id
+                                                    }
+                                        )
+
+                                        isNavigationPanelCollapsed =
+                                            true
                                     },
+
                                     onCollapse = {
-                                        isNavigationPanelCollapsed = true
+                                        isNavigationPanelCollapsed =
+                                            true
                                     }
                                 )
                             }
@@ -223,19 +326,12 @@ fun NavigationScreen(
                             MapCanvas(
                                 route = currentRoute
                             )
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
-
 }
 
 @Composable
@@ -246,40 +342,64 @@ fun NavigationCollapsedBar(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onExpand() },
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            .clickable {
+                onExpand()
+            },
+
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        )
     ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+                .padding(
+                    horizontal = 16.dp,
+                    vertical = 12.dp
+                ),
+
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            IconButton(onClick = onExpand) {
+            IconButton(
+                onClick = onExpand
+            ) {
+
                 Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
+                    imageVector =
+                        Icons.Default.KeyboardArrowDown,
+
                     contentDescription = "Expand"
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(
+                modifier = Modifier.width(8.dp)
+            )
 
             Text(
                 text = destinationName,
-                style = MaterialTheme.typography.titleMedium,
+
+                style =
+                    MaterialTheme.typography.titleMedium,
+
                 fontWeight = FontWeight.SemiBold
             )
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(
+                modifier = Modifier.weight(1f)
+            )
 
             Text(
                 text = "Tap to expand",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary
+
+                style =
+                    MaterialTheme.typography.bodySmall,
+
+                color =
+                    MaterialTheme.colorScheme.primary
             )
         }
     }
 }
-
-
