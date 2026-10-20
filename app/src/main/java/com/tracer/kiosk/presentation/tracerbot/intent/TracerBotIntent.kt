@@ -108,6 +108,17 @@ sealed class TracerBotIntent {
      * Example:
      * "What can you do?"
      */
+
+    /**
+     * User is greeting TracerBot or starting a conversation.
+     *
+     * Examples:
+     * "Hi"
+     * "Hello"
+     * "Hey"
+     * "Good morning"
+     */
+    data object Greeting : TracerBotIntent()
     data object Help : TracerBotIntent()
 
     /**

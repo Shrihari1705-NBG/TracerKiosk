@@ -36,6 +36,10 @@ class TracerBotResponseEngine {
 
         when (query.intent) {
 
+            TracerBotIntent.Greeting -> {
+                return createGreetingResponse(query.originalText)
+            }
+
             TracerBotIntent.Help -> {
                 return createHelpResponse()
             }
@@ -698,5 +702,62 @@ class TracerBotResponseEngine {
             message = projectInfo.answer,
             hasFacultyInformation = false
         )
+    }
+
+    // =================================================================
+    // GREETING
+    // =================================================================
+
+    private fun createGreetingResponse(
+        originalText: String
+    ): TracerBotResponse {
+
+        val greeting = getTimeBasedGreeting()
+
+        val message = when {
+            originalText.contains(
+                "how are you",
+                ignoreCase = true
+            ) -> {
+                "$greeting! 👋 I'm doing well and ready to help you. " +
+                        "What would you like to find on campus?"
+            }
+
+            originalText.contains(
+                "good night",
+                ignoreCase = true
+            ) -> {
+                "Good night! 👋 Thank you for visiting Tracer Kiosk. " +
+                        "Feel free to explore campus information whenever you need it."
+            }
+
+            else -> {
+                "$greeting! 👋 Welcome to Tracer Kiosk. " +
+                        "How can I help you today? You can ask me about " +
+                        "faculty members, campus destinations, or the Tracer project."
+            }
+        }
+
+        return TracerBotResponse(
+            message = message,
+            hasFacultyInformation = false
+        )
+    }
+
+    /**
+     * Returns a greeting based on the device's current local time.
+     *
+     * No internet connection or location permission is required.
+     */
+    private fun getTimeBasedGreeting(): String {
+
+        val hour = java.time.LocalTime.now().hour
+
+        return when (hour) {
+            in 5..11 -> "Good morning"
+            in 12..16 -> "Good afternoon"
+            in 17..20 -> "Good evening"
+            else -> "Hello"
+        }
     }
 }

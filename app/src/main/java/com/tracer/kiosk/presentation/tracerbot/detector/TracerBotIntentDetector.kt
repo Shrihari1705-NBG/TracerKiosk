@@ -1,21 +1,16 @@
+
 package com.tracer.kiosk.presentation.tracerbot.detector
 
 import com.tracer.kiosk.presentation.tracerbot.intent.TracerBotIntent
 
 /**
- * Detects what the user wants TracerBot to do.
+ * Local, rule-based natural-language intent detector.
  *
- * This is a lightweight, completely local,
- * rule-based natural-language intent detector.
- *
- * The detector checks more specific intents before
- * more general intents to reduce false classifications.
+ * Specific information requests are checked before general
+ * conversational phrases to avoid false classifications.
  */
 class TracerBotIntentDetector {
 
-    /**
-     * Determines the user's intent from the user's query.
-     */
     fun detect(query: String): TracerBotIntent {
 
         val text = normalize(query)
@@ -24,10 +19,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.Unknown
         }
 
-        // =========================================================
-        // 1. HELP
-        // =========================================================
-
+        // 1. Help
         if (
             containsAny(
                 text,
@@ -43,16 +35,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.Help
         }
 
-        // =========================================================
-        // 2. CONTACT / EMAIL
-        // =========================================================
-        //
-        // Checked before navigation so questions such as:
-        //
-        // "Where can I find Dr. X's email?"
-        //
-        // remain contact questions.
-
+        // 2. Contact / email
         if (
             containsAny(
                 text,
@@ -70,10 +53,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyContact
         }
 
-        // =========================================================
-        // 3. PUBLICATIONS
-        // =========================================================
-
+        // 3. Publications
         if (
             containsAny(
                 text,
@@ -90,10 +70,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyPublications
         }
 
-        // =========================================================
-        // 4. RECOGNITION / AWARDS
-        // =========================================================
-
+        // 4. Recognition / awards
         if (
             containsAny(
                 text,
@@ -112,10 +89,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyRecognition
         }
 
-        // =========================================================
-        // 5. EXPERIENCE
-        // =========================================================
-
+        // 5. Experience
         if (
             containsAny(
                 text,
@@ -131,10 +105,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyExperience
         }
 
-        // =========================================================
-        // 6. QUALIFICATION / EDUCATION
-        // =========================================================
-
+        // 6. Qualification / education
         if (
             containsAny(
                 text,
@@ -152,10 +123,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyQualification
         }
 
-        // =========================================================
-        // 7. DESIGNATION
-        // =========================================================
-
+        // 7. Designation
         if (
             containsAny(
                 text,
@@ -170,10 +138,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyDesignation
         }
 
-        // =========================================================
-        // 8. COURSES / TEACHING
-        // =========================================================
-
+        // 8. Courses / teaching
         if (
             containsAny(
                 text,
@@ -195,32 +160,12 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyCourses
         }
 
-        // =========================================================
-        // 9. PROJECT INFORMATION
-        // =========================================================
-        //
-        // ProjectInfo is checked BEFORE Navigation and Research.
-        //
-        // This is important because project questions can contain
-        // words such as:
-        //
-        // "navigation"
-        // "research"
-        // "algorithm"
-        //
-        // which could otherwise be mistaken for campus navigation
-        // or faculty research.
-        //
-        // A* is also handled explicitly.
-
+        // 9. Project information
+        // Keep this BEFORE Navigation and Research to preserve
+        // the previously tested project-information behaviour.
         if (
             containsAny(
                 text,
-
-                // -------------------------------------------------
-                // Tracer project
-                // -------------------------------------------------
-
                 "tracer project",
                 "what is tracer",
                 "what is the tracer project",
@@ -230,18 +175,11 @@ class TracerBotIntentDetector {
                 "what is the purpose of tracer",
                 "what is the objective of tracer",
                 "what is the goal of tracer",
-
-                // Project identity
                 "project name",
                 "what is the project name",
                 "name of the project",
                 "what is tracer called",
                 "tracer name",
-
-                // -------------------------------------------------
-                // Developer
-                // -------------------------------------------------
-
                 "developer",
                 "developer name",
                 "project developer",
@@ -251,22 +189,12 @@ class TracerBotIntentDetector {
                 "who made tracer",
                 "who created tracer",
                 "who built tracer",
-
-                // -------------------------------------------------
-                // Project guide
-                // -------------------------------------------------
-
                 "guide",
                 "project guide",
                 "guide name",
                 "who is the guide",
                 "who is project guide",
                 "who guided the project",
-
-                // -------------------------------------------------
-                // Development team
-                // -------------------------------------------------
-
                 "team",
                 "development team",
                 "project team",
@@ -274,11 +202,6 @@ class TracerBotIntentDetector {
                 "developers",
                 "who are the developers",
                 "who are the team members",
-
-                // -------------------------------------------------
-                // Tracer Kiosk
-                // -------------------------------------------------
-
                 "tracer kiosk",
                 "what is the kiosk",
                 "what is tracer kiosk",
@@ -286,22 +209,12 @@ class TracerBotIntentDetector {
                 "what can the kiosk do",
                 "kiosk features",
                 "kiosk functionality",
-
-                // -------------------------------------------------
-                // Tracer Main App
-                // -------------------------------------------------
-
                 "tracer main app",
                 "what is the main app",
                 "what is tracer main app",
                 "how does the main app work",
                 "main app features",
                 "main app technologies",
-
-                // -------------------------------------------------
-                // TracerBot
-                // -------------------------------------------------
-
                 "tracerbot",
                 "tracer bot",
                 "what is tracerbot",
@@ -316,11 +229,6 @@ class TracerBotIntentDetector {
                 "tracerbot features",
                 "tracerbot functions",
                 "tracerbot functionality",
-
-                // -------------------------------------------------
-                // Technologies
-                // -------------------------------------------------
-
                 "technologies used",
                 "what technologies are used",
                 "technology stack",
@@ -329,20 +237,10 @@ class TracerBotIntentDetector {
                 "what tech stack is used",
                 "what technologies does tracer use",
                 "what technology does tracer use",
-
-                // -------------------------------------------------
-                // Architecture
-                // -------------------------------------------------
-
                 "architecture",
                 "project architecture",
                 "system architecture",
                 "what architecture is used",
-
-                // -------------------------------------------------
-                // Navigation algorithm
-                // -------------------------------------------------
-
                 "navigation algorithm",
                 "what algorithm does navigation use",
                 "what algorithm is used for navigation",
@@ -350,11 +248,6 @@ class TracerBotIntentDetector {
                 "pathfinding algorithm",
                 "what pathfinding algorithm is used",
                 "route planning algorithm",
-
-                // -------------------------------------------------
-                // A*
-                // -------------------------------------------------
-
                 "a star",
                 "a*",
                 "astar",
@@ -367,54 +260,29 @@ class TracerBotIntentDetector {
                 "how does a star work",
                 "how does a* work",
                 "how does astar work",
-
-                // -------------------------------------------------
-                // Navigation graph
-                // -------------------------------------------------
-
                 "navigation graph",
                 "what is the navigation graph",
                 "weighted graph",
                 "what is a weighted graph",
                 "navigation nodes",
                 "navigation edges",
-
-                // -------------------------------------------------
-                // BLE / RSSI localization
-                // -------------------------------------------------
-
                 "ble localization",
                 "rssi localization",
                 "bluetooth localization",
                 "indoor localization",
                 "how does ble localization work",
                 "how does rssi localization work",
-
-                // -------------------------------------------------
-                // ONNX
-                // -------------------------------------------------
-
                 "onnx",
                 "onnx localization",
                 "onnx model",
                 "how is onnx used",
                 "how does onnx localization work",
-
-                // -------------------------------------------------
-                // QR handoff
-                // -------------------------------------------------
-
                 "qr handoff",
                 "qr code",
                 "kiosk qr",
                 "qr integration",
                 "how does qr handoff work",
                 "how does the qr handoff work",
-
-                // -------------------------------------------------
-                // Kiosk ↔ Main App integration
-                // -------------------------------------------------
-
                 "kiosk main app",
                 "how does kiosk and main app work",
                 "how does the kiosk and main app work",
@@ -426,11 +294,6 @@ class TracerBotIntentDetector {
                 "how do the kiosk and main app work together",
                 "how does the kiosk connect to the main app",
                 "how does the main app connect to the kiosk",
-
-                // -------------------------------------------------
-                // Complete system workflow
-                // -------------------------------------------------
-
                 "system workflow",
                 "project workflow",
                 "overall workflow",
@@ -444,22 +307,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.ProjectInfo
         }
 
-        // =========================================================
-        // 10. NAVIGATION
-        // =========================================================
-        //
-        // Navigation can refer to:
-        //
-        // - Faculty cabins
-        // - Laboratories
-        // - Classrooms
-        // - Library
-        // - Offices
-        // - Other campus destinations
-        //
-        // Destination resolution happens later inside
-        // TracerBotQueryProcessor.
-
+        // 10. Navigation
         if (
             containsAny(
                 text,
@@ -484,22 +332,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.Navigate
         }
 
-        // =========================================================
-        // 11. RESEARCH
-        // =========================================================
-        //
-        // Navigation comes before Research so:
-        //
-        // "Where is the Research Lab?"
-        //
-        // becomes Navigate.
-        //
-        // A normal faculty question such as:
-        //
-        // "What is Plasin's research?"
-        //
-        // reaches FacultyResearch.
-
+        // 11. Research
         if (
             containsAny(
                 text,
@@ -519,10 +352,7 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyResearch
         }
 
-        // =========================================================
-        // 12. GENERAL FACULTY PROFILE
-        // =========================================================
-
+        // 12. General faculty profile
         if (
             containsAny(
                 text,
@@ -539,49 +369,77 @@ class TracerBotIntentDetector {
             return TracerBotIntent.FacultyProfile
         }
 
-        // =========================================================
-        // 13. UNKNOWN
-        // =========================================================
+        // 13. Greeting
+        // Checked late so a greeting won't override a real question.
+        if (isStandaloneGreeting(text)) {
+            return TracerBotIntent.Greeting
+        }
 
+        // 14. Unknown
         return TracerBotIntent.Unknown
     }
 
-    /**
-     * Normalize text before intent matching.
-     *
-     * IMPORTANT:
-     *
-     * The '*' character is intentionally preserved because
-     * A* is one of the supported project-information topics.
-     *
-     * Example:
-     *
-     * "What is A*?"
-     *
-     * becomes:
-     *
-     * "what is a*"
-     */
-    private fun normalize(text: String): String {
+    private fun isStandaloneGreeting(text: String): Boolean {
 
-        return text
-            .lowercase()
-            .replace(Regex("[^a-z0-9@.+*\\-]"), " ")
-            .replace(Regex("\\s+"), " ")
-            .trim()
+        val greetingPhrases = setOf(
+            "hi",
+            "hi there",
+            "hello",
+            "hello there",
+            "hey",
+            "hey there",
+            "good morning",
+            "good afternoon",
+            "good evening",
+            "good night",
+            "greetings",
+            "howdy",
+            "how are you",
+            "how are you doing",
+            "what's up",
+            "whats up",
+            "nice to meet you"
+        )
+
+        if (text in greetingPhrases) {
+            return true
+        }
+
+        // Accept short conversational greetings such as:
+        // "Hey, how are you?" or "Hello, how are you doing?"
+        val greetingPrefixes = listOf(
+            "hi ",
+            "hello ",
+            "hey "
+        )
+
+        val isGreetingPrefix = greetingPrefixes.any { prefix ->
+            text.startsWith(prefix)
+        }
+
+        val containsOnlyGreetingFollowUp = containsAny(
+            text,
+            "how are you",
+            "how are you doing",
+            "what's up",
+            "whats up"
+        )
+
+        return isGreetingPrefix && containsOnlyGreetingFollowUp
     }
 
     /**
-     * Returns true when the text contains
-     * at least one supplied phrase.
+     * Preserve '*' because A* is a supported project topic.
      */
+    private fun normalize(text: String): String =
+        text.lowercase()
+            .replace(Regex("[^a-z0-9@.+*'\\-]"), " ")
+            .replace(Regex("\\s+"), " ")
+            .trim()
+
     private fun containsAny(
         text: String,
         vararg phrases: String
-    ): Boolean {
-
-        return phrases.any { phrase ->
-            text.contains(phrase)
-        }
-    }
+    ): Boolean =
+        phrases.any { phrase -> text.contains(phrase) }
 }
