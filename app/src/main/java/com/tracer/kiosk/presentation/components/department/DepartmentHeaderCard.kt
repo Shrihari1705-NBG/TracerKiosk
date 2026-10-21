@@ -1,3 +1,4 @@
+
 package com.tracer.kiosk.presentation.components.department
 
 import androidx.compose.foundation.layout.Arrangement
@@ -13,9 +14,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.theme.CardBlue
 
 @Composable
@@ -31,7 +34,6 @@ fun DepartmentHeaderCard(
             containerColor = CardBlue
         )
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -39,16 +41,15 @@ fun DepartmentHeaderCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-
             Text(
-                text = "Department of",
+                text = stringResource(R.string.department_header_prefix),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center
             )
 
             Text(
-                text = "Electronics & Communication Engineering",
+                text = stringResource(R.string.department_header_name),
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center

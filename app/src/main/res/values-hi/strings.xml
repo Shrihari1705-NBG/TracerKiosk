@@ -14,4 +14,34 @@
     <string name="sidebar_faculty_staff">शिक्षक और कर्मचारी</string>
     <string name="sidebar_department">विभाग</string>
     <string name="sidebar_about_tracer">ट्रेसर के बारे में</string>
+
+    <string name="faculty_screen_title">E&amp;CE विभाग के 15 संकाय सदस्यों से मिलें</string>
+    <string name="faculty_designation_professor_dean">प्रोफेसर एवं डीन</string>
+    <string name="faculty_designation_assistant_professor">सहायक प्रोफेसर</string>
+    <string name="hod_heading">विभागाध्यक्ष</string>
+    <string name="hod_designation">प्रोफेसर एवं विभागाध्यक्ष</string>
+    <string name="hod_experience">%1$d वर्ष</string>
+    <string name="hod_publications">%1$d प्रकाशन</string>
+
+    <string name="app_header_title">ट्रेसर कियोस्क</string>
+    <string name="app_header_subtitle">स्मार्ट कैंपस के लिए इनडोर नेविगेशन</string>
+
+    <string name="department_header_prefix">विभाग</string>
+    <string name="department_header_name">इलेक्ट्रॉनिक्स एवं कम्युनिकेशन इंजीनियरिंग</string>
+    <string name="department_overview">इलेक्ट्रॉनिक्स एवं कम्युनिकेशन इंजीनियरिंग (E&amp;CE) विभाग की स्थापना 2004 में हुई थी। यह B.E. और M.Tech. कार्यक्रम प्रदान करता है तथा VTU द्वारा मान्यता प्राप्त शोध केंद्र है। अनुभवी संकाय, आधुनिक प्रयोगशालाओं, उद्योग सहयोग और IIT बॉम्बे की e-Yantra पहल के अंतर्गत उन्नत रोबोटिक्स लैब के साथ, विभाग परियोजना-आधारित शिक्षा, शोध और नवाचार पर जोर देता है। विद्यार्थी मजबूत तकनीकी कौशल विकसित करते हैं और Infosys, Wipro, Cadence तथा Sankalp Semiconductors जैसी अग्रणी कंपनियों में रोजगार प्राप्त करते हैं।</string>
+
+    <string name="department_stat_faculty">संकाय सदस्य</string>
+    <string name="department_stat_phd">पीएच.डी. धारक संकाय</string>
+    <string name="department_stat_pursuing_phd">पीएच.डी. कर रहे\nसंकाय सदस्य</string>
+    <string name="department_stat_labs">प्रयोगशालाएँ</string>
+
+    <string name="department_vision_title">दृष्टि</string>
+    <string name="department_vision_text">मजबूत विषय विशेषज्ञता के माध्यम से प्रतिभाशाली, कुशल और सतत विकास के प्रति प्रतिबद्ध इलेक्ट्रॉनिक्स एवं कम्युनिकेशन इंजीनियरिंग स्नातक तैयार करना, ताकि वे उच्च व्यावसायिक नैतिकता के साथ समाज की सेवा कर सकें।</string>
+
+    <string name="department_mission_title">ध्येय</string>
+    <string name="department_mission_1">• प्रभावी शिक्षण-अधिगम पद्धतियों के माध्यम से इलेक्ट्रॉनिक्स एवं कम्युनिकेशन इंजीनियरिंग के क्षेत्र में गुणवत्तापूर्ण तकनीकी शिक्षा प्रदान करना।</string>
+    <string name="department_mission_2">• समस्या-समाधान क्षमता वाले सक्षम पेशेवर तैयार करने के लिए नवाचार, शोध और परियोजना-आधारित शिक्षा को प्रोत्साहित करना।</string>
+    <string name="department_mission_3">• समाज की प्रभावी सेवा के लिए व्यावसायिक नैतिकता, नेतृत्व गुण, टीमवर्क और आजीवन सीखने की भावना विकसित करना।</string>
+
+
 </resources>

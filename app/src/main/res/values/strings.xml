@@ -17,4 +17,34 @@
     <string name="sidebar_faculty_staff">Faculty &amp; Staff</string>
     <string name="sidebar_department">Department</string>
     <string name="sidebar_about_tracer">About Tracer</string>
+
+    <string name="faculty_screen_title">Meet the 15 Faculty Members of the E&amp;CE Department</string>
+    <string name="faculty_designation_professor_dean">Professor &amp; Dean</string>
+    <string name="faculty_designation_assistant_professor">Assistant Professor</string>
+    <string name="hod_heading">HEAD OF DEPARTMENT</string>
+    <string name="hod_designation">Professor &amp; Head</string>
+    <string name="hod_experience">%1$d Years</string>
+    <string name="hod_publications">%1$d Publications</string>
+
+    <string name="app_header_title">Tracer Kiosk</string>
+    <string name="app_header_subtitle">Indoor Navigation for Smart Campuses</string>
+
+    <string name="department_header_prefix">Department of</string>
+    <string name="department_header_name">Electronics &amp; Communication Engineering</string>
+    <string name="department_overview">The Department of Electronics and Communication Engineering (E and CE), established in 2004, offers B.E. and M.Tech. programs and is a VTU recognized research centre. With experienced faculty, modern laboratories, industry collaborations, and an Advanced Robotics Lab under IIT Bombay e Yantra initiative, the department emphasizes project based learning, research, and innovation. Students gain strong technical skills and secure placements in leading companies such as Infosys, Wipro, Cadence, and Sankalp Semiconductors.</string>
+
+    <string name="department_stat_faculty">Faculty Members</string>
+    <string name="department_stat_phd">Faculty with Ph.D.</string>
+    <string name="department_stat_pursuing_phd">Faculty pursuing\nPh.D.</string>
+    <string name="department_stat_labs">Laboratories</string>
+
+    <string name="department_vision_title">Vision</string>
+    <string name="department_vision_text">To bring out talented, skilled, and sustainable Electronics and Communication Engineering Graduates through strong domain expertise to serve the Society with greater Professional Ethics.</string>
+
+    <string name="department_mission_title">Mission</string>
+    <string name="department_mission_1">• Impart quality technical education in the field of Electronics and Communication Engineering through effective teaching-learning practices.</string>
+    <string name="department_mission_2">• Encourage innovation, research, and project-based learning to develop competent professionals with problem-solving abilities.</string>
+    <string name="department_mission_3">• Instill professional ethics, leadership qualities, teamwork, and lifelong learning to serve society effectively.</string>
+
+
 </resources>

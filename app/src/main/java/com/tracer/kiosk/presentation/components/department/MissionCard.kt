@@ -1,3 +1,4 @@
+
 package com.tracer.kiosk.presentation.components.department
 
 import androidx.compose.foundation.layout.Column
@@ -10,15 +11,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.theme.CardBlue
 
 @Composable
 fun MissionCard(
     modifier: Modifier = Modifier
 ) {
-
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(28.dp),
@@ -26,23 +28,21 @@ fun MissionCard(
             containerColor = CardBlue
         )
     ) {
-
         Column(
             modifier = Modifier.padding(
                 horizontal = 32.dp,
                 vertical = 28.dp
             )
         ) {
-
             Text(
-                text = "Mission",
+                text = stringResource(R.string.department_mission_title),
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface
             )
 
             Text(
-                text = "• Impart quality technical education in the field of Electronics and Communication Engineering through effective teaching-learning practices.",
+                text = stringResource(R.string.department_mission_1),
                 modifier = Modifier.padding(top = 20.dp),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -50,7 +50,7 @@ fun MissionCard(
             )
 
             Text(
-                text = "• Encourage innovation, research, and project-based learning to develop competent professionals with problem-solving abilities.",
+                text = stringResource(R.string.department_mission_2),
                 modifier = Modifier.padding(top = 16.dp),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -58,15 +58,12 @@ fun MissionCard(
             )
 
             Text(
-                text = "• Instill professional ethics, leadership qualities, teamwork, and lifelong learning to serve society effectively.",
+                text = stringResource(R.string.department_mission_3),
                 modifier = Modifier.padding(top = 16.dp),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface,
                 lineHeight = MaterialTheme.typography.headlineSmall.lineHeight
             )
-
         }
-
     }
-
 }

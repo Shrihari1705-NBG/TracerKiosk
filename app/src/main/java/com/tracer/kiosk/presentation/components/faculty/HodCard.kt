@@ -1,12 +1,14 @@
+
 package com.tracer.kiosk.presentation.components.faculty
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Work
 import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,48 +18,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.layout.ContentScale
 import com.tracer.kiosk.R
 
 @Composable
 fun HodCard(
-
     modifier: Modifier = Modifier,
-
     hodName: String = "Dr. Plasin Francis Dias",
-
+    heading: String = "HEAD OF DEPARTMENT",
     designation: String = "Professor & Head",
-
     qualification: String = "M.Tech., Ph.D.",
-
     email: String = "pfd@klsvdit.edu.in",
-
     experience: String = "26 Years",
-
     publications: String = "18 Publications"
-
 ) {
-
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(36.dp),
         color = Color(0xFFB4C7E7)
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp),
-
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-            // Image Placeholder
             Image(
                 painter = painterResource(
                     id = R.drawable.faculty_plasin_dias
@@ -72,13 +61,11 @@ fun HodCard(
 
             Spacer(modifier = Modifier.width(28.dp))
 
-            // Details
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-
                 Text(
-                    text = "HEAD OF DEPARTMENT",
+                    text = heading,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -111,7 +98,6 @@ fun HodCard(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = null
@@ -123,9 +109,7 @@ fun HodCard(
                         text = email,
                         style = MaterialTheme.typography.titleMedium
                     )
-
                 }
-
             }
 
             Spacer(modifier = Modifier.width(24.dp))
@@ -142,11 +126,9 @@ fun HodCard(
             Column(
                 verticalArrangement = Arrangement.spacedBy(40.dp)
             ) {
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Icon(
                         imageVector = Icons.Default.Work,
                         contentDescription = null,
@@ -159,13 +141,11 @@ fun HodCard(
                         text = experience,
                         style = MaterialTheme.typography.headlineSmall
                     )
-
                 }
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Icon(
                         imageVector = Icons.Default.MenuBook,
                         contentDescription = null,
@@ -178,13 +158,8 @@ fun HodCard(
                         text = publications,
                         style = MaterialTheme.typography.headlineSmall
                     )
-
                 }
-
             }
-
         }
-
     }
-
 }

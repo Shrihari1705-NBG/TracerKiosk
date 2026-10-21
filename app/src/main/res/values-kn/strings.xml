@@ -14,4 +14,34 @@
     <string name="sidebar_faculty_staff">ಅಧ್ಯಾಪಕರು ಮತ್ತು ಸಿಬ್ಬಂದಿ</string>
     <string name="sidebar_department">ವಿಭಾಗ</string>
     <string name="sidebar_about_tracer">ಟ್ರೇಸರ್ ಬಗ್ಗೆ</string>
+
+    <string name="faculty_screen_title">E&amp;CE ವಿಭಾಗದ 15 ಅಧ್ಯಾಪಕರನ್ನು ಭೇಟಿ ಮಾಡಿ</string>
+    <string name="faculty_designation_professor_dean">ಪ್ರಾಧ್ಯಾಪಕರು ಮತ್ತು ಡೀನ್</string>
+    <string name="faculty_designation_assistant_professor">ಸಹಾಯಕ ಪ್ರಾಧ್ಯಾಪಕರು</string>
+    <string name="hod_heading">ವಿಭಾಗದ ಮುಖ್ಯಸ್ಥರು</string>
+    <string name="hod_designation">ಪ್ರಾಧ್ಯಾಪಕರು ಮತ್ತು ವಿಭಾಗದ ಮುಖ್ಯಸ್ಥರು</string>
+    <string name="hod_experience">%1$d ವರ್ಷಗಳು</string>
+    <string name="hod_publications">%1$d ಪ್ರಕಟಣೆಗಳು</string>
+
+    <string name="app_header_title">ಟ್ರೇಸರ್ ಕಿಯೋಸ್ಕ್</string>
+    <string name="app_header_subtitle">ಸ್ಮಾರ್ಟ್ ಕ್ಯಾಂಪಸ್‌ಗಳಿಗಾಗಿ ಒಳಾಂಗಣ ನ್ಯಾವಿಗೇಶನ್</string>
+
+    <string name="department_header_prefix">ವಿಭಾಗ</string>
+    <string name="department_header_name">ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಮತ್ತು ಕಮ್ಯುನಿಕೇಶನ್ ಎಂಜಿನಿಯರಿಂಗ್</string>
+    <string name="department_overview">ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಮತ್ತು ಕಮ್ಯುನಿಕೇಶನ್ ಎಂಜಿನಿಯರಿಂಗ್ (E&amp;CE) ವಿಭಾಗವು 2004ರಲ್ಲಿ ಸ್ಥಾಪನೆಯಾಗಿದ್ದು, B.E. ಮತ್ತು M.Tech. ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ನೀಡುತ್ತದೆ ಹಾಗೂ VTU ಮಾನ್ಯತೆ ಪಡೆದ ಸಂಶೋಧನಾ ಕೇಂದ್ರವಾಗಿದೆ. ಅನುಭವಿ ಅಧ್ಯಾಪಕರು, ಆಧುನಿಕ ಪ್ರಯೋಗಾಲಯಗಳು, ಕೈಗಾರಿಕಾ ಸಹಯೋಗಗಳು ಮತ್ತು IIT ಬಾಂಬೆಯ e-Yantra ಉಪಕ್ರಮದ ಅಡಿಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಸುಧಾರಿತ ರೋಬೋಟಿಕ್ಸ್ ಪ್ರಯೋಗಾಲಯದೊಂದಿಗೆ, ಈ ವಿಭಾಗವು ಯೋಜನಾ ಆಧಾರಿತ ಕಲಿಕೆ, ಸಂಶೋಧನೆ ಮತ್ತು ನಾವೀನ್ಯತೆಗೆ ಒತ್ತು ನೀಡುತ್ತದೆ. ವಿದ್ಯಾರ್ಥಿಗಳು ಬಲವಾದ ತಾಂತ್ರಿಕ ಕೌಶಲ್ಯಗಳನ್ನು ಪಡೆದು Infosys, Wipro, Cadence ಮತ್ತು Sankalp Semiconductors ಮುಂತಾದ ಪ್ರಮುಖ ಕಂಪನಿಗಳಲ್ಲಿ ಉದ್ಯೋಗಾವಕಾಶಗಳನ್ನು ಪಡೆಯುತ್ತಾರೆ.</string>
+
+    <string name="department_stat_faculty">ಅಧ್ಯಾಪಕ ಸದಸ್ಯರು</string>
+    <string name="department_stat_phd">ಪಿಎಚ್.ಡಿ. ಪಡೆದ ಅಧ್ಯಾಪಕರು</string>
+    <string name="department_stat_pursuing_phd">ಪಿಎಚ್.ಡಿ. ಮಾಡುತ್ತಿರುವ\nಅಧ್ಯಾಪಕರು</string>
+    <string name="department_stat_labs">ಪ್ರಯೋಗಾಲಯಗಳು</string>
+
+    <string name="department_vision_title">ದೃಷ್ಟಿಕೋನ</string>
+    <string name="department_vision_text">ವಿಷಯ ಕ್ಷೇತ್ರದಲ್ಲಿ ಬಲವಾದ ಪರಿಣತಿಯನ್ನು ಹೊಂದಿರುವ ಪ್ರತಿಭಾವಂತ, ಕೌಶಲ್ಯಪೂರ್ಣ ಮತ್ತು ಸುಸ್ಥಿರ ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಮತ್ತು ಕಮ್ಯುನಿಕೇಶನ್ ಎಂಜಿನಿಯರಿಂಗ್ ಪದವೀಧರರನ್ನು ರೂಪಿಸಿ, ಉನ್ನತ ವೃತ್ತಿಪರ ನೈತಿಕತೆಯೊಂದಿಗೆ ಸಮಾಜಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸುವಂತೆ ಮಾಡುವುದು.</string>
+
+    <string name="department_mission_title">ಧ್ಯೇಯ</string>
+    <string name="department_mission_1">• ಪರಿಣಾಮಕಾರಿ ಬೋಧನೆ ಮತ್ತು ಕಲಿಕೆಯ ವಿಧಾನಗಳ ಮೂಲಕ ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಮತ್ತು ಕಮ್ಯುನಿಕೇಶನ್ ಎಂಜಿನಿಯರಿಂಗ್ ಕ್ಷೇತ್ರದಲ್ಲಿ ಗುಣಮಟ್ಟದ ತಾಂತ್ರಿಕ ಶಿಕ್ಷಣವನ್ನು ನೀಡುವುದು.</string>
+    <string name="department_mission_2">• ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಹರಿಸುವ ಸಾಮರ್ಥ್ಯ ಹೊಂದಿರುವ ಸಮರ್ಥ ವೃತ್ತಿಪರರನ್ನು ರೂಪಿಸಲು ನಾವೀನ್ಯತೆ, ಸಂಶೋಧನೆ ಮತ್ತು ಯೋಜನಾ ಆಧಾರಿತ ಕಲಿಕೆಯನ್ನು ಪ್ರೋತ್ಸಾಹಿಸುವುದು.</string>
+    <string name="department_mission_3">• ಸಮಾಜಕ್ಕೆ ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಸೇವೆ ಸಲ್ಲಿಸಲು ವೃತ್ತಿಪರ ನೈತಿಕತೆ, ನಾಯಕತ್ವ ಗುಣಗಳು, ತಂಡದ ಕೆಲಸ ಮತ್ತು ಜೀವನಪರ್ಯಂತ ಕಲಿಕೆಯನ್ನು ಬೆಳೆಸುವುದು.</string>
+
+
 </resources>
