@@ -1,19 +1,21 @@
+
 package com.tracer.kiosk
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
-import com.tracer.kiosk.presentation.app.TracerKioskApp
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import android.view.WindowManager
+import com.tracer.kiosk.presentation.app.TracerKioskApp
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         enableEdgeToEdge()

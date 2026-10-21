@@ -1,3 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TracerKiosk</string>
+
+    <string name="language_english">English</string>
+    <string name="language_kannada">ಕನ್ನಡ</string>
+    <string name="language_hindi">हिन्दी</string>
+
+    <string name="home_title">What do you want to do?</string>
+    <string name="home_navigate">Navigate</string>
+    <string name="home_faculty_staff">Faculty &amp; Staff</string>
+    <string name="home_department">Department</string>
+    <string name="home_about_tracer">About Tracer</string>
+
+    <string name="sidebar_home">Home</string>
+    <string name="sidebar_navigate">Navigate</string>
+    <string name="sidebar_faculty_staff">Faculty &amp; Staff</string>
+    <string name="sidebar_department">Department</string>
+    <string name="sidebar_about_tracer">About Tracer</string>
 </resources>

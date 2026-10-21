@@ -1,3 +1,4 @@
+
 package com.tracer.kiosk.presentation.components.sidebar
 
 import androidx.compose.foundation.background
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -23,33 +25,30 @@ fun SidebarItem(
     selected: Boolean,
     onClick: () -> Unit
 ) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .background(
-                color = if (selected)
+                color = if (selected) {
                     MaterialTheme.colorScheme.secondary
-                else
-                    Color.Transparent,
+                } else {
+                    Color.Transparent
+                },
                 shape = RoundedCornerShape(12.dp)
             )
             .clickable { onClick() },
-
         verticalAlignment = Alignment.CenterVertically,
-
         horizontalArrangement = Arrangement.Center
     ) {
-
         Text(
             text = title,
+            modifier = Modifier.fillMaxWidth(),
             color = Color.White,
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center
         )
-
     }
-
 }

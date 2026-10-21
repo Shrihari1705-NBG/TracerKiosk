@@ -1,3 +1,4 @@
+
 package com.tracer.kiosk.presentation.feature.home
 
 import androidx.compose.animation.core.LinearEasing
@@ -23,8 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.tracer.kiosk.R
 import com.tracer.kiosk.presentation.components.card.FeatureCard
 import com.tracer.kiosk.presentation.components.common.SectionTitle
 import com.tracer.kiosk.presentation.components.common.TracerBackground
@@ -60,21 +63,16 @@ fun HomeScreen(
 
             Sidebar(
                 selectedRoute = Screen.Home.route,
-
                 onHomeClick = {},
-
                 onNavigateClick = {
                     navController.navigate(Screen.Navigation.route)
                 },
-
                 onFacultyClick = {
                     navController.navigate(Screen.Faculty.route)
                 },
-
                 onDepartmentClick = {
                     navController.navigate(Screen.Department.route)
                 },
-
                 onAboutClick = {
                     navController.navigate(Screen.About.route)
                 }
@@ -102,7 +100,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 SectionTitle(
-                    title = "What do you want to do?"
+                    title = stringResource(R.string.home_title)
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -116,15 +114,16 @@ fun HomeScreen(
                     ) {
 
                         FeatureCard(
-                            title = "Navigate",
+                            title = stringResource(R.string.home_navigate),
                             icon = Icons.Outlined.Map,
                             onClick = {
                                 navController.navigate(Screen.Navigation.route)
                             },
                             modifier = Modifier.weight(1f)
                         )
+
                         FeatureCard(
-                            title = "Faculty & Staff",
+                            title = stringResource(R.string.home_faculty_staff),
                             icon = Icons.Outlined.Groups,
                             onClick = {
                                 navController.navigate(Screen.Faculty.route)
@@ -138,7 +137,7 @@ fun HomeScreen(
                     ) {
 
                         FeatureCard(
-                            title = "Department",
+                            title = stringResource(R.string.home_department),
                             icon = Icons.Outlined.AccountBalance,
                             onClick = {
                                 navController.navigate(Screen.Department.route)
@@ -147,7 +146,7 @@ fun HomeScreen(
                         )
 
                         FeatureCard(
-                            title = "About Tracer",
+                            title = stringResource(R.string.home_about_tracer),
                             icon = Icons.Outlined.Info,
                             onClick = {
                                 navController.navigate(Screen.About.route)

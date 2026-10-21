@@ -1,0 +1,17 @@
+<resources>
+    <string name="language_english">English</string>
+    <string name="language_kannada">ಕನ್ನಡ</string>
+    <string name="language_hindi">हिन्दी</string>
+
+    <string name="home_title">आप क्या करना चाहते हैं?</string>
+    <string name="home_navigate">नेविगेट करें</string>
+    <string name="home_faculty_staff">शिक्षक और कर्मचारी</string>
+    <string name="home_department">विभाग</string>
+    <string name="home_about_tracer">ट्रेसर के बारे में</string>
+
+    <string name="sidebar_home">होम</string>
+    <string name="sidebar_navigate">नेविगेट करें</string>
+    <string name="sidebar_faculty_staff">शिक्षक और कर्मचारी</string>
+    <string name="sidebar_department">विभाग</string>
+    <string name="sidebar_about_tracer">ट्रेसर के बारे में</string>
+</resources>
